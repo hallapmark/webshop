@@ -6,10 +6,12 @@ import "@fontsource/roboto/700.css"; // Bold
 import { ThemeProvider } from "@mui/material/styles";
 import travelTheme from "./theme";
 import { Button, Card, CardContent, Typography, Stack, Box } from "@mui/material";
+import TopNav from "./components/TopNav";
 
 function App() {
   return (
     <ThemeProvider theme={travelTheme}>
+      <TopNav />
       <Box sx={{ minHeight: "100vh", bgcolor: "background.default", color: "text.primary", p: 4 }}>
         <Typography variant="h3" gutterBottom>
           WebShop Theme 
@@ -34,7 +36,7 @@ function App() {
               Card Title
             </Typography>
             <Typography>
-              This card uses the muted color background and shows text contrast.
+              Card with muted color background.
             </Typography>
           </CardContent>
         </Card>
