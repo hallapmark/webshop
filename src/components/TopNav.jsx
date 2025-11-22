@@ -1,5 +1,6 @@
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SettingsIcon from "@mui/icons-material/Settings";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { AppBar, Box, Button, IconButton, Menu, MenuItem, Toolbar, Typography } from "@mui/material";
 import { useState } from "react";
 
@@ -31,7 +32,10 @@ function TopNav() {
           {/* Admin dropdown */}
           {/* Simulates "admin" area, for now with no login needed 
           TODO: it's actually not a bad idea to add a basic login here later*/}
-          <Button color="inherit" onClick={handleManageClick}>
+          <Button 
+            color="inherit" 
+            onClick={handleManageClick} 
+            endIcon={<ArrowDropDownIcon />} >
             Admin
           </Button>
           <Menu

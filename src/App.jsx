@@ -17,7 +17,7 @@ function App() {
           WebShop Theme 
         </Typography>
 
-        {/* Buttons */}
+        {/* mb means margin-bottom in mui-units. *8px. so mb: 4 is 32px */}
         <Stack spacing={2} direction="row" sx={{ mb: 4 }}>
           <Button variant="contained" color="primary">Primary</Button>
           <Button variant="contained" color="secondary">Secondary</Button>
