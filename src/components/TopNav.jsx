@@ -57,6 +57,7 @@ function TopNav() {
           
           {/* https://mui.com/material-ui/integrations/routing/ */}
           <Button component={RouterLink} to="/cars" color="inherit">Cars</Button>
+          <Button component={RouterLink} to="/employees" color="inherit">Employees</Button>
 
           {/* Admin dropdown */}
           {/* Simulates "admin" area, for now with no login needed 

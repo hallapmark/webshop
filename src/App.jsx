@@ -18,6 +18,7 @@ import ManageEmployees from "./pages/manage/ManageEmployees";
 import ManageProducts from "./pages/manage/ManageProducts";
 import ManageShops from "./pages/manage/ManageShops";
 import ManageUsers from "./pages/manage/ManageUsers";
+import Employees from "./pages/lists/Employees";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/" element={<Home />} />
 
         <Route path="/cars" element={<CarsPLP />} />
+        <Route path="/employees" element={<Employees />} />
 
         <Route path="/manage-cars" element={<ManageCars />} />
         <Route path="/manage-employees" element={<ManageEmployees />} />
