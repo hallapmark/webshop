@@ -13,21 +13,29 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { useNavigate } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+
 function TopNav() {
   const [anchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate(); 
 
   // mui pop-up menu 'anchors' to the button it was opened from
   const handleManageClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+  // de-anchor, close menu
   const handleManageClose = () => {
     setAnchorEl(null);
   };
 
+  const handleMenuNavigate = (path) => {
+    handleManageClose();
+    navigate(path);
+  };
+
   return (
     // Note to self: Box is like an enhanced'div' in mui-world
-    <Box> 
+    <Box>
       <AppBar position="static">
         <Toolbar>
           {/* Make title extend with flexGrow, 
@@ -37,8 +45,10 @@ function TopNav() {
               Webshop
             </Typography>
           </Box>
+          
+          {/* https://mui.com/material-ui/integrations/routing/ */}
+          <Button component={RouterLink} to="/cars" color="inherit">Cars</Button>
 
-          <Button color="inherit">Cars</Button>
           {/* Admin dropdown */}
           {/* Simulates "admin" area, for now with no login needed 
           TODO: it's actually not a bad idea to add a basic login here later*/}
@@ -53,11 +63,11 @@ function TopNav() {
             open={Boolean(anchorEl)}
             onClose={handleManageClose}
           >
-            <MenuItem onClick={handleManageClose}>Manage Cars</MenuItem>
-            <MenuItem onClick={handleManageClose}>Manage Shops</MenuItem>
-            <MenuItem onClick={handleManageClose}>Manage Users</MenuItem>
-            <MenuItem onClick={handleManageClose}>Manage Employees</MenuItem>
-            <MenuItem onClick={handleManageClose}>Manage Products</MenuItem>
+            <MenuItem onClick={() => handleMenuNavigate("/manage-cars")}>Manage Cars</MenuItem>
+            <MenuItem onClick={() => handleMenuNavigate("/manage-shops")}>Manage Shops</MenuItem>
+            <MenuItem onClick={() => handleMenuNavigate("/manage-users")}>Manage Users</MenuItem>
+            <MenuItem onClick={() => handleMenuNavigate("/manage-employees")}>Manage Employees</MenuItem>
+            <MenuItem onClick={() => handleMenuNavigate("/manage-products")}>Manage Products</MenuItem>
           </Menu>
 
           <IconButton color="inherit">
