@@ -8,38 +8,58 @@ import { useState } from "react";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Container from "@mui/material/Container";
 import IconButton from '@mui/material/IconButton';
+import LanguageIcon from '@mui/icons-material/Language';
 import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 
+
 function TopNav() {
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorElAdmin, setAnchorElAdmin] = useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
   const navigate = useNavigate(); 
 
   // mui pop-up menu 'anchors' to the button it was opened from
-  const handleManageClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleOpenAdminMenu = (event) => {
+    setAnchorElAdmin(event.currentTarget);
   };
   // de-anchor, close menu
-  const handleManageClose = () => {
-    setAnchorEl(null);
+  const handleAdminMenuClose = () => {
+    setAnchorElAdmin(null);
   };
 
-  const handleMenuNavigate = (path) => {
-    handleManageClose();
+  const handleAdminMenuNavigate = (path) => {
+    handleAdminMenuClose();
     navigate(path);
   };
 
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  }
+
+  const handleNavMenuClose = () => {
+    setAnchorElNav(null);
+  }
+
+  const handleNavMenuNavigate = (path) => {
+    handleNavMenuClose();
+    navigate(path);
+  };
+
+  
+
   return (
     // Note to self: Box is like an enhanced'div' in mui-world
-    <Box>
-      <AppBar position="static">
-        <Toolbar>
-          {/* Make title extend with flexGrow, 
-          we get the menu items pushed to the right*/}
+    <AppBar position="static">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          {/* Make title box extend with flexGrow, 
+          we get all menu items after Cart pushed to the right*/}
           <Box sx={{ flexGrow: 1 }}>
             <Typography 
               variant="h6" 
@@ -53,43 +73,69 @@ function TopNav() {
             > 
             Webshop
             </Typography>
+            <IconButton color="inherit" sx={{ ml: 2 }}>
+              <ShoppingCartIcon />
+            </IconButton>
           </Box>
           
           {/* https://mui.com/material-ui/integrations/routing/ */}
-          <Button component={RouterLink} to="/cars" color="inherit">Cars</Button>
-          <Button component={RouterLink} to="/employees" color="inherit">Employees</Button>
+          {/* https://mui.com/material-ui/react-app-bar/ */}
+          {/* Medium-to-xl: display menu items in a row */}
+          <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+            <Button component={RouterLink} to="/cars" color="inherit">Cars</Button>
+            <Button component={RouterLink} to="/shops" color="inherit">Shops</Button>
+            <Button component={RouterLink} to="/users" color="inherit">Users</Button>
+            <Button component={RouterLink} to="/employees" color="inherit">Employees</Button>
+          </Box>
+
+          {/* xs to sm (inclusive): hamburger nom nom*/}
+          <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+            <IconButton
+              size="large"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              anchorEl={anchorElNav}
+              open={Boolean(anchorElNav)}
+              onClose={handleNavMenuClose}
+            >
+              <MenuItem onClick={() => handleNavMenuNavigate("/cars")}>Cars</MenuItem>
+              <MenuItem onClick={() => handleNavMenuNavigate("/shops")}>Shops</MenuItem>
+              <MenuItem onClick={() => handleNavMenuNavigate("/users")}>Users</MenuItem>
+              <MenuItem onClick={() => handleNavMenuNavigate("/employees")}>Employees</MenuItem>
+            </Menu>
+          </Box>
 
           {/* Admin dropdown */}
-          {/* Simulates "admin" area, for now with no login needed 
+          {/* Simulates "admin/manage" area, for now with no login needed 
           TODO: it's actually not a bad idea to add a basic login here later*/}
           <Button 
-            color="inherit" 
-            onClick={handleManageClick} 
-            endIcon={<ArrowDropDownIcon />} >
-            Admin
+            onClick={handleOpenAdminMenu} 
+            endIcon={<ArrowDropDownIcon />} 
+            color="inherit" >
+            Manage
           </Button>
           <Menu
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={handleManageClose}
+            anchorEl={anchorElAdmin}
+            open={Boolean(anchorElAdmin)}
+            onClose={handleAdminMenuClose}
           >
-            <MenuItem onClick={() => handleMenuNavigate("/manage-cars")}>Manage Cars</MenuItem>
-            <MenuItem onClick={() => handleMenuNavigate("/manage-shops")}>Manage Shops</MenuItem>
-            <MenuItem onClick={() => handleMenuNavigate("/manage-users")}>Manage Users</MenuItem>
-            <MenuItem onClick={() => handleMenuNavigate("/manage-employees")}>Manage Employees</MenuItem>
-            <MenuItem onClick={() => handleMenuNavigate("/manage-products")}>Manage Products</MenuItem>
+            <MenuItem onClick={() => handleAdminMenuNavigate("/manage-cars")}>Manage Cars</MenuItem>
+            <MenuItem onClick={() => handleAdminMenuNavigate("/manage-shops")}>Manage Shops</MenuItem>
+            <MenuItem onClick={() => handleAdminMenuNavigate("/manage-users")}>Manage Users</MenuItem>
+            <MenuItem onClick={() => handleAdminMenuNavigate("/manage-employees")}>Manage Employees</MenuItem>
+            <MenuItem onClick={() => handleAdminMenuNavigate("/manage-products")}>Manage Products</MenuItem>
           </Menu>
 
           <IconButton color="inherit">
-            <ShoppingCartIcon />
-          </IconButton>
-
-          <IconButton color="inherit">
-            <SettingsIcon />
+            <LanguageIcon />
           </IconButton>
         </Toolbar>
-      </AppBar>
-    </Box>
+      </Container>
+    </AppBar>
   );
 }
 
