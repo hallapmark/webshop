@@ -1,0 +1,38 @@
+[
+  {
+    "id": "6b1ab5e2-d4e7-48fe-806d-83797af25cc2",
+    "name": "Ülemiste",
+    "telefon": "12345671",
+    "aadress": "Suur-Sõjamäe 65"
+  },
+  {
+    "id": "0ec1b4ed-70c8-43a9-bbfd-71a151905890",
+    "name": "Rocca al mare",
+    "telefon": "12345672",
+    "aadress": "Loomaaia 77"
+  },
+  {
+    "id": "b4cd31f0-66ea-43e3-8442-594dfd80eace",
+    "name": "Magistrali",
+    "telefon": "12345673",
+    "aadress": "Mäe 123"
+  },
+  {
+    "id": "b695da74-310f-436a-ae86-55ba455f9ecb",
+    "name": "Vesse",
+    "telefon": "12345674",
+    "aadress": "Vesi 912"
+  },
+  {
+    "id": "fe8d2851-4f45-4761-b026-e5c1bd638242",
+    "name": "Kristiine",
+    "telefon": "12345675",
+    "aadress": "Endla 421"
+  },
+  {
+    "id": "faf5c9d6-f94d-456b-9975-3ba111608e8d",
+    "name": "Järveotsa",
+    "telefon": "12345676",
+    "aadress": "Järve 642"
+  }
+]

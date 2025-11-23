@@ -1,0 +1,107 @@
+[
+  {
+    "id": "d110be7c-03ae-4092-9581-3abc509476d7",
+    "name": "Toyota",
+    "price": 25000,
+    "active": true,
+    "image": "toyota.jpg"
+  },
+  {
+    "id": "29426b86-8296-40e0-ad9d-ac3b115cd876",
+    "name": "Honda",
+    "price": 21000,
+    "active": false,
+    "image": "honda.jpg"
+  },
+  {
+    "id": "1ca31f8a-a640-44dd-944f-8df0d9bb1f2c",
+    "name": "Ford",
+    "price": 21000,
+    "active": true,
+    "image": "ford.jpg"
+  },
+  {
+    "id": "8503f37c-2402-4430-be15-13470062cce9",
+    "name": "Tesla",
+    "price": 45000,
+    "active": true,
+    "image": "tesla.jpg"
+  },
+  {
+    "id": "b446e295-6006-4e69-adb2-c3d60c2f55cb",
+    "name": "BMW",
+    "price": 48000,
+    "active": true,
+    "image": "bmw.jpg"
+  },
+  {
+    "id": "a2b971ed-d0b5-4933-8b34-25f611d4da12",
+    "name": "Audi",
+    "price": 47000,
+    "active": false,
+    "image": "audi.jpg"
+  },
+  {
+    "id": "0b2ae402-10a4-425a-93bf-e4dfe3d90961",
+    "name": "Mercedes",
+    "price": 50000,
+    "active": true,
+    "image": "mercedes.jpg"
+  },
+  {
+    "id": "bf507bd6-e9a5-4422-b97c-43bd2847ebab",
+    "name": "Volkswagen",
+    "price": 28000,
+    "active": true,
+    "image": "volkswagen.jpg"
+  },
+  {
+    "id": "8fc946b0-208a-4814-b44a-cfbb1fd39e7d",
+    "name": "Subaru",
+    "price": 27000,
+    "active": true,
+    "image": "subaru.jpg"
+  },
+  {
+    "id": "597e8ccc-fb4f-444f-a598-fb3c3b79c7ab",
+    "name": "Mazda",
+    "price": 24000,
+    "active": true,
+    "image": "mazda.jpg"
+  },
+  {
+    "id": "c3a18355-c4a0-4d73-8422-c30cf17f5bfd",
+    "name": "Hyundai",
+    "price": 23000,
+    "active": true,
+    "image": "hyundai.jpg"
+  },
+  {
+    "id": "5a96e836-5ef3-4368-95b6-b569ae7869c4",
+    "name": "Kia",
+    "price": 22000,
+    "active": true,
+    "image": "kia.jpg"
+  },
+  {
+    "id": "8a0c8174-f3ae-4cb6-92f3-9c6a2f2687cc",
+    "name": "Nissan",
+    "price": 24000,
+    "active": false,
+    "image": "nissan.jpg"
+  },
+  {
+    "id": "de6bc703-4b4b-4325-9664-138496036b9d",
+    "name": "Chevrolet",
+    "price": 26000,
+    "active": true,
+    "image": "chevrolet.jpg"
+  },
+  {
+    "id": "0f70c2d6-06b9-4b83-903a-34db90605f15",
+    "name": "Volvo",
+    "price": 42000,
+    "active": true,
+    "image": "volvo.jpg"
+  }
+]
