@@ -12,7 +12,7 @@ function Employees() {
   
   return (
     <Box>
-      <Typography variant="h1">Employees</Typography>
+      <Typography variant="h1" sx={{mx: 3}}>Employees</Typography>
       <Grid container spacing={4} alignItems="stretch" mx={2} my={4}>
         {employees.map((employee) => (
           <Grid
