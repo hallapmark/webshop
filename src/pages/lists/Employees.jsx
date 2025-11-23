@@ -11,10 +11,14 @@ function Employees() {
   const [employees, setEmployees] = useState(employeesFile.slice());
   
   return (
-    <Grid container spacing={4} mx={2} my={4}>
+    <Grid container spacing={4} alignItems="stretch" mx={2} my={4}>
       {employees.map((employee) => (
-        <Grid size={{xs: 12, sm: 6, md: 4, lg: 3}} key={employee.id}>
-          <Card>
+        <Grid 
+          size={{xs: 12, sm: 6, md: 4, lg: 3}} 
+          sx={{ display: "flex", flexDirection: "column"}} 
+          key={employee.id}
+        >
+          <Card sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
             <CardMedia
               component="img"
               image={`src/assets/${employee.image}`}
@@ -26,7 +30,7 @@ function Employees() {
                 mt: 2
               }}
             />
-            <CardContent sx={{ textAlign: "center" }}>
+            <CardContent sx={{ textAlign: "center", flexGrow: 1}}>
               <Typography variant="h5" >{employee.name}</Typography>
             </CardContent>
           </Card>
