@@ -1,12 +1,9 @@
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 function NotFound() {
   return (
-    <div>
+    <div style={{textAlign: "center"}}>
       <h2>404</h2>
       <h3>Page not found</h3>
+      <img src="/src/assets/undraw_page-not-found_6wni.svg" alt="Not found" width={400} />
     </div>
   )
 }
