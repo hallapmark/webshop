@@ -41,8 +41,17 @@ function TopNav() {
           {/* Make title extend with flexGrow, 
           we get the menu items pushed to the right*/}
           <Box sx={{ flexGrow: 1 }}>
-            <Typography variant="h6" >
-              Webshop
+            <Typography 
+              variant="h6" 
+              component={RouterLink} 
+              to="/" 
+              sx={{
+                color: "inherit",
+                textDecoration: "none",
+                "&:hover": { textDecoration: "none" },
+              }}
+            > 
+            Webshop
             </Typography>
           </Box>
           
