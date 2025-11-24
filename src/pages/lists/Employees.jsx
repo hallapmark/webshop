@@ -22,7 +22,13 @@ function Employees() {
             sx={{ display: "flex", flexDirection: "column"}}
             key={employee.id}
           >
-            <Card sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
+            <Card sx={{ display: "flex", 
+                        flexDirection: "column", 
+                        height: "100%", 
+                        borderTop: '4px solid', 
+                        borderColor: 'accent.main', 
+                        transition: 'transform .12s ease, box-shadow .12s ease', 
+                        '&:hover': { transform: 'translateY(-4px)', boxShadow: 2 } }}>
               <CardMedia
                 component="img"
                 image={`src/assets/${employee.image}`}

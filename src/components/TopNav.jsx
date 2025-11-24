@@ -17,6 +17,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Badge from '@mui/material/Badge';
 
 // other
 import { useTranslation } from "react-i18next";
@@ -98,7 +99,14 @@ function TopNav() {
             {t('nav.webshop')}
             </Typography>
             <IconButton color="inherit" sx={{ ml: 2 }} aria-label="Open shopping cart">
-              <ShoppingCartIcon />
+              {/* Todo: Add the badge back in when we can update the cart state ... hmm */}
+              {/* <Badge
+                badgeContent={2}
+                overlap="circular"
+                slotProps={{ badge: { sx: { bgcolor: 'accent.main', color: 'accent.contrastText' } } }}
+              > */}
+                <ShoppingCartIcon />
+              {/* </Badge> */}
             </IconButton>
           </Box>
           
