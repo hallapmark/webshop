@@ -20,11 +20,13 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 // other
 import { useTranslation } from "react-i18next";
+import { LNG_KEY, LANGUAGE_MANUALLY_SET_KEY, LANGUAGES } from "../i18n";
 
 
 function TopNav() {
   const [anchorElAdmin, setAnchorElAdmin] = useState(null);
   const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElLang, setAnchorElLang] = useState(null);
   const navigate = useNavigate(); 
   const { t, i18n } = useTranslation();
 
@@ -55,6 +57,19 @@ function TopNav() {
     navigate(path);
   };
 
+  const handleOpenLangMenu = (event) => {
+    setAnchorElLang(event.currentTarget);
+  }
+
+  const handleLangMenuClose = () => {
+    setAnchorElLang(null);
+  }
+
+  const handleLangMenuChoice = (newLang) => {
+    handleLangMenuClose();
+    updateLanguage(newLang);
+  }
+
   function updateLanguage(newLang) {
     i18n.changeLanguage(newLang);
     localStorage.setItem(LNG_KEY, newLang);
@@ -62,10 +77,11 @@ function TopNav() {
   }
   
   return (
-    // Note to self: Box is like an enhanced'div' in mui-world
+    // https://mui.com/material-ui/react-app-bar/
     <AppBar position="static">
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar disableGutters>     
+          {/* Note to self: Box is like an enhanced 'div' in mui-world */}
           {/* Make title box extend with flexGrow, 
           we get all menu items after Cart pushed to the right*/}
           <Box sx={{ flexGrow: 1 }}>
@@ -81,13 +97,12 @@ function TopNav() {
             > 
             {t('nav.webshop')}
             </Typography>
-            <IconButton color="inherit" sx={{ ml: 2 }}>
+            <IconButton color="inherit" sx={{ ml: 2 }} aria-label="Open shopping cart">
               <ShoppingCartIcon />
             </IconButton>
           </Box>
           
           {/* https://mui.com/material-ui/integrations/routing/ */}
-          {/* https://mui.com/material-ui/react-app-bar/ */}
           {/* Medium-to-xl: display menu items in a row */}
           <Box sx={{ display: { xs: 'none', md: 'block' } }}>
             <Button component={RouterLink} to="/cars" color="inherit">{t('nav.cars')}</Button>
@@ -102,18 +117,25 @@ function TopNav() {
               size="large"
               onClick={handleOpenNavMenu}
               color="inherit"
+              aria-label="Open navigation menu"
+              aria-controls={anchorElNav ? 'nav-menu' : undefined}
+              aria-haspopup="menu"
+              aria-expanded={Boolean(anchorElNav)}
             >
+              {/* Adding aria-controls on this component. Seems like a good place to start, since it's the main navigation */}
+              {/* TODO: Difficult to test? Are there online tools to test these work as expected, or do you need a physical device?*/}
               <MenuIcon />
             </IconButton>
             <Menu
+              id="nav-menu"
               anchorEl={anchorElNav}
-              open={Boolean(anchorElNav)}
+              open={Boolean(anchorElNav)} // evaluates true if we've got an html element in anchorElNav
               onClose={handleNavMenuClose}
             >
-              <MenuItem onClick={() => handleNavMenuNavigate("/cars")}>Cars</MenuItem>
-              <MenuItem onClick={() => handleNavMenuNavigate("/shops")}>Shops</MenuItem>
-              <MenuItem onClick={() => handleNavMenuNavigate("/users")}>Users</MenuItem>
-              <MenuItem onClick={() => handleNavMenuNavigate("/employees")}>Employees</MenuItem>
+              <MenuItem onClick={() => handleNavMenuNavigate("/cars")}>{t('nav.cars')}</MenuItem>
+              <MenuItem onClick={() => handleNavMenuNavigate("/shops")}>{t('nav.shops')}</MenuItem>
+              <MenuItem onClick={() => handleNavMenuNavigate("/users")}>{t('nav.users')}</MenuItem>
+              <MenuItem onClick={() => handleNavMenuNavigate("/employees")}>{t('nav.employees')}</MenuItem>
             </Menu>
           </Box>
 
@@ -123,24 +145,55 @@ function TopNav() {
           <Button 
             onClick={handleOpenAdminMenu} 
             endIcon={<ArrowDropDownIcon />} 
-            color="inherit" >
-            Manage
+            color="inherit"
+            aria-label="Open manage menu"
+            aria-controls={anchorElAdmin ? 'admin-menu' : undefined}
+            aria-haspopup="menu"
+            aria-expanded={Boolean(anchorElAdmin)}
+          >
+            {t('nav.manage')}
           </Button>
           <Menu
+            id="admin-menu"
             anchorEl={anchorElAdmin}
             open={Boolean(anchorElAdmin)}
             onClose={handleAdminMenuClose}
           >
-            <MenuItem onClick={() => handleAdminMenuNavigate("/manage-cars")}>Manage Cars</MenuItem>
-            <MenuItem onClick={() => handleAdminMenuNavigate("/manage-shops")}>Manage Shops</MenuItem>
-            <MenuItem onClick={() => handleAdminMenuNavigate("/manage-users")}>Manage Users</MenuItem>
-            <MenuItem onClick={() => handleAdminMenuNavigate("/manage-employees")}>Manage Employees</MenuItem>
-            <MenuItem onClick={() => handleAdminMenuNavigate("/manage-products")}>Manage Products</MenuItem>
+            <MenuItem onClick={() => handleAdminMenuNavigate("/manage-cars")}>{t('nav.managenav.cars')}</MenuItem>
+            <MenuItem onClick={() => handleAdminMenuNavigate("/manage-shops")}>{t('nav.managenav.shops')}</MenuItem>
+            <MenuItem onClick={() => handleAdminMenuNavigate("/manage-users")}>{t('nav.managenav.users')}</MenuItem>
+            <MenuItem onClick={() => handleAdminMenuNavigate("/manage-employees")}>{t('nav.managenav.employees')}</MenuItem>
+            <MenuItem onClick={() => handleAdminMenuNavigate("/manage-products")}>{t('nav.managenav.products')}</MenuItem>
           </Menu>
 
-          <IconButton color="inherit">
+          <IconButton 
+            color="inherit"
+            onClick={handleOpenLangMenu}
+            aria-label="Open language menu"
+            aria-controls={anchorElLang ? 'language-menu' : undefined}
+            aria-haspopup="menu"
+            aria-expanded={Boolean(anchorElLang)}
+          >
             <LanguageIcon />
           </IconButton>
+          <Menu
+            id="language-menu"
+            anchorEl={anchorElLang}
+            open={Boolean(anchorElLang)}
+            onClose={handleLangMenuClose}
+          >
+            { LANGUAGES.map((lng) => (
+              <MenuItem key={lng.code} onClick={() => handleLangMenuChoice(lng.code)}>
+                <Box
+                  component="img"
+                  src={lng.src}
+                  alt={lng.label}
+                  sx={{ width: 24, height: 24, mr: 1, borderRadius: '4px' }}
+                />
+                {lng.label}
+              </MenuItem>
+            ))}
+          </Menu>
         </Toolbar>
       </Container>
     </AppBar>

@@ -3,9 +3,14 @@ import { initReactI18next } from "react-i18next";
 
 export const LNG_KEY = "lng"
 export const LANGUAGE_MANUALLY_SET_KEY = "languageHasBeenManuallySet"
+export const LANGUAGES = [
+    { code: "en", label: "English", src: "/english.png" },
+    { code: "et", label: "Eesti keel", src: "/estonian.png" },
+];
 // the translations
 // (tip move them in a JSON file and import them,
 // or even better, manage them separated from your code: https://react.i18next.com/guides/multiple-translation-files)
+
 const resources = {
   en: {
     translation: {
@@ -21,9 +26,10 @@ const resources = {
         "webshop": "Webshop",
         "managenav": {
           "cars": "Manage Cars",
+          "employees": "Manage Employees",
+          "products": "Manage products",
           "shops": "Manage Shops",
           "users": "Manage Users",
-          "employees": "Manage Employees"
         }
       }, 
       "cars": {
@@ -50,7 +56,7 @@ const resources = {
       "nav": {
         "add": "Lisa",
         "cars": "Autod",
-        "employees": "Employees",
+        "employees": "Töötajad",
         "users": "Kasutajad",
         "shops": "Esindused",
         "gift-card": "Kinkekaart",
@@ -59,10 +65,11 @@ const resources = {
         "manage": "Halda",
         "webshop": "Veebipood",
         "managenav": {
-          "cars": "Halda autosid",
-          "shops": "Halda esindusi",
-          "users": "Halda kasutajaid",
-          "employees": "Halda töötajaid"
+          "cars": "Halda autod",
+          "employees": "Halda töötajad",
+          "products": "Halda tooted",
+          "shops": "Halda esindused",
+          "users": "Halda kasutajad",
         }
       },
       "cart": {
