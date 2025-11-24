@@ -1,9 +1,6 @@
-// react imports
-import { useEffect, useState } from "react";
+// react, react router
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-
-// constants / dependency inject
-import { LNG_KEY, LANGUAGE_MANUALLY_SET_KEY } from "../i18n";
+import { useState } from "react";
 
 // https://mui.com/material-ui/guides/minimizing-bundle-size/
 // mui does not recommend 'import { AppBar } from ...' style imports
@@ -24,26 +21,12 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 // other
 import { useTranslation } from "react-i18next";
 
+
 function TopNav() {
   const [anchorElAdmin, setAnchorElAdmin] = useState(null);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const navigate = useNavigate(); 
   const { t, i18n } = useTranslation();
-  
-  useEffect(() => {
-    if (localStorage.getItem(LANGUAGE_MANUALLY_SET_KEY) === "true") {
-      return;
-    }
-
-    let detectedLang = navigator.language;
-    if (detectedLang.toLowerCase().includes("en-")) {
-      detectedLang = "en" // Simplify English-language locales to one catch-all English-language locale
-    }
-    i18n.changeLanguage(detectedLang);
-    localStorage.setItem(LNG_KEY, detectedLang);
-  }, 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  []) // eslint wants i18n reported as a dep, but i18n is stable and we only want to run the effect once.
 
   // mui pop-up menu 'anchors' to the button it was opened from
   const handleOpenAdminMenu = (event) => {

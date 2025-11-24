@@ -1,18 +1,25 @@
-import "@fontsource/roboto/300.css"; // Light
-import "@fontsource/roboto/400.css"; // Regular
-import "@fontsource/roboto/500.css"; // Medium
-import "@fontsource/roboto/700.css"; // Bold
 
-import { ThemeProvider } from "@mui/material/styles";
-import travelTheme from "./theme";
+// react, react router
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import CssBaseline from '@mui/material/CssBaseline';
 
+// constants 
+import { LNG_KEY, LANGUAGE_MANUALLY_SET_KEY } from "./i18n";
+
+// pages
 import TopNav from "./components/TopNav";
 import Home from "./pages/Home";
 import CarsPLP from "./pages/lists/CarsPLP";
 import NotFound from "./pages/NotFound"
 
+// mui and fonts
+import "@fontsource/roboto/300.css"; // Light
+import "@fontsource/roboto/400.css"; // Regular
+import "@fontsource/roboto/500.css"; // Medium
+import "@fontsource/roboto/700.css"; // Bold
+import { ThemeProvider } from "@mui/material/styles";
+import travelTheme from "./theme";
+import CssBaseline from '@mui/material/CssBaseline';
 import ManageCars from "./pages/manage/ManageCars";
 import ManageEmployees from "./pages/manage/ManageEmployees";
 import ManageProducts from "./pages/manage/ManageProducts";
@@ -21,8 +28,26 @@ import ManageUsers from "./pages/manage/ManageUsers";
 import Employees from "./pages/lists/Employees";
 import Users from "./pages/lists/Users";
 import Shops from "./pages/lists/Shops";
+import { useTranslation } from "react-i18next";
+
 
 function App() {
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    if (localStorage.getItem(LANGUAGE_MANUALLY_SET_KEY) === "true") {
+      return;
+    }
+
+    let detectedLang = navigator.language;
+    if (detectedLang.toLowerCase().includes("en-")) {
+      detectedLang = "en" // Simplify English-language locales to one catch-all English-language locale
+    }
+    i18n.changeLanguage(detectedLang);
+    localStorage.setItem(LNG_KEY, detectedLang);
+  }, 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  []) // eslint wants i18n reported as a dep, but i18n is stable and we only want to run the effect once.
   return (
     <ThemeProvider theme={travelTheme}>
       {/* see https://mui.com/material-ui/react-css-baseline/ */}
