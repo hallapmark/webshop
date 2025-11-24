@@ -8,7 +8,7 @@ import Stack from '@mui/material/Stack';
 
 function Home() {
   return (
-    <Box sx={{ minHeight: "100vh", bgcolor: "background.default", color: "text.primary", p: 4 }}>
+    <Box m={4}>
       <Typography variant="h3" gutterBottom>
         WebShop Theme 
       </Typography>
