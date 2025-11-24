@@ -5,14 +5,16 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import carsFile from '../../data/cars.json'
 import { useState } from 'react';
-import { Box } from '@mui/material';
+import Box from '@mui/material/Box';
+import { useTranslation } from 'react-i18next';
 
 function CarsPLP() {
   const [cars, setCars] = useState(carsFile.slice());
+  const { t } = useTranslation();
 
   return (
     <Box>
-      <Typography variant="h1" sx={{mx: 3, mt: 4}}>Cars</Typography>
+      <Typography variant="h1" sx={{mx: 3, mt: 4}}>{t('cars.cars')}</Typography>
       <Grid container spacing={3} margin={2}>
         {cars.map((car) => (
           // 12 kokku mui Grid-süsteemis. xs ekraanisuuruse korral üks item võtab siin 12 kohta,

@@ -1,11 +1,14 @@
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import SettingsIcon from "@mui/icons-material/Settings";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { useState } from "react";
+// react imports
+import { useEffect, useState } from "react";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+
+// constants / dependency inject
+import { LNG_KEY, LANGUAGE_MANUALLY_SET_KEY } from "../i18n";
 
 // https://mui.com/material-ui/guides/minimizing-bundle-size/
 // mui does not recommend 'import { AppBar } from ...' style imports
 import AppBar from '@mui/material/AppBar';
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from "@mui/material/Container";
@@ -16,13 +19,31 @@ import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
+// other
+import { useTranslation } from "react-i18next";
 
 function TopNav() {
   const [anchorElAdmin, setAnchorElAdmin] = useState(null);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const navigate = useNavigate(); 
+  const { t, i18n } = useTranslation();
+  
+  useEffect(() => {
+    if (localStorage.getItem(LANGUAGE_MANUALLY_SET_KEY) === "true") {
+      return;
+    }
+
+    let detectedLang = navigator.language;
+    if (detectedLang.toLowerCase().includes("en-")) {
+      detectedLang = "en" // Simplify English-language locales to one catch-all English-language locale
+    }
+    i18n.changeLanguage(detectedLang);
+    localStorage.setItem(LNG_KEY, detectedLang);
+  }, 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  []) // eslint wants i18n reported as a dep, but i18n is stable and we only want to run the effect once.
 
   // mui pop-up menu 'anchors' to the button it was opened from
   const handleOpenAdminMenu = (event) => {
@@ -51,8 +72,12 @@ function TopNav() {
     navigate(path);
   };
 
+  function updateLanguage(newLang) {
+    i18n.changeLanguage(newLang);
+    localStorage.setItem(LNG_KEY, newLang);
+    localStorage.setItem(LANGUAGE_MANUALLY_SET_KEY, "true")
+  }
   
-
   return (
     // Note to self: Box is like an enhanced'div' in mui-world
     <AppBar position="static">
@@ -71,7 +96,7 @@ function TopNav() {
                 "&:hover": { textDecoration: "none" },
               }}
             > 
-            Webshop
+            {t('nav.webshop')}
             </Typography>
             <IconButton color="inherit" sx={{ ml: 2 }}>
               <ShoppingCartIcon />
@@ -82,10 +107,10 @@ function TopNav() {
           {/* https://mui.com/material-ui/react-app-bar/ */}
           {/* Medium-to-xl: display menu items in a row */}
           <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-            <Button component={RouterLink} to="/cars" color="inherit">Cars</Button>
-            <Button component={RouterLink} to="/shops" color="inherit">Shops</Button>
-            <Button component={RouterLink} to="/users" color="inherit">Users</Button>
-            <Button component={RouterLink} to="/employees" color="inherit">Employees</Button>
+            <Button component={RouterLink} to="/cars" color="inherit">{t('nav.cars')}</Button>
+            <Button component={RouterLink} to="/shops" color="inherit">{t('nav.shops')}</Button>
+            <Button component={RouterLink} to="/users" color="inherit">{t('nav.users')}</Button>
+            <Button component={RouterLink} to="/employees" color="inherit">{t('nav.employees')}</Button>
           </Box>
 
           {/* xs to sm (inclusive): hamburger nom nom*/}

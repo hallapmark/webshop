@@ -1,6 +1,8 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
+export const LNG_KEY = "lng"
+export const LANGUAGE_MANUALLY_SET_KEY = "languageHasBeenManuallySet"
 // the translations
 // (tip move them in a JSON file and import them,
 // or even better, manage them separated from your code: https://react.i18next.com/guides/multiple-translation-files)
@@ -9,19 +11,37 @@ const resources = {
     translation: {
       "nav": {
         "add": "Add",
-        "api": "Api calls",
-        "arrays": "Arrays",
+        "cars": "Cars",
         "employees": "Employees",
+        "users": "Users",
+        "shops": "Shops",
         "gift-card": "Gift card",
-        "cart": "Cart",
-        "settings": "Settings",
         "calculator": "Calculator",
         "manage": "Manage",
+        "webshop": "Webshop",
+        "managenav": {
+          "cars": "Manage Cars",
+          "shops": "Manage Shops",
+          "users": "Manage Users",
+          "employees": "Manage Employees"
+        }
       }, 
+      "cars": {
+        "cars": "Cars"
+      },
       "cart": {
         "empty-text": "Cart is empty",
         "empty-button": "Empty cart",
         "total": "Total of the cart"
+      },
+      "employees": {
+        "employees": "Employees"
+      },
+      "shops": {
+        "shops": "Shops"
+      },
+      "users": {
+        "users": "Users"
       }
     }
   },
@@ -29,19 +49,38 @@ const resources = {
     translation: {
       "nav": {
         "add": "Lisa",
-        "api": "Api päringud",
-        "arrays": "Massiivid",
+        "cars": "Autod",
         "employees": "Employees",
+        "users": "Kasutajad",
+        "shops": "Esindused",
         "gift-card": "Kinkekaart",
         "cart": "Ostukorv",
-        "settings": "Seaded",
         "calculator": "Kalkulaator",
-        "manage": "Halda",   
+        "manage": "Halda",
+        "webshop": "Veebipood",
+        "managenav": {
+          "cars": "Halda autosid",
+          "shops": "Halda esindusi",
+          "users": "Halda kasutajaid",
+          "employees": "Halda töötajaid"
+        }
       },
       "cart": {
         "empty-text": "Ostukorv on tühi",
         "empty-button": "Tühenda ostukorv",
         "total": "Ostukorvi kogusumma"
+      },
+      "cars": {
+        "cars": "Autod"
+      },
+      "employees": {
+        "employees": "Töötajad"
+      },
+      "shops": {
+        "shops": "Esindused"
+      },
+      "users": {
+        "users": "Kasutajad"
       }
     }
   }
@@ -61,11 +100,14 @@ i18n
   });
 
   function getLanguage() {
-    if (localStorage.getItem("lng") === null || !Object.keys(resources).includes(localStorage.getItem("lng"))) {
-      localStorage.setItem("lng", "en");
+    const currentLngInStorage = localStorage.getItem(LNG_KEY);
+
+    if (currentLngInStorage === null || !Object.keys(resources).includes(currentLngInStorage)) {
+      localStorage.setItem(LNG_KEY, "en");
       return "en";
     }
-    return localStorage.getItem("lng");
+    return currentLngInStorage;
   }
 
   export default i18n;
+  

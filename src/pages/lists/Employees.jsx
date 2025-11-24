@@ -6,13 +6,15 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import { useState } from 'react';
 import employeesFile from '../../data/employees.json'
+import { useTranslation } from 'react-i18next';
 
 function Employees() {
   const [employees, setEmployees] = useState(employeesFile.slice());
+  const { t } = useTranslation();
   
   return (
     <Box>
-      <Typography variant="h1" sx={{mx: 3}}>Employees</Typography>
+      <Typography variant="h1" sx={{mx: 3}}>{t('employees.employees')}</Typography>
       <Grid container spacing={4} alignItems="stretch" mx={2} my={4}>
         {employees.map((employee) => (
           <Grid
