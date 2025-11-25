@@ -25,6 +25,7 @@ function Cart() {
   const [selectedParcelMachine, setSelectedParcelMachine] = useState("");
   const [parcelMachines, setParcelMachines] = useState([]);
   const [dbParcelMachines, setDbParcelMachines] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   
   useEffect(() => {
     fetch("https://www.omniva.ee/locations.json")
@@ -34,6 +35,17 @@ function Cart() {
         setDbParcelMachines(json);
       })
   }, []);
+
+  useEffect(() => {
+    const filtered = dbParcelMachines.filter(
+      pm =>
+        pm.A0_NAME === country &&
+        pm.NAME.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setParcelMachines(filtered);
+    setSelectedParcelMachine(filtered[0]?.NAME || ""); // first match
+  }, [dbParcelMachines, country, searchTerm]);
+
 
   function removeItemFromCart(id) {
     const index = products.find(product => product.id === id);
@@ -52,11 +64,6 @@ function Cart() {
     let sum = 0;
     products.forEach(p => sum += p.price);
     return sum.toFixed(2);
-  }
-
-  function searchForParcelMachines(searched) {
-    const result = dbParcelMachines.filter(pm => pm.NAME.includes(searched));
-    setParcelMachines(result);
   }
 
   return (
@@ -97,7 +104,7 @@ function Cart() {
             id="outlined-search" 
             label="Search field" 
             type="search"
-            onChange={(e) => searchForParcelMachines(e.target.value)}
+            onChange={(e) => setSearchTerm(e.target.value)}
         />
         <FormControl sx={{ minWidth: 220, maxWidth: 550 }}>
           <InputLabel id="parcel-locker-label">Parcel Locker</InputLabel>
@@ -108,7 +115,6 @@ function Cart() {
             onChange={(e) => setSelectedParcelMachine(e.target.value)}
           >
             {parcelMachines
-              .filter(pm => pm.A0_NAME === country)
               .map(pm => (
                 <MenuItem key={pm.ZIP} value={pm.NAME}>
                   {pm.NAME}
