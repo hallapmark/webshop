@@ -1,19 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
+import FormControl from "@mui/material/FormControl";
 import IconButton from "@mui/material/IconButton";
+import InputLabel from "@mui/material/InputLabel";
 import List from "@mui/material/List";
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
+import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import Select from "@mui/material/Select";
 
 import DeleteIcon from '@mui/icons-material/Delete';
 
+
+// TODO: Add capability to add multiple items of the same type
 function Cart() {
   const [products, setProducts] = useState(JSON.parse(localStorage.getItem("cart")) || []);
+  const [country, setCountry] = useState("EE");
+  const [selectedParcelMachine, setSelectedParcelMachine] = useState("");
+  const [parcelMachines, setParcelMachines] = useState([]);
+  const [dbParcelMachines, setDbParcelMachines] = useState([]);
+  
+  useEffect(() => {
+    fetch("https://www.omniva.ee/locations.json")
+      .then(res => res.json())
+      .then(json => {
+        setParcelMachines(json);
+        setDbParcelMachines(json);
+      })
+  }, []);
 
   function removeItemFromCart(id) {
     const index = products.find(product => product.id === id);
@@ -26,6 +46,17 @@ function Cart() {
   function emptyCart() {
     setProducts([]);
     localStorage.setItem("cart", "[]");
+  }
+
+  function calculateTotal() {
+    let sum = 0;
+    products.forEach(p => sum += p.price);
+    return sum.toFixed(2);
+  }
+
+  function searchForParcelMachines(searched) {
+    const result = dbParcelMachines.filter(pm => pm.NAME.includes(searched));
+    setParcelMachines(result);
   }
 
   return (
@@ -52,6 +83,42 @@ function Cart() {
           ))}
         </List>
       </Box>
+
+      {products.length > 0 && 
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 3, alignItems: "center", mb: 5}}>
+        <Typography variant="subtitle1" gutterBottom mt={2.5}>Cart total: {calculateTotal()}€</Typography>
+        <Box sx={{ display: "flex", justifyContent: "center", gap: 1.5 }}>
+          <Button variant="contained" onClick={() => setCountry("EE")}>Eesti</Button>
+          <Button variant="contained" onClick={() => setCountry("LV")}>Läti</Button>
+          <Button variant="contained" onClick={() => setCountry("LT")}>Leedu</Button>
+        </Box>
+        <TextField 
+            sx={{ minWidth: 200, maxWidth: 500}}
+            id="outlined-search" 
+            label="Search field" 
+            type="search"
+            onChange={(e) => searchForParcelMachines(e.target.value)}
+        />
+        <FormControl sx={{ minWidth: 220, maxWidth: 550 }}>
+          <InputLabel id="parcel-locker-label">Parcel Locker</InputLabel>
+          <Select
+            labelId="parcel-locker-label"
+            value={selectedParcelMachine}
+            label="Parcel Locker"
+            onChange={(e) => setSelectedParcelMachine(e.target.value)}
+          >
+            {parcelMachines
+              .filter(pm => pm.A0_NAME === country)
+              .map(pm => (
+                <MenuItem key={pm.ZIP} value={pm.NAME}>
+                  {pm.NAME}
+                </MenuItem>
+              ))}
+          </Select>
+        </FormControl>
+      </Box>
+      }
+
     </Box>
     
   )
