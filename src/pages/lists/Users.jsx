@@ -3,6 +3,7 @@ import { Link as RouterLink } from "react-router-dom";
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography'
 
@@ -21,11 +22,10 @@ function Users() {
         <Box display="flex" justifyContent="center">
           <List>
             {users.map((user) => (
-              <ListItem button component={RouterLink} to={`/user/${user.id}`} key={user.id} >
-                <ListItemText
-                  primary={user.name}
-                  secondary={user.email}
-                />
+              <ListItem disablePadding key={user.id} >
+                <ListItemButton component={RouterLink} to={`/user/${user.id}`} >
+                  <ListItemText primary={user.name} secondary={user.email} />
+                </ListItemButton>
               </ListItem>
             ))}
           </List>
