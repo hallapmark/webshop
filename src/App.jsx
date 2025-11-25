@@ -28,6 +28,11 @@ import ManageUsers from "./pages/manage/ManageUsers";
 import Employees from "./pages/lists/Employees";
 import Users from "./pages/lists/Users";
 import Shops from "./pages/lists/Shops";
+import ChangeCar from "./pages/change/ChangeCar";
+import ChangeEmployee from "./pages/change/ChangeEmployee";
+import ChangeShop from "./pages/change/ChangeShop";
+import ChangeUser from "./pages/change/ChangeUser";
+import ChangeProduct from "./pages/change/ChangeProduct";
 import { useTranslation } from "react-i18next";
 import CarDetail from "./pages/detail/CarDetail";
 import EmployeeDetail from "./pages/detail/EmployeeDetail";
@@ -79,6 +84,11 @@ function App() {
         <Route path="/manage-products" element={<ManageProducts />} />
         <Route path="/manage-shops" element={<ManageShops />} />
         <Route path="/manage-users" element={<ManageUsers />} />
+        <Route path="/change-car/:id" element={<ChangeCar />} />
+        <Route path="/change-employee/:id" element={<ChangeEmployee />} />
+        <Route path="/change-product/:id" element={<ChangeProduct />} />
+        <Route path="/change-shop/:id" element={<ChangeShop />} />
+        <Route path="/change-user/:id" element={<ChangeUser />} />
         
         <Route path="/*" element={ <NotFound /> } />
       </Routes>
