@@ -1,3 +1,5 @@
+import { Link as RouterLink } from "react-router-dom";
+
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -19,7 +21,7 @@ function Users() {
         <Box display="flex" justifyContent="center">
           <List>
             {users.map((user) => (
-              <ListItem key={user.id}>
+              <ListItem button component={RouterLink} to={`/user/${user.id}`} key={user.id} >
                 <ListItemText
                   primary={user.name}
                   secondary={user.email}

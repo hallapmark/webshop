@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
 
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import Typography from '@mui/material/Typography';
@@ -47,19 +49,22 @@ function Shops() {
         tallinnShops.map((shop) =>
           // https://mui.com/material-ui/react-accordion/
           <Accordion key={shop.id}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ "&:hover": { backgroundColor: "action.hover" }}}>
               <Typography variant="h5">{shop.name}</Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Box display='flex' flexDirection="column" gap={2}>
                 <Box display='flex' alignItems='center' gap={2}>
-                  <CallIcon fontSize="small" />
-                  <Typography variant="body1">(+372) {shop.telephone}</Typography>
-                </Box>
-                <Box display='flex' alignItems='center' gap={2}>
                   <PlaceIcon fontSize="small" />
                   <Typography variant="body1">{shop.aadress}</Typography>
                 </Box>
+                <Box display='flex' alignItems='center' gap={2}>
+                  <CallIcon fontSize="small" />
+                  <Typography variant="body1">(+372) {shop.telephone}</Typography>
+                </Box>
+                <Button component={RouterLink} to={`/shop/${shop.id}`}variant="contained" color="muted" sx={{ py: 1.2 }}>
+                  Details
+                </Button>
               </Box>
             </AccordionDetails>
           </Accordion>

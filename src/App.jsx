@@ -29,6 +29,11 @@ import Employees from "./pages/lists/Employees";
 import Users from "./pages/lists/Users";
 import Shops from "./pages/lists/Shops";
 import { useTranslation } from "react-i18next";
+import CarDetail from "./pages/detail/CarDetail";
+import EmployeeDetail from "./pages/detail/EmployeeDetail";
+import ShopDetail from "./pages/detail/ShopDetail";
+import UserDetail from "./pages/detail/UserDetail";
+import PDP from "./pages/detail/PDP";
 
 
 function App() {
@@ -62,6 +67,12 @@ function App() {
         <Route path="/employees" element={<Employees />} />
         <Route path="/shops" element={<Shops />} />
         <Route path="/users" element={<Users />} />
+
+        <Route path="/car/:id" element={<CarDetail />} />
+        <Route path="/employee/:id" element={<EmployeeDetail />} />
+        <Route path="/product/:id" element={<PDP />} />
+        <Route path="/shop/:id" element={<ShopDetail />} />
+        <Route path="/user/:id" element={<UserDetail />} />
 
         <Route path="/manage-cars" element={<ManageCars />} />
         <Route path="/manage-employees" element={<ManageEmployees />} />
