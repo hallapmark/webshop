@@ -98,7 +98,13 @@ function TopNav() {
             > 
             {t('nav.webshop')}
             </Typography>
-            <IconButton color="inherit" sx={{ ml: 2 }} aria-label="Open shopping cart">
+            <IconButton 
+              color="inherit" 
+              sx={{ ml: 2 }} 
+              aria-label="Open shopping cart" 
+              component={RouterLink}
+              to="/cart"
+            >
               {/* Todo: Add the badge back in when we can update the cart state ... hmm */}
               {/* <Badge
                 badgeContent={2}

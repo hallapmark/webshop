@@ -20,6 +20,7 @@ import "@fontsource/roboto/700.css"; // Bold
 import { ThemeProvider } from "@mui/material/styles";
 import travelTheme from "./theme";
 import CssBaseline from '@mui/material/CssBaseline';
+import Cart from "./pages/Cart";
 import ManageCars from "./pages/manage/ManageCars";
 import ManageEmployees from "./pages/manage/ManageEmployees";
 import ManageProducts from "./pages/manage/ManageProducts";
@@ -89,6 +90,8 @@ function App() {
         <Route path="/change-product/:id" element={<ChangeProduct />} />
         <Route path="/change-shop/:id" element={<ChangeShop />} />
         <Route path="/change-user/:id" element={<ChangeUser />} />
+
+        <Route path="/cart" element={<Cart />} />
         
         <Route path="/*" element={ <NotFound /> } />
       </Routes>

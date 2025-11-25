@@ -11,13 +11,17 @@ import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
 
 import productsFile from "../data/products.json"
+import { toast, ToastContainer } from "react-toastify";
 
 
 function Home() {
   const [products, setProducts] = useState(productsFile.slice());
 
-  const addToCart = (productId) => {
-    
+  const addToCart = (product) => {
+    const cartLS = JSON.parse(localStorage.getItem("cart")) || [];
+    cartLS.push(product);
+    localStorage.setItem("cart", JSON.stringify(cartLS));
+    toast.success(product.name + " added to cart!");
   }
 
   return (
@@ -43,13 +47,14 @@ function Home() {
                 </CardContent>
               </CardActionArea>
               <Divider />
-              <Button variant="contained" color="accent" sx={{ mt:"auto", py: 1.2 }} onClick={() => addToCart(product.id)}>
-                WIP: Add to cart
+              <Button variant="contained" color="accent" sx={{ mt:"auto", py: 1.2 }} onClick={() => addToCart(product)}>
+                Add to cart
               </Button>
             </Card>
           </Grid>
         ))}
       </Grid>
+      <ToastContainer position="bottom-right" autoClose={4000} theme="dark" />
     </Box>
   )
 }
