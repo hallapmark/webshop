@@ -3,15 +3,17 @@ import { Link as RouterLink } from "react-router-dom";
 
 import Box from '@mui/material/Box';
 import Button from "@mui/material/Button";
+import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import Typography from "@mui/material/Typography";
 
 import carsFile from "../../data/cars.json"
+
 
 function ManageCars() {
   const [cars, setCars] = useState(carsFile.slice());
@@ -24,6 +26,7 @@ function ManageCars() {
 
   return (
     <Box>
+      <Typography variant="h1" sx={{ textAlign: "center", my: 1.5 }}>Manage Cars</Typography>
       {/* https://mui.com/material-ui/react-table/ */}
       <TableContainer component={Paper}>
         <Table>

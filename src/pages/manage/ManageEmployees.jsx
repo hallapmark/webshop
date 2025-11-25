@@ -9,6 +9,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Typography from "@mui/material/Typography";
 import Paper from '@mui/material/Paper';
 
 import employeesFile from "../../data/employees.json"
@@ -24,14 +25,16 @@ function ManageEmployees() {
 
   return (
     <Box>
+      <Typography variant="h1" sx={{ textAlign: "center", my: 1.5 }}>Manage Employees</Typography>
       {/* https://mui.com/material-ui/react-table/ */}
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
+              <TableCell>Employee name</TableCell>
               <TableCell align="right">Id</TableCell>
               <TableCell align="right">Email</TableCell>
+              <TableCell align="right">Phone number</TableCell>
               <TableCell align="right">Change</TableCell>
               <TableCell align="right">Delete</TableCell>
             </TableRow>
@@ -45,6 +48,7 @@ function ManageEmployees() {
               <TableCell component="th" scope="row">{employee.name}</TableCell>
               <TableCell align="right">{employee.id}</TableCell>
               <TableCell align="right">{employee.email}</TableCell>
+              <TableCell align="right">{employee.phone}</TableCell>
               <TableCell align="right">
                 <Button component={RouterLink} to={"/change-employee/" + employee.id} variant="contained" color="warning" size="small">
                   Change

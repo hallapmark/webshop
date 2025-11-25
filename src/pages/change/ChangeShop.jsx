@@ -2,8 +2,6 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
@@ -48,7 +46,7 @@ function ChangeShop() {
         gap: 2,
       }}
     >
-      <Typography variant="h5" sx={{ textAlign: "center" }}>Edit Car</Typography>
+      <Typography variant="h5" sx={{ textAlign: "center" }}>Edit Shop</Typography>
       <TextField
         label="Name"
         value={shop.name}

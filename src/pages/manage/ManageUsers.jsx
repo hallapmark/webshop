@@ -9,6 +9,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Typography from "@mui/material/Typography";
 import Paper from '@mui/material/Paper';
 
 import usersFile from "../../data/users.json"
@@ -24,6 +25,7 @@ function ManageUsers() {
 
   return (
     <Box>
+      <Typography variant="h1" sx={{ textAlign: "center", my: 1.5 }}>Manage Users</Typography>
       {/* https://mui.com/material-ui/react-table/ */}
       <TableContainer component={Paper}>
         <Table>

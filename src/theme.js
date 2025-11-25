@@ -1,10 +1,15 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 
 // Detect system dark mode preference
 const prefersDarkMode = window.matchMedia &&
   window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-const travelTheme = createTheme({
+let travelTheme = createTheme({
+  typography: {
+    h1: {
+      fontSize: "4rem",   // reduce a bit
+    },
+  },
   palette: {
     mode: prefersDarkMode ? 'dark' : 'light',
 
@@ -64,5 +69,6 @@ const travelTheme = createTheme({
         }),
   },
 });
+travelTheme = responsiveFontSizes(travelTheme);
 
 export default travelTheme;
