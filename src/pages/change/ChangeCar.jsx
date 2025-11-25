@@ -72,7 +72,7 @@ function ChangeCar() {
       <TextField
         label="Image"
         value={car.image}
-        onChange={(e) => setCar({ ...car, image: e.target.value })}
+        onChange={(e) => setCar({...car, image: e.target.value })}
       />
       <Button variant="contained" onClick={updateCar}>Update</Button>
       <ToastContainer position="bottom-right" autoClose={4000} theme="dark" />
