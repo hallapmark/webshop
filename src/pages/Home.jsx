@@ -30,7 +30,6 @@ function Home() {
           <Grid
             // Grid is divided into 12
             // 2, 3, or 3 items in a row depending on screen size. 
-            item
             size={{ xs: 12, sm: 6, md: 4 }}  
             sx={{ display: "flex", flexDirection: "column" }}
             key={product.id}

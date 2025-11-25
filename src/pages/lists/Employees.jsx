@@ -22,7 +22,6 @@ function Employees() {
       <Grid container spacing={4} alignItems="stretch" mx={2} my={4}>
         {employees.map((employee) => (
           <Grid 
-            item
             size={{xs: 12, sm: 6, md: 4, lg: 3}}
             sx={{ display: "flex", flexDirection: "column"}}
             key={employee.id}
