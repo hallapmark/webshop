@@ -26,24 +26,26 @@ function ManageCars() {
     <Box>
       {/* https://mui.com/material-ui/react-table/ */}
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }}>
+        <Table>
           <TableHead>
             <TableRow>
               <TableCell>Car name</TableCell>
+              <TableCell align="right">Car id</TableCell>
               <TableCell align="right">Car price</TableCell>
               <TableCell align="right">Car active</TableCell>
               <TableCell align="right">Car image</TableCell>
               <TableCell align="right">Change</TableCell>
               <TableCell align="right">Delete</TableCell>
             </TableRow>
-        </TableHead>
+          </TableHead>
         <TableBody>
           {cars.map((car) => (
             <TableRow
-              key={car.name}
+              key={car.id}
               // sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">{car.name}</TableCell>
+              <TableCell align="right">{car.id}</TableCell>
               <TableCell align="right">{car.price}€</TableCell>
               <TableCell align="right">{car.active ? "Active" : "Inactive"}</TableCell>
               <TableCell align="right">{car.image}</TableCell>

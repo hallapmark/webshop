@@ -56,7 +56,7 @@ function Shops() {
               <Box display='flex' flexDirection="column" gap={2}>
                 <Box display='flex' alignItems='center' gap={2}>
                   <PlaceIcon fontSize="small" />
-                  <Typography variant="body1">{shop.aadress}</Typography>
+                  <Typography variant="body1">{shop.address}</Typography>
                 </Box>
                 <Box display='flex' alignItems='center' gap={2}>
                   <CallIcon fontSize="small" />

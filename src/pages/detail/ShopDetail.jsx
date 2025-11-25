@@ -28,7 +28,7 @@ function ShopDetail() {
         <Typography variant="h6">{found.name}</Typography>
         <Box display='flex' justifyContent="center" alignItems='center' gap={2}>
           <PlaceIcon fontSize="small" />
-          <Typography variant="body1">{found.aadress}</Typography>
+          <Typography variant="body1">{found.address}</Typography>
         </Box>
         <Box display='flex' justifyContent="center" alignItems='center'  gap={2}>
           <CallIcon fontSize="small" />

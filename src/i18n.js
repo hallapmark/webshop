@@ -27,7 +27,7 @@ const resources = {
         "managenav": {
           "cars": "Manage Cars",
           "employees": "Manage Employees",
-          "products": "Manage products",
+          "products": "Manage Products",
           "shops": "Manage Shops",
           "users": "Manage Users",
         }
