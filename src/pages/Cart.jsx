@@ -46,7 +46,7 @@ function Cart() {
               }
             >
               <ListItemButton component={RouterLink} to={`/product/${product.id}`} >
-                <ListItemText primary={product.name} secondary={product.price} />
+                <ListItemText primary={product.name} secondary={`${product.price}€`} />
               </ListItemButton>
             </ListItem>
           ))}

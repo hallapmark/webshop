@@ -12,14 +12,18 @@ import carsFile from '../../data/cars.json'
 
 import Box from '@mui/material/Box';
 import { useTranslation } from 'react-i18next';
+import { toast, ToastContainer } from 'react-toastify';
 
 function CarsPLP() {
   const [cars, setCars] = useState(carsFile.slice());
   const { t } = useTranslation();
 
-  const addToCart = (carId) => {
-    
-  }
+  const addToCart = (car) => {
+      const cartLS = JSON.parse(localStorage.getItem("cart")) || [];
+      cartLS.push(car);
+      localStorage.setItem("cart", JSON.stringify(cartLS));
+      toast.success(car.name + " added to cart!");
+    }
   
   return (
     <Box>
@@ -38,13 +42,14 @@ function CarsPLP() {
                 </CardContent>
               </CardActionArea>
               <Divider />
-              <Button variant="contained" color="accent" sx={{ mt:"auto", py: 1.2 }} onClick={() => addToCart(car.id)}>
-                WIP: Add to cart
+              <Button variant="contained" color="accent" sx={{ mt:"auto", py: 1.2 }} onClick={() => addToCart(car)}>
+                Add to cart
               </Button>
             </Card>
           </Grid>
         ))}
       </Grid>
+      <ToastContainer position="bottom-right" autoClose={4000} theme="dark" />
     </Box>
   );
 }
