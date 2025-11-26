@@ -47,8 +47,12 @@ function Cart() {
   }, [dbParcelMachines, country, searchTerm]);
 
 
-  function removeItemFromCart(id) {
-    const index = products.find(product => product.id === id);
+  function removeItemFromCart(index) {
+    //const index = products.find(product => product.id === id); 
+    
+    // find leiab esimese
+    // alati kustutab niimodi esimese ainult kui ykskoik millisel delete vajutan
+    // bugi p6hjus
     const productsCopy = products.slice();
     productsCopy.splice(index,1);
     localStorage.setItem("cart", JSON.stringify(productsCopy));
@@ -72,13 +76,14 @@ function Cart() {
       <Button variant="outlined" onClick={emptyCart}>Empty Cart</Button>
       <Box sx={{ maxWidth: 'sm', mx: 'auto' }}>
         <List sx={{ px: 1.5 }}>
-          {products.map((product) => (
+          {products.map((product, index) => (
             <ListItem 
               disablePadding 
-              key={product.id} 
+              key={index} 
+              // id ei ole siin unikaalne! 
               secondaryAction=
               {
-                <IconButton edge="end" aria-label="delete" onClick={() => removeItemFromCart(product.id)}>
+                <IconButton edge="end" aria-label="delete" onClick={() => removeItemFromCart(index)}>
                   <DeleteIcon />
                 </IconButton>
               }
