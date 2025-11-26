@@ -22,6 +22,7 @@ function Home() {
   const [products, setProducts] = useState(productsFile.slice());
   const [sortNextAZAsc, setSortNextAZAsc] = useState(true);
   const [sortNextPriceAsc, setSortNextPriceAsc] = useState(true);
+  const [lastSort, setLastSort] = useState(null); // 'az' | 'price' | null 
 
   const addToCart = (product) => {
     const cartLS = JSON.parse(localStorage.getItem("cart")) || [];
@@ -35,13 +36,15 @@ function Home() {
       sortNextAZAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)
     );
     setProducts(sorted);
-    setSortNextAZAsc(!sortNextAZAsc); 
+    setSortNextAZAsc(!sortNextAZAsc);
+    setLastSort('az');
   }
 
   function sortPrice() {
     const sorted = products.toSorted((a, b) => sortNextPriceAsc ? a.price - b.price : b.price - a.price);
     setProducts(sorted);
     setSortNextPriceAsc(!sortNextPriceAsc);
+    setLastSort('price');
   }
 
   return (
@@ -49,15 +52,23 @@ function Home() {
       <Typography variant="h1" gutterBottom>Webshop</Typography>
       <br />
       <Typography variant="h3" gutterBottom>New arrivals</Typography>
+      {/* TODO: Maybe some filters as well? */}
+      {/* --- SORTING -- */}
       <Box
         sx={{ display: "flex", justifyContent: "flex-end", alignItems: "center", mt: 1, mr: 2, gap: 1 }}
       >
-        <Button variant="outlined" startIcon={<SortByAlphaIcon />} onClick={sortAZ}>
+        <Button 
+          variant={lastSort === "az" ? "contained" : "outlined" }
+          startIcon={<SortByAlphaIcon />} 
+          onClick={sortAZ}>
           {sortNextAZAsc // if yes, we are CURRENTLY ZA
             ? <ArrowDownwardIcon fontSize="small" /> 
             : <ArrowUpwardIcon fontSize="small" />}
         </Button>
-        <Button variant="outlined" startIcon={<AttachMoneyIcon />} onClick={sortPrice}>
+        <Button 
+          variant={lastSort === "price" ? "contained" : "outlined" }
+          startIcon={<AttachMoneyIcon />} 
+          onClick={sortPrice}>
           {sortNextPriceAsc // if yes, current is descending (high price first)
             ? <ArrowDownwardIcon fontSize="small" /> 
             : <ArrowUpwardIcon fontSize="small" />}
