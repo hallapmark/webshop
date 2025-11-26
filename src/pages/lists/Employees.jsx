@@ -50,7 +50,10 @@ function Employees() {
     return name.split(" ").slice(-1)[0];
   }
 
-  
+  function reset() {
+    setEmployees(employeesFile.slice());
+  }
+
   return (
     <Box>
       <Typography variant="h1" sx={{mx: 3}}>{t('employees.employees')}</Typography>
@@ -74,6 +77,9 @@ function Employees() {
           {sortNextLastNameAZAsc // if yes, we are CURRENTLY ZA
             ? <ArrowDownwardIcon fontSize="small" /> 
             : <ArrowUpwardIcon fontSize="small" />}
+        </Button>
+        <Button variant="outlined" onClick={reset}>
+          Reset
         </Button>
       </Box>
       <Grid container spacing={4} alignItems="stretch" mx={2} my={4}>
