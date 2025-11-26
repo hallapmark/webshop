@@ -10,12 +10,18 @@ import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
 
+import SortByAlphaIcon from '@mui/icons-material/SortByAlpha';
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import productsFile from "../data/products.json"
 import { toast, ToastContainer } from "react-toastify";
 
 
 function Home() {
   const [products, setProducts] = useState(productsFile.slice());
+  const [sortNextAZAsc, setSortNextAZAsc] = useState(true);
+  const [sortNextPriceAsc, setSortNextPriceAsc] = useState(true);
 
   const addToCart = (product) => {
     const cartLS = JSON.parse(localStorage.getItem("cart")) || [];
@@ -24,11 +30,39 @@ function Home() {
     toast.success(product.name + " added to cart!");
   }
 
+  function sortAZ() {
+    const sorted = products.slice().sort((a, b) =>
+      sortNextAZAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)
+    );
+    setProducts(sorted);
+    setSortNextAZAsc(!sortNextAZAsc); 
+  }
+
+  function sortPrice() {
+    const sorted = products.toSorted((a, b) => sortNextPriceAsc ? a.price - b.price : b.price - a.price);
+    setProducts(sorted);
+    setSortNextPriceAsc(!sortNextPriceAsc);
+  }
+
   return (
     <Box m={4}>
       <Typography variant="h1" gutterBottom>Webshop</Typography>
       <br />
       <Typography variant="h3" gutterBottom>New arrivals</Typography>
+      <Box
+        sx={{ display: "flex", justifyContent: "flex-end", alignItems: "center", mt: 1, mr: 2, gap: 1 }}
+      >
+        <Button variant="outlined" startIcon={<SortByAlphaIcon />} onClick={sortAZ}>
+          {sortNextAZAsc // if yes, we are CURRENTLY ZA
+            ? <ArrowDownwardIcon fontSize="small" /> 
+            : <ArrowUpwardIcon fontSize="small" />}
+        </Button>
+        <Button variant="outlined" startIcon={<AttachMoneyIcon />} onClick={sortPrice}>
+          {sortNextPriceAsc // if yes, current is descending (high price first)
+            ? <ArrowDownwardIcon fontSize="small" /> 
+            : <ArrowUpwardIcon fontSize="small" />}
+        </Button>
+      </Box>
       <Grid container spacing={4} alignItems="stretch" mx={2} my={4}>
         {products.map((product) => (
           <Grid
