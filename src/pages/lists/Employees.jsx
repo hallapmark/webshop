@@ -99,7 +99,7 @@ function Employees() {
               <CardActionArea component={RouterLink} to={`/employee/${employee.id}`} sx={{ flexGrow: 1 }}>
                 <CardMedia
                   component="img"
-                  image={`src/assets/${employee.image}`}
+                  image={`/assets/${employee.image}`}
                   alt="Employee"
                   sx={{
                     maxHeight: 140,

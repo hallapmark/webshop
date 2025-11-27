@@ -20,7 +20,7 @@ function EmployeeDetail() {
     <Card sx={{ height: "100%", display: "flex", flexDirection: "column", textAlign: "center" }}>
       <CardMedia
         component="img"
-        image={`/src/assets/${found.image}`}
+        image={`/assets/${found.image}`}
         alt="Employee"
         sx={{
           maxHeight: 140,
