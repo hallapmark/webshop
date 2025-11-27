@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 import Box from '@mui/material/Box';
@@ -18,10 +18,16 @@ import { toast, ToastContainer } from "react-toastify";
 
 
 function Home() {
-  const [products, setProducts] = useState(productsFile.slice());
+  const [products, setProducts] = useState([]);
   const [sortNextAZAsc, setSortNextAZAsc] = useState(true);
   const [sortNextPriceAsc, setSortNextPriceAsc] = useState(true);
   const [lastSort, setLastSort] = useState(null); // 'az' | 'price' | null 
+
+  useEffect(() => {
+    fetch("http://localhost:8080/products")
+      .then(res => res.json())
+      .then(json => setProducts(json))
+  }, []);
 
   const addToCart = (product) => {
     const cartLS = JSON.parse(localStorage.getItem("cart")) || [];
