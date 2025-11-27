@@ -1,5 +1,4 @@
 import { useNavigate, useParams } from "react-router-dom"
-// import productFile from "../../data/products.json"
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";

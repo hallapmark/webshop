@@ -14,7 +14,6 @@ import SortByAlphaIcon from '@mui/icons-material/SortByAlpha';
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import productsFile from "../data/products.json"
 import { toast, ToastContainer } from "react-toastify";
 
 

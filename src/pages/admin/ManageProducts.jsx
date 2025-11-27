@@ -12,8 +12,6 @@ import TableRow from '@mui/material/TableRow';
 import Typography from "@mui/material/Typography";
 import Paper from '@mui/material/Paper';
 
-// import productsFile from "../../data/products.json"
-
 function ManageProducts() {
   const [products, setProducts] = useState([]);
 

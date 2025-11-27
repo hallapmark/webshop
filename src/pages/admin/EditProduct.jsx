@@ -2,12 +2,9 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-// import productsFile from "../../data/products.json"
 import { toast, ToastContainer } from "react-toastify";
 import { useEffect, useState } from "react";
 
