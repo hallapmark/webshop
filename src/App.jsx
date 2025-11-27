@@ -39,7 +39,7 @@ import CarDetail from "./pages/detail/CarDetail";
 import EmployeeDetail from "./pages/detail/EmployeeDetail";
 import ShopDetail from "./pages/detail/ShopDetail";
 import UserDetail from "./pages/detail/UserDetail";
-import PDP from "./pages/detail/PDP";
+import ProductDetail from "./pages/detail/ProductDetail";
 
 
 function App() {
@@ -76,7 +76,7 @@ function App() {
 
         <Route path="/car/:id" element={<CarDetail />} />
         <Route path="/employee/:id" element={<EmployeeDetail />} />
-        <Route path="/product/:id" element={<PDP />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/shop/:id" element={<ShopDetail />} />
         <Route path="/user/:id" element={<UserDetail />} />
 
