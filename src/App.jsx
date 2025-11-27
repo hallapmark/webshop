@@ -21,11 +21,6 @@ import { ThemeProvider } from "@mui/material/styles";
 import travelTheme from "./theme";
 import CssBaseline from '@mui/material/CssBaseline';
 import Cart from "./pages/Cart";
-import ManageCars from "./pages/manage/ManageCars";
-import ManageEmployees from "./pages/manage/ManageEmployees";
-import ManageProducts from "./pages/manage/ManageProducts";
-import ManageShops from "./pages/manage/ManageShops";
-import ManageUsers from "./pages/manage/ManageUsers";
 import Employees from "./pages/lists/Employees";
 import Users from "./pages/lists/Users";
 import Shops from "./pages/lists/Shops";
@@ -40,6 +35,11 @@ import ShopDetail from "./pages/detail/ShopDetail";
 import UserDetail from "./pages/detail/UserDetail";
 import ProductDetail from "./pages/detail/ProductDetail";
 import EditProduct from "./pages/admin/EditProduct";
+import ManageCars from "./pages/admin/ManageCars";
+import ManageEmployees from "./pages/admin/ManageEmployees";
+import ManageProducts from "./pages/admin/ManageProducts";
+import ManageUsers from "./pages/admin/ManageUsers";
+import ManageShops from "./pages/admin/ManageShops";
 
 
 function App() {

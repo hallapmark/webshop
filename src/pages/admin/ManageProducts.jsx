@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 import Box from '@mui/material/Box';
@@ -12,15 +12,23 @@ import TableRow from '@mui/material/TableRow';
 import Typography from "@mui/material/Typography";
 import Paper from '@mui/material/Paper';
 
-import productsFile from "../../data/products.json"
+// import productsFile from "../../data/products.json"
 
 function ManageProducts() {
-  const [products, setProducts] = useState(productsFile.slice());
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+      fetch("http://localhost:8080/products")
+        .then(res => res.json())
+        .then(json => setProducts(json))
+  }, []);
 
   function deleteProduct(id) {
-    const index = productsFile.findIndex((item) => item.id === id);
-    productsFile.splice(index,1);
-    setProducts(productsFile.slice());
+    fetch("http://localhost:8080/products?id=" + id, {
+      method: "DELETE"
+    })
+     .then(res => res.json())
+     .then(json => setProducts(json))
   }
 
   return (
@@ -48,7 +56,7 @@ function ManageProducts() {
               <TableCell align="right">{product.id}</TableCell>
               <TableCell align="right">{product.price}€</TableCell>
               <TableCell align="right">
-                <Button component={RouterLink} to={"/change-product/" + product.id} variant="contained" color="warning" size="small">
+                <Button component={RouterLink} to={"/edit-product/" + product.id} variant="contained" color="warning" size="small">
                   Change
                 </Button>
               </TableCell>
