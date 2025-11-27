@@ -33,13 +33,13 @@ import ChangeCar from "./pages/change/ChangeCar";
 import ChangeEmployee from "./pages/change/ChangeEmployee";
 import ChangeShop from "./pages/change/ChangeShop";
 import ChangeUser from "./pages/change/ChangeUser";
-import ChangeProduct from "./pages/change/ChangeProduct";
 import { useTranslation } from "react-i18next";
 import CarDetail from "./pages/detail/CarDetail";
 import EmployeeDetail from "./pages/detail/EmployeeDetail";
 import ShopDetail from "./pages/detail/ShopDetail";
 import UserDetail from "./pages/detail/UserDetail";
 import ProductDetail from "./pages/detail/ProductDetail";
+import EditProduct from "./pages/admin/EditProduct";
 
 
 function App() {
@@ -87,7 +87,7 @@ function App() {
         <Route path="/manage-users" element={<ManageUsers />} />
         <Route path="/change-car/:id" element={<ChangeCar />} />
         <Route path="/change-employee/:id" element={<ChangeEmployee />} />
-        <Route path="/change-product/:id" element={<ChangeProduct />} />
+        <Route path="/edit-product/:id" element={<EditProduct />} />
         <Route path="/change-shop/:id" element={<ChangeShop />} />
         <Route path="/change-user/:id" element={<ChangeUser />} />
 

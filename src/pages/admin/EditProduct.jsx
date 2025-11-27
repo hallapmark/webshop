@@ -7,16 +7,22 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-import productsFile from "../../data/products.json"
+// import productsFile from "../../data/products.json"
 import { toast, ToastContainer } from "react-toastify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function ChangeProduct() {
+function EditProduct() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [product, setProduct] = useState(productsFile.find(item => item.id === id));
+  const [product, setProduct] = useState({});
 
-  const updateCar = () => {
+  useEffect(() => {
+    fetch("http://localhost:8080/products/" + id)
+      .then(res => res.json())
+      .then(json => setProduct(json))
+  }, [id]);
+
+  const updateProduct = () => {
     if (product.price <= 0) {
       toast.error("Price cannot be zero or negative");
       return;
@@ -27,14 +33,23 @@ function ChangeProduct() {
       return;
     }
 
-    const index = productsFile.findIndex((item) => item.id === id);
-    productsFile[index] = product;
-
-    navigate("/manage-products");
+    fetch("http://localhost:8080/products", {
+      method: "PUT",
+      body: JSON.stringify(product),
+      headers : {
+        "Content-Type": "application/json"
+      }
+    })
+     .then(res => res.json())
+     .then(() => navigate("/manage-products"))
   };
 
   if (product === undefined) {
     return <Typography variant="h6">Product not found</Typography>
+  }
+
+  if (product.id === undefined) {
+    return <Typography variant="h6">Loading...</Typography>
   }
 
   return (
@@ -48,7 +63,7 @@ function ChangeProduct() {
         gap: 2,
       }}
     >
-      <Typography variant="h5" sx={{ textAlign: "center" }}>Edit Car</Typography>
+      <Typography variant="h5" sx={{ textAlign: "center" }}>Edit Product</Typography>
       <TextField
         label="Name"
         value={product.name}
@@ -70,11 +85,11 @@ function ChangeProduct() {
         value={product.description_est}
         onChange={(e) => setProduct({...product, description_est: e.target.value })}
       />
-      <Button variant="contained" onClick={updateCar}>Update</Button>
+      <Button variant="contained" onClick={updateProduct}>Update</Button>
       <ToastContainer position="bottom-right" autoClose={4000} theme="dark" />
     </Box>
   );
 }
 
-export default ChangeProduct
+export default EditProduct
   
