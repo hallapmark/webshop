@@ -28,7 +28,7 @@ function ChangeShop() {
     const index = shopsFile.findIndex((item) => item.id === id);
     shopsFile[index] = shop;
 
-    navigate("/manage-shops");
+    navigate("/maintain-shops");
   };
 
   if (shop === undefined) {
