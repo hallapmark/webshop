@@ -37,9 +37,9 @@ import ProductDetail from "./pages/detail/ProductDetail";
 import EditProduct from "./pages/admin/EditProduct";
 import ManageCars from "./pages/admin/ManageCars";
 import ManageEmployees from "./pages/admin/ManageEmployees";
-import MaintainProducts from "./pages/admin/MaintainProducts";
+import ManageProducts from "./pages/admin/ManageProducts";
 import ManageUsers from "./pages/admin/ManageUsers";
-import MaintainShops from "./pages/admin/MaintainShops";
+import ManageShops from "./pages/admin/ManageShops";
 
 
 function App() {
@@ -82,8 +82,8 @@ function App() {
 
         <Route path="/manage-cars" element={<ManageCars />} />
         <Route path="/manage-employees" element={<ManageEmployees />} />
-        <Route path="/maintain-products" element={<MaintainProducts />} />
-        <Route path="/maintain-shops" element={<MaintainShops />} />
+        <Route path="/manage-products" element={<ManageProducts />} />
+        <Route path="/manage-shops" element={<ManageShops />} />
         <Route path="/manage-users" element={<ManageUsers />} />
         <Route path="/change-car/:id" element={<ChangeCar />} />
         <Route path="/change-employee/:id" element={<ChangeEmployee />} />

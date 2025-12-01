@@ -174,10 +174,10 @@ function TopNav() {
             onClose={handleAdminMenuClose}
           >
             <MenuItem onClick={() => handleAdminMenuNavigate("/manage-cars")}>{t('nav.managenav.cars')}</MenuItem>
-            <MenuItem onClick={() => handleAdminMenuNavigate("/maintain-shops")}>{t('nav.managenav.shops')}</MenuItem>
+            <MenuItem onClick={() => handleAdminMenuNavigate("/manage-shops")}>{t('nav.managenav.shops')}</MenuItem>
             <MenuItem onClick={() => handleAdminMenuNavigate("/manage-users")}>{t('nav.managenav.users')}</MenuItem>
             <MenuItem onClick={() => handleAdminMenuNavigate("/manage-employees")}>{t('nav.managenav.employees')}</MenuItem>
-            <MenuItem onClick={() => handleAdminMenuNavigate("/maintain-products")}>{t('nav.managenav.products')}</MenuItem>
+            <MenuItem onClick={() => handleAdminMenuNavigate("/manage-products")}>{t('nav.managenav.products')}</MenuItem>
           </Menu>
 
           <IconButton 

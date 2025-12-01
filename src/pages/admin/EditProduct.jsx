@@ -44,7 +44,7 @@ function EditProduct() {
       }
     })
      .then(res => res.json())
-     .then(() => navigate("/maintain-products"))
+     .then(() => navigate("/manage-products"))
   };
 
   if (product === undefined) {
