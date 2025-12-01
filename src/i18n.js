@@ -16,7 +16,6 @@ const resources = {
     translation: {
       "nav": {
         "add": "Add",
-        "cars": "Cars",
         "employees": "Employees",
         "users": "Users",
         "shops": "Shops",
@@ -25,16 +24,12 @@ const resources = {
         "manage": "Manage",
         "webshop": "Webshop",
         "managenav": {
-          "cars": "Manage Cars",
           "employees": "Manage Employees",
           "products": "Manage Products",
           "shops": "Manage Shops",
           "users": "Manage Users",
         }
       }, 
-      "cars": {
-        "cars": "Cars"
-      },
       "cart": {
         "empty-text": "Cart is empty",
         "empty-button": "Empty cart",
@@ -55,7 +50,6 @@ const resources = {
     translation: {
       "nav": {
         "add": "Lisa",
-        "cars": "Autod",
         "employees": "Töötajad",
         "users": "Kasutajad",
         "shops": "Esindused",
@@ -65,7 +59,6 @@ const resources = {
         "manage": "Halda",
         "webshop": "Veebipood",
         "managenav": {
-          "cars": "Halda autod",
           "employees": "Halda töötajad",
           "products": "Halda tooted",
           "shops": "Halda esindused",
@@ -76,9 +69,6 @@ const resources = {
         "empty-text": "Ostukorv on tühi",
         "empty-button": "Tühenda ostukorv",
         "total": "Ostukorvi kogusumma"
-      },
-      "cars": {
-        "cars": "Autod"
       },
       "employees": {
         "employees": "Töötajad"

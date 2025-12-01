@@ -119,7 +119,6 @@ function TopNav() {
           {/* https://mui.com/material-ui/integrations/routing/ */}
           {/* Medium-to-xl: display menu items in a row */}
           <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-            <Button component={RouterLink} to="/cars" color="inherit">{t('nav.cars')}</Button>
             <Button component={RouterLink} to="/shops" color="inherit">{t('nav.shops')}</Button>
             <Button component={RouterLink} to="/users" color="inherit">{t('nav.users')}</Button>
             <Button component={RouterLink} to="/employees" color="inherit">{t('nav.employees')}</Button>
@@ -146,7 +145,6 @@ function TopNav() {
               open={Boolean(anchorElNav)} // evaluates true if we've got an html element in anchorElNav
               onClose={handleNavMenuClose}
             >
-              <MenuItem onClick={() => handleNavMenuNavigate("/cars")}>{t('nav.cars')}</MenuItem>
               <MenuItem onClick={() => handleNavMenuNavigate("/shops")}>{t('nav.shops')}</MenuItem>
               <MenuItem onClick={() => handleNavMenuNavigate("/users")}>{t('nav.users')}</MenuItem>
               <MenuItem onClick={() => handleNavMenuNavigate("/employees")}>{t('nav.employees')}</MenuItem>
@@ -173,7 +171,6 @@ function TopNav() {
             open={Boolean(anchorElAdmin)}
             onClose={handleAdminMenuClose}
           >
-            <MenuItem onClick={() => handleAdminMenuNavigate("/manage-cars")}>{t('nav.managenav.cars')}</MenuItem>
             <MenuItem onClick={() => handleAdminMenuNavigate("/manage-shops")}>{t('nav.managenav.shops')}</MenuItem>
             <MenuItem onClick={() => handleAdminMenuNavigate("/manage-users")}>{t('nav.managenav.users')}</MenuItem>
             <MenuItem onClick={() => handleAdminMenuNavigate("/manage-employees")}>{t('nav.managenav.employees')}</MenuItem>
