@@ -1,0 +1,128 @@
+[
+    {
+        "bla": "8d6d50d1-92d3-423e-bdff-e8551c7c57d2",
+        "name": "Corevia X7 Mechanical Keyboard",
+        "description": "RGB mechanical keyboard with tactile blue switches.",
+        "description_est": "RGB mehaaniline klaviatuur taktiilsete siniste lülititega.",
+        "category":{"id": 1}, "price": 89.99
+    },
+    {
+        "bla": "07c00908-a143-4766-a6e3-60b5f3fc61b0",
+        "name": "Quantel Mini PC Cube",
+        "description": "Compact desktop PC powered by Intel i5 and 16GB RAM.",
+        "description_est": "Kompaktne lauaarvuti Intel i5 protsessori ja 16GB muutmäluga.",
+        "category":{"id": 1}, "price": 599.0
+    },
+    {
+        "bla": "835877c1-d792-4293-b215-386a3b68dee7",
+        "name": "Veyronix StreamCam HD",
+        "description": "Full HD webcam with built-in stereo microphone.",
+        "description_est": "Full HD veebikaamera sisseehitatud stereomikrofoniga.",
+        "category":{"id": 1}, "price": 79.9
+    },
+    {
+        "bla": "fbf57433-c8a8-4ed2-901f-b295a2674bdf",
+        "name": "Nexar Drive SSD 1TB",
+        "description": "High-speed external SSD for quick backups and file transfers.",
+        "description_est": "Kiire väline SSD kiireks varundamiseks ja failiedastuseks.",
+        "category":{"id": 1}, "price": 129.99
+    },
+    {
+        "bla": "579f3c42-8ed0-433a-b795-51918018af86",
+        "name": "Helion 750W Power Supply",
+        "description": "Modular power supply with 80+ Gold efficiency certification.",
+        "description_est": "Moodul-toiteplokk 80+ Gold energiatõhususe sertifikaadiga.",
+        "category":{"id": 1}, "price": 119.0
+    },
+    {
+        "bla": "5f85acc0-ac7c-4923-ad3c-a6c48fc00ce7",
+        "name": "Arcton AX-500 Headset",
+        "description": "Lightweight wired gaming headset with clear voice chat.",
+        "description_est": "Kerge juhtmega mängupeakomplekt selge häälesidega.",
+        "category":{"id": 1}, "price": 69.5
+    },
+    {
+        "bla": "ea5c166b-bf4a-44b8-a0db-5ddfcc7b32bd",
+        "name": "Keltor 5-Port USB Hub",
+        "description": "Aluminum USB hub with fast-charging support.",
+        "description_est": "Alumiiniumist USB jaotur kiire laadimise toega.",
+        "category":{"id": 1}, "price": 34.99
+    },
+    {
+        "bla": "6d61f4b5-3701-43af-8a7b-61711d73b856",
+        "name": "Bravix DualBand Router X5",
+        "description": "Wi-Fi 6 router with up to 3.6 Gbps total throughput.",
+        "description_est": "Wi-Fi 6 ruuter kuni 3,6 Gbps koguläbilaskevõimega.",
+        "category":{"id": 1}, "price": 149.99
+    },
+    {
+        "bla": "3a05ede8-1522-49ed-92b1-b966c48bfa9d",
+        "name": "Optrix Pro Monitor Stand",
+        "description": "Adjustable monitor stand with built-in USB-C dock.",
+        "description_est": "Reguleeritav monitorialus sisseehitatud USB-C dokiga.",
+        "category":{"id": 1}, "price": 89.0
+    },
+    {
+        "bla": "c804f34c-2c7c-458d-a010-2c849f77bc81",
+        "name": "Cortel SoundBar S100",
+        "description": "Slim Bluetooth soundbar for desktop or TV use.",
+        "description_est": "Õhuke Bluetooth heliriba lauaarvutile või telerile.",
+        "category":{"id": 1}, "price": 99.99
+    },
+    {
+        "bla": "3fc9f36d-226f-4a7e-ac8a-ee1a91cb1979",
+        "name": "PixelForge Graphic Tablet M10",
+        "description": "10-inch drawing tablet with pressure-sensitive stylus.",
+        "description_est": "10-tolline joonistustahvel survetundliku pliiatsiga.",
+        "category":{"id": 1}, "price": 179.0
+    },
+    {
+        "bla": "9ca842fe-aadc-4af0-be61-165af2164fac",
+        "name": "Voltair PowerBank 20000",
+        "description": "High-capacity power bank with fast USB-C charging.",
+        "description_est": "Suurmahuline akupank kiire USB-C laadimisega.",
+        "category":{"id": 1}, "price": 49.95
+    },
+    {
+        "bla": "aa91b086-1dc1-4b21-a3d8-789d848bf607",
+        "name": "Novatrax Bluetooth Keyboard",
+        "description": "Slim wireless keyboard compatible with all devices.",
+        "description_est": "Õhuke juhtmevaba klaviatuur, mis ühildub kõigi seadmetega.",
+        "category":{"id": 1}, "price": 54.99
+    },
+    {
+        "bla": "fb3a3031-17a4-4f9c-a4be-cbf594110c31",
+        "name": "Thermax Arctic Cooler",
+        "description": "Efficient CPU cooler with dual fans and RGB lighting.",
+        "description_est": "Tõhus protsessorijahuti kahe ventilaatori ja RGB valgustusega.",
+        "category":{"id": 1}, "price": 89.9
+    },
+    {
+        "bla": "f76ddf2f-d996-4bed-ab87-8e15fac65593",
+        "name": "Lunova SmartWatch X3",
+        "description": "Fitness-focused smartwatch with heart rate and sleep tracking.",
+        "description_est": "Tervisespordile keskendunud nutikell pulsisageduse ja uneseirega.",
+        "category":{"id": 1}, "price": 199.0
+    },
+    {
+        "bla": "e8741058-d271-4d71-9f2b-9597f5e485b9",
+        "name": "Spectra 512GB USB-C Flash Drive",
+        "description": "Compact and durable flash drive with ultra-fast transfer speeds.",
+        "description_est": "Kompaktne ja vastupidav mälupulk ülikiire andmeedastusega.",
+        "category":{"id": 1}, "price": 59.0
+    },
+    {
+        "bla": "e4993da2-9b6c-4773-bfe0-271e2d6af8c4",
+        "name": "Veltrix MX-200 Gaming Mouse",
+        "description": "Ergonomic RGB gaming mouse with adjustable DPI up to 12,000.",
+        "description_est": "Ergonoomiline RGB mänguhiir reguleeritava DPI-ga kuni 12 000.",
+        "category":{"id": 1}, "price": 3.0
+    },
+    {
+        "bla": "1582313d-3607-4063-af90-e84d5aedbf33",
+        "name": "Lumi",
+        "description": "27-inch QHD monitor with ultra-thin bezels and 144Hz refresh rate.",
+        "description_est": "27-tolline QHD monitor eriti õhukeste servade ja 144Hz värskendussagedusega.",
+        "category":{"id": 1}, "price": 329.5
+    }
+]

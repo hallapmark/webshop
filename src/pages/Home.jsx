@@ -18,16 +18,32 @@ import { toast, ToastContainer } from "react-toastify";
 
 
 function Home() {
-  const [products, setProducts] = useState([]);
-  const [sortNextAZAsc, setSortNextAZAsc] = useState(true);
-  const [sortNextPriceAsc, setSortNextPriceAsc] = useState(true);
-  const [lastSort, setLastSort] = useState(null); // 'az' | 'price' | null 
+  const [products, setProducts] = useState([]); 
+  const [categories, setCategories] = useState([]);
+  const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [size, setSize] = useState(2);
+  const [selectedCategory, setSelectedCategory] = useState(0);
+  const [sort, setSort] = useState("id,asc");
 
   useEffect(() => {
-    fetch("http://localhost:8080/products")
+    fetch("http://localhost:8080/categories")
       .then(res => res.json())
-      .then(json => setProducts(json))
+      .then(json => {
+        setCategories(json);
+      })
   }, []);
+
+  useEffect(() => {
+    fetch(`http://localhost:8080/products?size=${size}&page=${page}&categoryId=${selectedCategory}&sort=${sort}`)
+      .then(res => res.json())
+      .then(json => {
+        setProducts(json.content)
+        setTotalPages(json.totalPages)
+      })
+  }, [page, size, selectedCategory, sort]);
+  // filtreerimised pigem backendis teha. isegi sorteerimisi tehakse tihti backendis (TODO!)
+  // lehekylgede kaupa võiks ka olla lõpuks
 
   const addToCart = (product) => {
     const cartLS = JSON.parse(localStorage.getItem("cart")) || [];
@@ -36,20 +52,19 @@ function Home() {
     toast.success(product.name + " added to cart!");
   }
 
-  function sortAZ() {
-    const sorted = products.slice().sort((a, b) =>
-      sortNextAZAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)
-    );
-    setProducts(sorted);
-    setSortNextAZAsc(!sortNextAZAsc);
-    setLastSort('az');
+  function changeSize(newValue) {
+    setSize(newValue);
+    setPage(0);
   }
 
-  function sortPrice() {
-    const sorted = products.toSorted((a, b) => sortNextPriceAsc ? a.price - b.price : b.price - a.price);
-    setProducts(sorted);
-    setSortNextPriceAsc(!sortNextPriceAsc);
-    setLastSort('price');
+  function changeSelectedCategory(newValue) {
+    setSelectedCategory(newValue);
+    setPage(0);
+  }
+
+  function changeSort(newValue) {
+    setSort(newValue);
+    setPage(0);
   }
 
   return (
@@ -62,21 +77,31 @@ function Home() {
       <Box
         sx={{ display: "flex", justifyContent: "flex-end", alignItems: "center", mt: 1, mr: 2, gap: 1 }}
       >
+        {categories.map(category =>
+          <Button key={category.id} onClick={() => changeSelectedCategory(category.id)}>{category.name}</Button>
+        )}
+
+        <select onChange={(e) => changeSize(e.target.value)}>
+          <option>2</option>
+          <option>4</option>
+          <option>6</option>
+          <option>8</option>
+        </select>
+
         <Button 
-          variant={lastSort === "az" ? "contained" : "outlined" }
+          variant="contained"
           startIcon={<SortByAlphaIcon />} 
-          onClick={sortAZ}>
-          {sortNextAZAsc // if yes, we are CURRENTLY ZA
-            ? <ArrowDownwardIcon fontSize="small" /> 
-            : <ArrowUpwardIcon fontSize="small" />}
+          onClick={() => changeSort("name,asc")}>
+            A-Z
         </Button>
         <Button 
-          variant={lastSort === "price" ? "contained" : "outlined" }
+          variant="contained"
           startIcon={<AttachMoneyIcon />} 
-          onClick={sortPrice}>
-          {sortNextPriceAsc // if yes, current is descending (high price first)
+          onClick={() => changeSort("price,desc")}>
+            Desc
+          {/* {sortNextPriceAsc // if yes, current is descending (high price first)
             ? <ArrowDownwardIcon fontSize="small" /> 
-            : <ArrowUpwardIcon fontSize="small" />}
+            : <ArrowUpwardIcon fontSize="small" />} */}
         </Button>
       </Box>
       <Grid container spacing={4} alignItems="stretch" mx={2} my={4}>
@@ -104,6 +129,9 @@ function Home() {
           </Grid>
         ))}
       </Grid>
+      <Button disabled={page === 0} onClick={() => setPage(page - 1)}>Previous</Button>
+      <span>{page + 1}</span>
+      <Button disabled={page + 1 === totalPages} onClick={() => setPage(page + 1)}>Next</Button>
       <ToastContainer position="bottom-right" autoClose={4000} theme="dark" />
     </Box>
   )

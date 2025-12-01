@@ -16,9 +16,9 @@ function ManageProducts() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-      fetch("http://localhost:8080/products")
+      fetch("http://localhost:8080/products?categoryId=0")
         .then(res => res.json())
-        .then(json => setProducts(json))
+        .then(json => setProducts(json.content))
   }, []);
 
   function deleteProduct(id) {
@@ -26,7 +26,7 @@ function ManageProducts() {
       method: "DELETE"
     })
      .then(res => res.json())
-     .then(json => setProducts(json))
+     .then(json => setProducts(json.content))
   }
 
   return (

@@ -12,11 +12,17 @@ function EditProduct() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState({});
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/products/" + id)
+    fetch("http://localhost:8080/categories")
       .then(res => res.json())
-      .then(json => setProduct(json))
+      .then(json => {
+        setCategories(json);
+        fetch("http://localhost:8080/products/" + id)
+          .then(res => res.json())
+          .then(json => setProduct(json))
+      })
   }, [id]);
 
   const updateProduct = () => {
@@ -82,6 +88,13 @@ function EditProduct() {
         value={product.description_est}
         onChange={(e) => setProduct({...product, description_est: e.target.value })}
       />
+      <select defaultValue={product.category.id}
+        onChange={(e) => setProduct({...product, category: {"id": e.target.value}})}>
+        {categories.map(category => 
+          <option key={category.id} value={category.id}>
+            {category.name}
+          </option>)}
+      </select>
       <Button variant="contained" onClick={updateProduct}>Update</Button>
       <ToastContainer position="bottom-right" autoClose={4000} theme="dark" />
     </Box>
