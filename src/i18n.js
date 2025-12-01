@@ -21,7 +21,7 @@ const resources = {
         "shops": "Shops",
         "gift-card": "Gift card",
         "calculator": "Calculator",
-        "manage": "Manage",
+        "admin": "Admin",
         "webshop": "Webshop",
         "managenav": {
           "employees": "Manage Employees",
@@ -56,7 +56,7 @@ const resources = {
         "gift-card": "Kinkekaart",
         "cart": "Ostukorv",
         "calculator": "Kalkulaator",
-        "manage": "Halda",
+        "admin": "Administreeri",
         "webshop": "Veebipood",
         "managenav": {
           "employees": "Halda töötajad",

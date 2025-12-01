@@ -5,7 +5,6 @@ import { useState } from "react";
 // https://mui.com/material-ui/guides/minimizing-bundle-size/
 // mui does not recommend 'import { AppBar } from ...' style imports
 import AppBar from '@mui/material/AppBar';
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from "@mui/material/Container";
@@ -25,25 +24,10 @@ import { LNG_KEY, LANGUAGE_MANUALLY_SET_KEY, LANGUAGES } from "../i18n";
 
 
 function TopNav() {
-  const [anchorElAdmin, setAnchorElAdmin] = useState(null);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElLang, setAnchorElLang] = useState(null);
   const navigate = useNavigate(); 
   const { t, i18n } = useTranslation();
-
-  // mui pop-up menu 'anchors' to the button it was opened from
-  const handleOpenAdminMenu = (event) => {
-    setAnchorElAdmin(event.currentTarget);
-  };
-  // de-anchor, close menu
-  const handleAdminMenuClose = () => {
-    setAnchorElAdmin(null);
-  };
-
-  const handleAdminMenuNavigate = (path) => {
-    handleAdminMenuClose();
-    navigate(path);
-  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -151,31 +135,16 @@ function TopNav() {
             </Menu>
           </Box>
 
-          {/* Admin dropdown */}
+          {/* Admin */}
           {/* Simulates "admin/manage" area, for now with no login needed 
-          TODO: it's actually not a bad idea to add a basic login here later*/}
-          <Button 
-            onClick={handleOpenAdminMenu} 
-            endIcon={<ArrowDropDownIcon />} 
+          TODO: add login here later*/}
+          <Button
+            component={RouterLink}
+            to="/admin"
             color="inherit"
-            aria-label="Open manage menu"
-            aria-controls={anchorElAdmin ? 'admin-menu' : undefined}
-            aria-haspopup="menu"
-            aria-expanded={Boolean(anchorElAdmin)}
           >
-            {t('nav.manage')}
+            {t('nav.admin')}
           </Button>
-          <Menu
-            id="admin-menu"
-            anchorEl={anchorElAdmin}
-            open={Boolean(anchorElAdmin)}
-            onClose={handleAdminMenuClose}
-          >
-            <MenuItem onClick={() => handleAdminMenuNavigate("/manage-shops")}>{t('nav.managenav.shops')}</MenuItem>
-            <MenuItem onClick={() => handleAdminMenuNavigate("/manage-users")}>{t('nav.managenav.users')}</MenuItem>
-            <MenuItem onClick={() => handleAdminMenuNavigate("/manage-employees")}>{t('nav.managenav.employees')}</MenuItem>
-            <MenuItem onClick={() => handleAdminMenuNavigate("/manage-products")}>{t('nav.managenav.products')}</MenuItem>
-          </Menu>
 
           <IconButton 
             color="inherit"

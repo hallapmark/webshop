@@ -23,19 +23,21 @@ import Cart from "./pages/Cart";
 import Employees from "./pages/lists/Employees";
 import Users from "./pages/lists/Users";
 import Shops from "./pages/lists/Shops";
-import ChangeEmployee from "./pages/change/ChangeEmployee";
-import ChangeShop from "./pages/change/ChangeShop";
-import ChangeUser from "./pages/change/ChangeUser";
+import ChangeEmployee from "./pages/admin/ChangeEmployee";
+import ChangeShop from "./pages/admin/ChangeShop";
+import ChangeUser from "./pages/admin/ChangeUser";
 import { useTranslation } from "react-i18next";
 import EmployeeDetail from "./pages/detail/EmployeeDetail";
 import ShopDetail from "./pages/detail/ShopDetail";
 import UserDetail from "./pages/detail/UserDetail";
 import ProductDetail from "./pages/detail/ProductDetail";
-import EditProduct from "./pages/admin/EditProduct";
+import EditProduct from "./pages/admin/ChangeProduct";
 import ManageEmployees from "./pages/admin/ManageEmployees";
 import ManageProducts from "./pages/admin/ManageProducts";
 import ManageUsers from "./pages/admin/ManageUsers";
 import ManageShops from "./pages/admin/ManageShops";
+import AdminHome from "./pages/admin/AdminHome";
+import ManageCategories from "./pages/admin/ManageCategories";
 
 
 function App() {
@@ -76,6 +78,8 @@ function App() {
         <Route path="/manage-employees" element={<ManageEmployees />} />
         <Route path="/manage-products" element={<ManageProducts />} />
         <Route path="/manage-shops" element={<ManageShops />} />
+        <Route path="/manage-categories" element={<ManageCategories />} />
+        <Route path="/admin" element={<AdminHome />} />
         <Route path="/manage-users" element={<ManageUsers />} />
         <Route path="/change-employee/:id" element={<ChangeEmployee />} />
         <Route path="/edit-product/:id" element={<EditProduct />} />
