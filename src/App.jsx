@@ -10,6 +10,7 @@ import { LNG_KEY, LANGUAGE_MANUALLY_SET_KEY } from "./i18n";
 import TopNav from "./components/TopNav";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound"
+import Signup from "./pages/auth/Signup";
 
 // mui and fonts
 import "@fontsource/roboto/300.css"; // Light
@@ -65,6 +66,7 @@ function App() {
       
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<Signup />} />
 
         <Route path="/employees" element={<Employees />} />
         <Route path="/shops" element={<Shops />} />
