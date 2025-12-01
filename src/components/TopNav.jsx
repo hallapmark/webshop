@@ -104,7 +104,6 @@ function TopNav() {
           {/* Medium-to-xl: display menu items in a row */}
           <Box sx={{ display: { xs: 'none', md: 'block' } }}>
             <Button component={RouterLink} to="/shops" color="inherit">{t('nav.shops')}</Button>
-            <Button component={RouterLink} to="/users" color="inherit">{t('nav.users')}</Button>
             <Button component={RouterLink} to="/employees" color="inherit">{t('nav.employees')}</Button>
           </Box>
 

@@ -93,25 +93,21 @@ function Employees() {
                         flexDirection: "column", 
                         height: "100%", 
                         borderTop: '4px solid', 
-                        borderColor: 'accent.main', 
-                        transition: 'transform .12s ease, box-shadow .12s ease', 
-                        '&:hover': { transform: 'translateY(-4px)', boxShadow: 2 } }}>
-              <CardActionArea component={RouterLink} to={`/employee/${employee.id}`} sx={{ flexGrow: 1 }}>
-                <CardMedia
-                  component="img"
-                  image={`/assets/${employee.image}`}
-                  alt="Employee"
-                  sx={{
-                    maxHeight: 140,
-                    objectFit: "contain", // maintain aspect ratio
-                    mx: "auto",           // center horizontally
-                    mt: 2
-                  }}
-                />
-                <CardContent sx={{ textAlign: "center", flexGrow: 1}}>
-                  <Typography variant="h5" >{employee.name}</Typography>
-                </CardContent>
-              </CardActionArea>
+                        borderColor: 'accent.main' }}>
+              <CardMedia
+                component="img"
+                image={`/assets/${employee.image}`}
+                alt="Employee"
+                sx={{
+                  maxHeight: 140,
+                  objectFit: "contain", // maintain aspect ratio
+                  mx: "auto",           // center horizontally
+                  mt: 2
+                }}
+              />
+              <CardContent sx={{ textAlign: "center", flexGrow: 1}}>
+                <Typography variant="h5" >{employee.name}</Typography>
+              </CardContent>
             </Card>
             <Box sx={{ textAlign: "center", mt: 1.5 }}>
               <Typography variant="body2">{employee.email}</Typography>

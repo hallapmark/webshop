@@ -35,7 +35,7 @@ function ChangeEmployee() {
   };
 
   if (employee === undefined) {
-    return <Typography variant="h6">Shop not found</Typography>
+    return <Typography variant="h6">Employee not found</Typography>
   }
 
   return (

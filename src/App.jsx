@@ -22,13 +22,11 @@ import travelTheme from "./theme";
 import CssBaseline from '@mui/material/CssBaseline';
 import Cart from "./pages/Cart";
 import Employees from "./pages/lists/Employees";
-import Users from "./pages/lists/Users";
 import Shops from "./pages/lists/Shops";
 import ChangeEmployee from "./pages/admin/ChangeEmployee";
 import ChangeShop from "./pages/admin/ChangeShop";
 import ChangeUser from "./pages/admin/ChangeUser";
 import { useTranslation } from "react-i18next";
-import EmployeeDetail from "./pages/detail/EmployeeDetail";
 import ShopDetail from "./pages/detail/ShopDetail";
 import UserDetail from "./pages/detail/UserDetail";
 import ProductDetail from "./pages/detail/ProductDetail";
@@ -70,9 +68,7 @@ function App() {
 
         <Route path="/employees" element={<Employees />} />
         <Route path="/shops" element={<Shops />} />
-        <Route path="/users" element={<Users />} />
 
-        <Route path="/employee/:id" element={<EmployeeDetail />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/shop/:id" element={<ShopDetail />} />
         <Route path="/user/:id" element={<UserDetail />} />
