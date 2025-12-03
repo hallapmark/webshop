@@ -4,13 +4,16 @@ import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { CartSumContextProvider } from './context/CartSumContextProvider.jsx'
+import { AuthContextProvider } from './context/AuthContextProvider.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       {/* contextprovider children on see mis tema tagide vahel on, praegu siis App */}
       <CartSumContextProvider> 
+        <AuthContextProvider>
           <App />
+        </AuthContextProvider>
       </CartSumContextProvider>
     </BrowserRouter>
   </StrictMode>,

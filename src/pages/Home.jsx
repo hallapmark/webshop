@@ -74,7 +74,6 @@ function Home() {
     <Box m={4}>
       <Typography variant="h1" gutterBottom>Webshop</Typography>
       <br />
-      <Button component={RouterLink} to="/signup" variant="outlined" sx={{ mb: 2 }}>Sign up</Button>
       <Typography variant="h3" gutterBottom>New arrivals</Typography>
       {/* TODO: Maybe some filters as well? */}
       {/* --- SORTING -- */}

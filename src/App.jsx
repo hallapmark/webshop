@@ -38,9 +38,14 @@ import ManageShops from "./pages/admin/ManageShops";
 import AdminHome from "./pages/admin/AdminHome";
 import ManageCategories from "./pages/admin/ManageCategories";
 
+import Profile from "./pages/auth/Profile";
+import Login from "./pages/auth/Login";
+import { AuthContext } from "./context/AuthContext";
+
 
 function App() {
   const { i18n } = useTranslation();
+  const { loggedIn } = useContext(AuthContext);
 
   useEffect(() => {
     if (localStorage.getItem(LANGUAGE_MANUALLY_SET_KEY) === "true") {
@@ -64,7 +69,6 @@ function App() {
       
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<Signup />} />
 
         <Route path="/employees" element={<Employees />} />
         <Route path="/shops" element={<Shops />} />
@@ -73,16 +77,26 @@ function App() {
         <Route path="/shop/:id" element={<ShopDetail />} />
         <Route path="/user/:id" element={<UserDetail />} />
 
-        <Route path="/manage-employees" element={<ManageEmployees />} />
-        <Route path="/manage-products" element={<ManageProducts />} />
-        <Route path="/manage-shops" element={<ManageShops />} />
-        <Route path="/manage-categories" element={<ManageCategories />} />
-        <Route path="/admin" element={<AdminHome />} />
-        <Route path="/manage-users" element={<ManageUsers />} />
-        <Route path="/change-employee/:id" element={<ChangeEmployee />} />
-        <Route path="/edit-product/:id" element={<EditProduct />} />
-        <Route path="/change-shop/:id" element={<ChangeShop />} />
-        <Route path="/change-user/:id" element={<ChangeUser />} />
+        {loggedIn ?
+        <>
+          <Route path="/profile" element={<Profile />} />
+
+          <Route path="/manage-employees" element={<ManageEmployees />} />
+          <Route path="/manage-products" element={<ManageProducts />} />
+          <Route path="/manage-shops" element={<ManageShops />} />
+          <Route path="/manage-categories" element={<ManageCategories />} />
+          <Route path="/admin" element={<AdminHome />} />
+          <Route path="/manage-users" element={<ManageUsers />} />
+          <Route path="/change-employee/:id" element={<ChangeEmployee />} />
+          <Route path="/edit-product/:id" element={<EditProduct />} />
+          <Route path="/change-shop/:id" element={<ChangeShop />} />
+          <Route path="/change-user/:id" element={<ChangeUser />} />
+        </>:
+        <>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </>
+        }
 
         <Route path="/cart" element={<Cart />} />
         

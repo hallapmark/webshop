@@ -22,6 +22,7 @@ import Badge from '@mui/material/Badge';
 import { useTranslation } from "react-i18next";
 import { LNG_KEY, LANGUAGE_MANUALLY_SET_KEY, LANGUAGES } from "../i18n";
 import { CartSumContext } from "../context/CartSumContext";
+import { AuthContext } from "../context/AuthContext";
 
 
 function TopNav() {
@@ -30,6 +31,7 @@ function TopNav() {
   const navigate = useNavigate(); 
   const { t, i18n } = useTranslation();
   const { cartSum } = useContext(CartSumContext);
+  const { loggedIn, logout } = useContext(AuthContext);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -140,13 +142,30 @@ function TopNav() {
           {/* Admin */}
           {/* Simulates "admin/manage" area, for now with no login needed 
           TODO: add login here later*/}
-          <Button
-            component={RouterLink}
-            to="/admin"
-            color="inherit"
-          >
-            {t('nav.admin')}
-          </Button>
+          {loggedIn ? 
+            <Box>
+              <Button onClick={logout} color="inherit">Logout</Button>
+              <Button
+                component={RouterLink}
+                to="/profile"
+                color="inherit"
+              >
+                Profile
+              </Button>
+              <Button
+                component={RouterLink}
+                to="/admin"
+                color="inherit"
+              >
+                {t('nav.admin')}
+              </Button>
+            </Box>
+            : 
+              <Box>
+                <Button component={RouterLink} to="/signup" color="inherit">Sign up</Button>
+                <Button component={RouterLink} to="/login" color="inherit">Login</Button>
+              </Box>
+          }
 
           <IconButton 
             color="inherit"
