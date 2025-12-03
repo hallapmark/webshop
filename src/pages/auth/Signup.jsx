@@ -51,9 +51,8 @@ function validateEmail(email) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     }).then(() => {
-      toast.success("Signup successful");
       setLoading(false);
-      setTimeout(() => navigate("/"), 1100);
+      navigate("/");
     });
   };
 
@@ -103,7 +102,7 @@ function validateEmail(email) {
         {loading ? "Signing up..." : "Sign up"}
       </Button>
 
-      <ToastContainer position="bottom-right" autoClose={1100} theme="dark" />
+      <ToastContainer position="bottom-right" autoClose={4000} theme="dark" />
     </Box>
   );
 }
