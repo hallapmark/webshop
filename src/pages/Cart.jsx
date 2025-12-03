@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 import FormControl from "@mui/material/FormControl";
@@ -16,6 +16,7 @@ import Typography from "@mui/material/Typography";
 import Select from "@mui/material/Select";
 
 import DeleteIcon from '@mui/icons-material/Delete';
+import { CartSumContext } from "../context/CartSumContext";
 
 
 // TODO: Add capability to add multiple items of the same type
@@ -26,6 +27,7 @@ function Cart() {
   const [parcelMachines, setParcelMachines] = useState([]);
   const [dbParcelMachines, setDbParcelMachines] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const {setCartSum} = useContext(CartSumContext);
   
   useEffect(() => {
     fetch("https://www.omniva.ee/locations.json")
@@ -53,21 +55,30 @@ function Cart() {
     // find leiab esimese
     // alati kustutab niimodi esimese ainult kui ykskoik millisel delete vajutan
     // bugi p6hjus
-    const productsCopy = products.slice();
-    productsCopy.splice(index,1);
-    localStorage.setItem("cart", JSON.stringify(productsCopy));
-    setProducts(productsCopy);
+    // const productsCopy = products.slice();
+    // productsCopy.splice(index,1);
+    // localStorage.setItem("cart", JSON.stringify(productsCopy));
+    // nii ei toimi
+
+    products.splice(index,1);
+    localStorage.setItem("cart", JSON.stringify(products));
+    setProducts(products.slice()); // setter mõjub alles siis kui funktsioon läbi
+    setCartSum(calculateTotal());
+    // huvitav koht, vt. koopia käitumine
   }
 
   function emptyCart() {
     setProducts([]);
     localStorage.setItem("cart", "[]");
+    setCartSum(0);
   }
 
   function calculateTotal() {
     let sum = 0;
     products.forEach(p => sum += p.price);
-    return sum.toFixed(2);
+    // funktsioon võiks ikka numbri tagastada, mitte toFixed (mis on string)
+    // toFixed alles html-is
+    return sum;
   }
 
   return (
@@ -98,7 +109,7 @@ function Cart() {
 
       {products.length > 0 && 
       <Box sx={{ display: "flex", flexDirection: "column", gap: 3, alignItems: "center", mb: 5}}>
-        <Typography variant="subtitle1" gutterBottom mt={2.5}>Cart total: {calculateTotal()}€</Typography>
+        <Typography variant="subtitle1" gutterBottom mt={2.5}>Cart total: {calculateTotal().toFixed(2)}€</Typography>
         <Box sx={{ display: "flex", justifyContent: "center", gap: 1.5 }}>
           <Button variant="contained" onClick={() => setCountry("EE")}>Eesti</Button>
           <Button variant="contained" onClick={() => setCountry("LV")}>Läti</Button>

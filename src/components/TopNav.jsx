@@ -1,6 +1,6 @@
 // react, react router
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 // https://mui.com/material-ui/guides/minimizing-bundle-size/
 // mui does not recommend 'import { AppBar } from ...' style imports
@@ -21,6 +21,7 @@ import Badge from '@mui/material/Badge';
 // other
 import { useTranslation } from "react-i18next";
 import { LNG_KEY, LANGUAGE_MANUALLY_SET_KEY, LANGUAGES } from "../i18n";
+import { CartSumContext } from "../context/CartSumContext";
 
 
 function TopNav() {
@@ -28,6 +29,7 @@ function TopNav() {
   const [anchorElLang, setAnchorElLang] = useState(null);
   const navigate = useNavigate(); 
   const { t, i18n } = useTranslation();
+  const { cartSum } = useContext(CartSumContext);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -96,6 +98,7 @@ function TopNav() {
                 slotProps={{ badge: { sx: { bgcolor: 'accent.main', color: 'accent.contrastText' } } }}
               > */}
                 <ShoppingCartIcon />
+                {cartSum.toFixed(2)}€
               {/* </Badge> */}
             </IconButton>
           </Box>

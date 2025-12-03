@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 import Box from '@mui/material/Box';
@@ -15,6 +15,7 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { toast, ToastContainer } from "react-toastify";
+import { CartSumContext } from "../context/CartSumContext";
 
 
 function Home() {
@@ -25,6 +26,7 @@ function Home() {
   const [size, setSize] = useState(2);
   const [selectedCategory, setSelectedCategory] = useState(0);
   const [sort, setSort] = useState("id,asc");
+  const {cartSum, setCartSum} = useContext(CartSumContext);
 
   useEffect(() => {
     fetch("http://localhost:8080/categories")
@@ -50,6 +52,7 @@ function Home() {
     cartLS.push(product);
     localStorage.setItem("cart", JSON.stringify(cartLS));
     toast.success(product.name + " added to cart!");
+    setCartSum(cartSum + product.price);
   }
 
   function changeSize(newValue) {
