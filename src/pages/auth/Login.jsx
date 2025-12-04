@@ -17,27 +17,29 @@ function Login() {
   const navigate = useNavigate();
 
   function handleSubmit(e) {
+    // default käitumine on et teeb refreshi, me tõkestame seda
     e.preventDefault();
-    // enable loading
-    fetch()
+    setLoading(true);
+    fetch("http://localhost:8080/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(loginCredentials)
+    })
       .then(res => res.json())
       .then(json => {
         if (json.message && json.timestamp && json.status) {
-          toast.error(`${json.message}\n Status: ${json.status}`);
-        } else {
+          toast.error(`${json.message}. Status: ${json.status}`);
+        } else if (json.token) {
           login(json.token);
           navigate("/profile");
+        } else {
+          toast.error("Unexpected response from server.")
         }
-        // disable loading
     })
-
-    // default käitumine on et teeb refreshi, me tõkestame seda
-    
-    
-    // siit saata json token sisse
-    //login(json.token);
-    
-    navigate("/profile");
+    .catch(err => {
+      toast.error("Login failed: " + err.message);
+    })
+    .finally(() => setLoading(false));
   }
   
   return (
@@ -74,7 +76,7 @@ function Login() {
         {loading ? "Signing in..." : "Sign in"}
       </Button>
 
-      <ToastContainer position="bottom-right" autoClose={1100} theme="dark" />
+      <ToastContainer position="bottom-right" autoClose={3000} theme="dark" />
     </Box>
   );
 }

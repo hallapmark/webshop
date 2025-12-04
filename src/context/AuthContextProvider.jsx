@@ -4,9 +4,9 @@ import { AuthContext } from "./AuthContext"
 export const  AuthContextProvider = ({children}) => {
   const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem("token"));
 
-  function login() {
+  function login(token) {
     setLoggedIn(true);
-    sessionStorage.setItem("token", "blabla123");
+    sessionStorage.setItem("token", token);
   }
 
   function logout() {
