@@ -1,7 +1,6 @@
-
 // react, react router
-import { useContext, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
 
 // constants 
 import { LNG_KEY, LANGUAGE_MANUALLY_SET_KEY } from "./i18n";
@@ -40,18 +39,17 @@ import ManageCategories from "./pages/admin/ManageCategories";
 
 import Profile from "./pages/auth/Profile";
 import Login from "./pages/auth/Login";
-import { AuthContext } from "./context/AuthContext";
+import RequireAuth from "./components/RequireAuth";
+import RequireNotAuth from "./components/RequireNotAuth";
+
 
 
 function App() {
   const { i18n } = useTranslation();
-  const { loggedIn } = useContext(AuthContext);
-
   useEffect(() => {
     if (localStorage.getItem(LANGUAGE_MANUALLY_SET_KEY) === "true") {
       return;
     }
-
     let detectedLang = navigator.language;
     if (detectedLang.toLowerCase().includes("en-")) {
       detectedLang = "en" // Simplify English-language locales to one catch-all English-language locale
@@ -75,11 +73,12 @@ function App() {
 
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/shop/:id" element={<ShopDetail />} />
-        <Route path="/user/:id" element={<UserDetail />} />
 
-        {loggedIn ?
-        <>
+        <Route path="/cart" element={<Cart />} />
+
+        <Route element={<RequireAuth />}>
           <Route path="/profile" element={<Profile />} />
+          <Route path="/user/:id" element={<UserDetail />} />
 
           <Route path="/manage-employees" element={<ManageEmployees />} />
           <Route path="/manage-products" element={<ManageProducts />} />
@@ -91,14 +90,12 @@ function App() {
           <Route path="/edit-product/:id" element={<EditProduct />} />
           <Route path="/change-shop/:id" element={<ChangeShop />} />
           <Route path="/change-user/:id" element={<ChangeUser />} />
-        </>:
-        <>
+        </Route>
+
+        <Route element={<RequireNotAuth />}>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-        </>
-        }
-
-        <Route path="/cart" element={<Cart />} />
+        </Route>
         
         <Route path="*" element={ <NotFound /> } />
       </Routes>
