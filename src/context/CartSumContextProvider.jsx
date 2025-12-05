@@ -6,7 +6,7 @@ export const CartSumContextProvider = ({children}) => {
   const [cartSum, setCartSum] = useState(calculateTotal());
 
   function calculateTotal() {
-    const cartLS = JSON.parse(localStorage.getItem("cart") || []);
+    const cartLS = JSON.parse(localStorage.getItem("cart") || "[]");
     let sum = 0;
     cartLS.forEach(p => sum += p.price);
     return sum;
