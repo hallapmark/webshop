@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext"; // Adjust path to your context
+import { AuthContext } from "../context/AuthContext"; 
 
 const RequireAuth = () => {
   const { loggedIn } = useContext(AuthContext);
