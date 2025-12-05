@@ -14,7 +14,6 @@ function Login() {
   const [loginCredentials, setLoginCredentials] = useState({"email": "", "password": ""});
   const [loading, setLoading] = useState(false);
   const {login} = useContext(AuthContext);
-  const navigate = useNavigate();
 
   function handleSubmit(e) {
     // default käitumine on et teeb refreshi, me tõkestame seda
@@ -31,7 +30,6 @@ function Login() {
           toast.error(`${json.message}. Status: ${json.status}`);
         } else if (json.token) {
           login(json.token);
-          navigate("/profile");
         } else {
           toast.error("Unexpected response from server.")
         }
