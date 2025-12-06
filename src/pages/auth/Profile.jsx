@@ -5,6 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
 import TextField from "@mui/material/TextField";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
@@ -16,26 +17,74 @@ import SaveIcon from '@mui/icons-material/Save';
 import CloseIcon from '@mui/icons-material/Close';
 import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
+import { toast } from "react-toastify";
 
 function Profile() {
   const [person, setPerson] = useState({});
   const [editMode, setEditMode] = useState(false);
   const [editedFirstName, setEditedFirstName] = useState("");
   const [editedLastName, setEditedLastName] = useState("");
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [successSnackbarOpen, setSuccessSnackbarOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    fetchPerson();
+  }, []);
+
+  const fetchPerson = () => {
     fetch("http://localhost:8080/person?token=" + sessionStorage.getItem("token"))
       .then(res => res.json())
       .then(json => {
         setPerson(json);
         console.log(json);
         // TODO: Display alert/toast if user not found / upon error
-      })
-  }, []);
+      }
+    )
+  }
+
+  const saveProfileChanges = () => {
+    if (!editedFirstName.trim() || !editedLastName.trim()) {
+      return;
+    }
+
+    const payload = {
+      id: person.id,
+      firstName: editedFirstName,
+      lastName: editedLastName, 
+      email: person.email,
+      password: person.password,
+      role: person.role
+    }
+    setLoading(true);
+    // TODO: above is not secure in a real app?
+    // TODO: require token on backend, then update here
+    fetch("http://localhost:8080/persons", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)  
+    })
+      .then(res => res.json())
+      .then(json => {
+        // backend gives error as { message, status, timestamp }
+        if (json.message && json.timestamp && json.status) {
+          toast.error(`${json.message}. Status: ${json.status}`);
+        } else {
+          // TODO: should we fetchPerson() again or is it fine to write from memory?
+          setPerson(payload);
+          setEditMode(false);
+          setSuccessSnackbarOpen(true);
+        }
+    })
+    .catch(err => {
+      toast.error("Login failed: " + err.message);
+    })
+    .finally(() => setLoading(false));
+  }
 
   if (!person || Object.keys(person).length === 0) {
-    return <div>Loading....</div>
+    return <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
+            <CircularProgress />
+           </Box>
   }
 
   return (
@@ -86,8 +135,10 @@ function Profile() {
           { editMode && <Typography variant="caption" color="text.secondary">Email cannot be changed from here</Typography>}
           </Stack>
         </CardContent>
-        <Snackbar open={snackbarOpen} autoHideDuration={3000} onClose={() => setSnackbarOpen(false)} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-          <Alert onClose={() => setSnackbarOpen(false)} severity="success" sx={{ width: '100%' }}>
+        {/* mui's snackbar. Not as convenient as toastify, I think */}
+        <Snackbar open={successSnackbarOpen} autoHideDuration={3000} onClose={() => setSuccessSnackbarOpen(false)} 
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+          <Alert onClose={() => setSuccessSnackbarOpen(false)} severity="success" sx={{ width: '100%' }}>
             Profile updated
           </Alert>
         </Snackbar>
@@ -103,20 +154,13 @@ function Profile() {
           ) : (
             <>
               <Button
-                startIcon={<SaveIcon />}
+                startIcon={loading ? <CircularProgress size={16} /> : <SaveIcon />}
                 variant="contained"
                 size="small"
-                // don't allow save when first or last is empty, or when both are unchanged
-                disabled={editedFirstName.trim() === '' || editedLastName.trim() === '' ||
+                // don't allow save when loading, when first or last is empty or when both are unchanged
+                disabled={loading || editedFirstName.trim() === '' || editedLastName.trim() === '' ||
                   (editedFirstName.trim() === person.firstName && editedLastName.trim() === person.lastName)}
-                onClick={() => {
-                  if (!editedFirstName.trim() || !editedLastName.trim()) {
-                    return;
-                  }
-                  setPerson(prev => ({ ...prev, firstName: editedFirstName.trim(), lastName: editedLastName.trim() }));
-                  setEditMode(false);
-                  setSnackbarOpen(true);
-                }}
+                onClick={saveProfileChanges}
               >
                 Save
               </Button>
