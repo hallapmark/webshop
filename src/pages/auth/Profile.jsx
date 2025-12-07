@@ -1,9 +1,11 @@
-// import employeesFile from "../../data/employees.json"
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import TextField from "@mui/material/TextField";
@@ -15,8 +17,7 @@ import Alert from "@mui/material/Alert";
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import CloseIcon from '@mui/icons-material/Close';
-import { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
+
 import { toast } from "react-toastify";
 
 function Profile() {
@@ -26,12 +27,14 @@ function Profile() {
   const [editedLastName, setEditedLastName] = useState("");
   const [successSnackbarOpen, setSuccessSnackbarOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { token } = useContext(AuthContext);
 
   useEffect(() => {
     fetchPerson();
   }, []);
 
   const fetchPerson = () => {
+    // TODO: move token to authorization header
     fetch("http://localhost:8080/person?token=" + sessionStorage.getItem("token"))
       .then(res => res.json())
       .then(json => {
@@ -56,12 +59,14 @@ function Profile() {
       role: person.role
     }
     setLoading(true);
-    // TODO: above is not secure in a real app?
-    // TODO: require token on backend, then update here
-    fetch("http://localhost:8080/persons", {
+    // TODO: replace with dto-type object?
+    fetch("http://localhost:8080/editownprofile", {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)  
+      headers: { 
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify(payload)
     })
       .then(res => res.json())
       .then(json => {
@@ -70,7 +75,7 @@ function Profile() {
           toast.error(`${json.message}. Status: ${json.status}`);
         } else {
           // TODO: should we fetchPerson() again or is it fine to write from memory?
-          setPerson(payload);
+          setPerson(json);
           setEditMode(false);
           setSuccessSnackbarOpen(true);
         }
