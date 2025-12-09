@@ -27,15 +27,25 @@ function Profile() {
   const [editedLastName, setEditedLastName] = useState("");
   const [successSnackbarOpen, setSuccessSnackbarOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { token } = useContext(AuthContext);
+  const { token, logout } = useContext(AuthContext);
 
   useEffect(() => {
-    fetchPerson();
+    console.log(sessionStorage.getItem("expiration"));
+    console.log(new Date().getTime());
+    if (sessionStorage.getItem("expiration") > new Date().getTime()) {
+      fetchPerson();
+    } else {
+      alert("Token expired. Log in again");
+      logout();
+    }
   }, []);
 
   const fetchPerson = () => {
-    // TODO: move token to authorization header
-    fetch("http://localhost:8080/person?token=" + sessionStorage.getItem("token"))
+    fetch("http://localhost:8080/person", {
+      headers: {
+        "Authorization": "Bearer " + sessionStorage.getItem("token")
+      }
+    })
       .then(res => res.json())
       .then(json => {
         setPerson(json);

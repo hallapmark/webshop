@@ -7,8 +7,9 @@ export const  AuthContextProvider = ({children}) => {
   const [loggedIn, setLoggedIn] = useState(!!sessionStorage.getItem("token"));
   const navigate = useNavigate();
 
-  function login(tokenFromServer) {
+  function login(tokenFromServer, expiration) {
     sessionStorage.setItem("token", tokenFromServer);
+    sessionStorage.setItem("expiration", expiration);
     setToken(tokenFromServer);
     setLoggedIn(true);
     navigate("/profile");
@@ -18,7 +19,8 @@ export const  AuthContextProvider = ({children}) => {
     navigate("/");
     setToken(null);
     setLoggedIn(false);
-    sessionStorage.removeItem("token");
+    // sessionStorage.removeItem("token");
+    sessionStorage.clear();
   }
 
   return (

@@ -28,7 +28,7 @@ function Login() {
         if (json.message && json.timestamp && json.status) {
           toast.error(`${json.message}. Status: ${json.status}`);
         } else if (json.token) {
-          login(json.token);
+          login(json.token, json.expiration);
         } else {
           toast.error("Unexpected response from server.")
         }
