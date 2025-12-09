@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 import Box from '@mui/material/Box';
 import Button from "@mui/material/Button";
@@ -14,19 +15,56 @@ import Paper from '@mui/material/Paper';
 
 function ManageProducts() {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
+  const { token, logout } = useContext(AuthContext);
 
   useEffect(() => {
-      fetch("http://localhost:8080/products?categoryId=0")
-        .then(res => res.json())
-        .then(json => setProducts(json.content))
-  }, []);
+  fetch("http://localhost:8080/products?categoryId=0")
+    .then(res => {
+      if (!res.ok) throw new Error("Failed to load products");
+      return res.json();
+    })
+    .then(json => setProducts(json.content))
+    .catch(error => {
+      console.error("Error loading products:", error);
+    });
+}, []);
 
   function deleteProduct(id) {
     fetch("http://localhost:8080/products?id=" + id, {
-      method: "DELETE"
+      method: "DELETE",
+      headers: {
+        "Authorization": "Bearer " + token
+      }
     })
-     .then(res => res.json())
-     .then(json => setProducts(json.content))
+     .then(res => {
+      if (!res.ok) {
+        // Parse error response regardless of status code
+        return res.json().catch(() => {
+          // If JSON parsing fails, throw generic error
+          throw new Error("Request failed");
+        });
+      }
+      return res.json();
+    })
+     .then(json => {
+      // check if it is an error response
+      if (json.message && json.timestamp && json.status) {
+        if (json.message === "Token expired") {
+          // Clear token and redirect to login
+          logout()
+          navigate("/login");
+        } else {
+          alert(json.message);
+        }
+      } else {
+        setProducts(json);
+      }
+    })
+    .catch(error => {
+      console.error("Error:", error);
+      alert("An error occurred");
+    });
   }
 
   return (
