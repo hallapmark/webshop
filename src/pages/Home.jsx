@@ -12,8 +12,8 @@ import Typography from '@mui/material/Typography';
 
 import SortByAlphaIcon from '@mui/icons-material/SortByAlpha';
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+// import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+// import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { toast, ToastContainer } from "react-toastify";
 import { CartSumContext } from "../context/CartSumContext";
 

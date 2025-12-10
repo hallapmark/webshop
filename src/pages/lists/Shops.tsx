@@ -19,7 +19,7 @@ import shopsFile from "../../data/tallinn_shops.json";
 
 function Shops() {
   const [tabValue, setTabValue] = useState('tallinn');
-  const [tallinnShops, setTallinnShops] = useState(shopsFile.slice());
+  const tallinnShops = shopsFile.slice();
 
   return (
     <Box>

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
 import Card from "@mui/material/Card";
@@ -21,39 +21,12 @@ import CloseIcon from '@mui/icons-material/Close';
 import { toast } from "react-toastify";
 
 function Profile() {
-  const [person, setPerson] = useState({});
   const [editMode, setEditMode] = useState(false);
   const [editedFirstName, setEditedFirstName] = useState("");
   const [editedLastName, setEditedLastName] = useState("");
   const [successSnackbarOpen, setSuccessSnackbarOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { token, logout } = useContext(AuthContext);
-
-  useEffect(() => {
-    console.log(sessionStorage.getItem("expiration"));
-    console.log(new Date().getTime());
-    if (sessionStorage.getItem("expiration") > new Date().getTime()) {
-      fetchPerson();
-    } else {
-      alert("Token expired. Log in again");
-      logout();
-    }
-  }, []);
-
-  const fetchPerson = () => {
-    fetch("http://localhost:8080/person", {
-      headers: {
-        "Authorization": "Bearer " + sessionStorage.getItem("token")
-      }
-    })
-      .then(res => res.json())
-      .then(json => {
-        setPerson(json);
-        console.log(json);
-        // TODO: Display alert/toast if user not found / upon error
-      }
-    )
-  }
+  const { token, person, setPerson } = useContext(AuthContext);
 
   const saveProfileChanges = () => {
     if (!editedFirstName.trim() || !editedLastName.trim()) {
@@ -64,13 +37,10 @@ function Profile() {
       id: person.id,
       firstName: editedFirstName,
       lastName: editedLastName, 
-      email: person.email,
-      password: person.password,
-      role: person.role
     }
     setLoading(true);
     // TODO: replace with dto-type object?
-    fetch("http://localhost:8080/editownprofile", {
+    fetch("http://localhost:8080/persons", {
       method: "PUT",
       headers: { 
         "Content-Type": "application/json",
@@ -84,7 +54,6 @@ function Profile() {
         if (json.message && json.timestamp && json.status) {
           toast.error(`${json.message}. Status: ${json.status}`);
         } else {
-          // TODO: should we fetchPerson() again or is it fine to write from memory?
           setPerson(json);
           setEditMode(false);
           setSuccessSnackbarOpen(true);

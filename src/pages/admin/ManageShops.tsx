@@ -17,7 +17,7 @@ import shopsFile from "../../data/tallinn_shops.json"
 function ManageShops() {
   const [shops, setShops] = useState(shopsFile.slice());
 
-  function deleteShop(id) {
+  function deleteShop(id: string) {
     const index = shopsFile.findIndex((item) => item.id === id);
     shopsFile.splice(index,1);
     setShops(shopsFile.slice());

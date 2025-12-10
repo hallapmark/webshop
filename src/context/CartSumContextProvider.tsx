@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { CartSumContext } from "./CartSumContext";
+import type { Product } from "../models/Product";
 
-export const CartSumContextProvider = ({children}) => {
+export const CartSumContextProvider = ({children}: {children: ReactNode}) => {
   // globaalne muutuja, mida hakkame väljastama
   const [cartSum, setCartSum] = useState(calculateTotal());
 
   function calculateTotal() {
-    const cartLS = JSON.parse(localStorage.getItem("cart") || "[]");
+    const cartLS: Product[] = JSON.parse(localStorage.getItem("cart") || "[]");
     let sum = 0;
     cartLS.forEach(p => sum += p.price);
     return sum;

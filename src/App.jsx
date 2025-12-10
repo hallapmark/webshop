@@ -40,6 +40,7 @@ import ManageCategories from "./pages/admin/ManageCategories";
 import Profile from "./pages/auth/Profile";
 import Login from "./pages/auth/Login";
 import RequireAuth from "./components/RequireAuth";
+import RequireAdminAuth from "./components/RequireAdminAuth"
 import RequireNotAuth from "./components/RequireNotAuth";
 
 
@@ -78,8 +79,11 @@ function App() {
 
         <Route element={<RequireAuth />}>
           <Route path="/profile" element={<Profile />} />
+          {/* TODO: UserDetail vist pole kasutuses enam */}
           <Route path="/user/:id" element={<UserDetail />} />
+        </Route>
 
+        <Route element={<RequireAdminAuth />}>
           <Route path="/manage-employees" element={<ManageEmployees />} />
           <Route path="/manage-products" element={<ManageProducts />} />
           <Route path="/manage-shops" element={<ManageShops />} />
