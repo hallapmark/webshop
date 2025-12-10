@@ -53,7 +53,7 @@ function validateEmail(email) {
       body: JSON.stringify(payload),
     }).then(() => {
       setLoading(false);
-      navigate("/");
+      navigate("/login");
     });
   };
 
