@@ -42,7 +42,8 @@ function validateEmail(email) {
       lastName,
       email,
       password,
-      role: "user",
+      // no role set here. Only allowing customer role upon signup, 
+      // this is enforced on the backend side.
     };
 
     setLoading(true);
