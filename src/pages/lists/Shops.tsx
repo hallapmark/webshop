@@ -62,7 +62,7 @@ function Shops() {
                   <CallIcon fontSize="small" />
                   <Typography variant="body1">(+372) {shop.telephone}</Typography>
                 </Box>
-                <Button component={RouterLink} to={`/shop/${shop.id}`}variant="contained" color="muted" sx={{ py: 1.2 }}>
+                <Button component={RouterLink} to={`/shop/${shop.id}`} variant="contained" color="muted" sx={{ py: 1.2 }}>
                   Details
                 </Button>
               </Box>
