@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Box from "@mui/material/Box";
@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 import { toast, ToastContainer } from "react-toastify";
+import { validateEmail } from "../../util/Validations";
 
 function Signup() {
   const navigate = useNavigate();
@@ -16,16 +17,7 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-
-// https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
-// mui seems to also have some built-in checks, this is in addition to those
-// should guarantee anystring@anystring.anystring 
-function validateEmail(email) {
-  var re = /\S+@\S+\.\S+/;
-  return re.test(email);
-}
-
-  const handleSubmit = (ev) => {
+  const handleSubmit = (ev: FormEvent) => {
     ev.preventDefault();
 
     if (!firstName || !lastName || !email || !password) {
