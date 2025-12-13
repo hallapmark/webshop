@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 import Box from '@mui/material/Box';
@@ -14,27 +14,30 @@ import SortByAlphaIcon from '@mui/icons-material/SortByAlpha';
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 // import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 // import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import { toast, ToastContainer } from "react-toastify";
-import { CartSumContext } from "../context/CartSumContext";
+import type { Product } from "../models/Product";
+import type { Category } from "../models/Category";
+import AddCartButton from "../components/AddCartButton";
+import { ToastContainer } from "react-toastify";
+import useEffectFetch from "../hooks/useEffectFetch";
 
 
 function Home() {
-  const [products, setProducts] = useState([]); 
-  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]); 
+  // const [categories, setCategories] = useState<Category[]>([]);
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [size, setSize] = useState(2);
   const [selectedCategory, setSelectedCategory] = useState(0);
   const [sort, setSort] = useState("id,asc");
-  const {cartSum, setCartSum} = useContext(CartSumContext);
+  const categories = useEffectFetch("/categories", "Failed to fetch categories");
 
-  useEffect(() => {
-    fetch("http://localhost:8080/categories")
-      .then(res => res.json())
-      .then(json => {
-        setCategories(json);
-      })
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:8080/categories")
+  //     .then(res => res.json())
+  //     .then(json => {
+  //       setCategories(json);
+  //     })
+  // }, []);
 
   useEffect(() => {
     fetch(`http://localhost:8080/products?size=${size}&page=${page}&categoryId=${selectedCategory}&sort=${sort}`)
@@ -47,25 +50,17 @@ function Home() {
   // filtreerimised pigem backendis teha. isegi sorteerimisi tehakse tihti backendis (TODO!)
   // lehekylgede kaupa võiks ka olla lõpuks
 
-  const addToCart = (product) => {
-    const cartLS = JSON.parse(localStorage.getItem("cart")) || [];
-    cartLS.push(product);
-    localStorage.setItem("cart", JSON.stringify(cartLS));
-    toast.success(product.name + " added to cart!");
-    setCartSum(cartSum + product.price);
-  }
-
-  function changeSize(newValue) {
+  function changeSize(newValue: number) {
     setSize(newValue);
     setPage(0);
   }
 
-  function changeSelectedCategory(newValue) {
+  function changeSelectedCategory(newValue: number) {
     setSelectedCategory(newValue);
     setPage(0);
   }
 
-  function changeSort(newValue) {
+  function changeSort(newValue: string) {
     setSort(newValue);
     setPage(0);
   }
@@ -84,7 +79,7 @@ function Home() {
           <Button key={category.id} onClick={() => changeSelectedCategory(category.id)}>{category.name}</Button>
         )}
 
-        <select onChange={(e) => changeSize(e.target.value)}>
+        <select onChange={(e) => changeSize(Number(e.target.value))}>
           <option>2</option>
           <option>4</option>
           <option>6</option>
@@ -125,9 +120,7 @@ function Home() {
                 </CardContent>
               </CardActionArea>
               <Divider />
-              <Button variant="contained" color="accent" sx={{ mt:"auto", py: 1.2 }} onClick={() => addToCart(product)}>
-                Add to cart
-              </Button>
+              <AddCartButton addedProduct={product} />
             </Card>
           </Grid>
         ))}
@@ -135,7 +128,6 @@ function Home() {
       <Button disabled={page === 0} onClick={() => setPage(page - 1)}>Previous</Button>
       <span>{page + 1}</span>
       <Button disabled={page + 1 === totalPages} onClick={() => setPage(page + 1)}>Next</Button>
-      <ToastContainer position="bottom-right" autoClose={4000} theme="dark" />
     </Box>
   )
 }

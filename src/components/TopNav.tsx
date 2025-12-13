@@ -1,6 +1,6 @@
 // react, react router
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useState, type MouseEvent } from "react";
 
 // https://mui.com/material-ui/guides/minimizing-bundle-size/
 // mui does not recommend 'import { AppBar } from ...' style imports
@@ -16,7 +16,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import Badge from '@mui/material/Badge';
+// import Badge from '@mui/material/Badge';
 
 // other
 import { useTranslation } from "react-i18next";
@@ -26,14 +26,14 @@ import { AuthContext } from "../context/AuthContext";
 
 
 function TopNav() {
-  const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElLang, setAnchorElLang] = useState(null);
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [anchorElLang, setAnchorElLang] = useState<null | HTMLElement>(null);
   const navigate = useNavigate(); 
   const { t, i18n } = useTranslation();
   const { cartSum } = useContext(CartSumContext);
   const { loggedIn, logout } = useContext(AuthContext);
 
-  const handleOpenNavMenu = (event) => {
+  const handleOpenNavMenu = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorElNav(event.currentTarget);
   }
 
@@ -41,12 +41,12 @@ function TopNav() {
     setAnchorElNav(null);
   }
 
-  const handleNavMenuNavigate = (path) => {
+  const handleNavMenuNavigate = (path: string) => {
     handleNavMenuClose();
     navigate(path);
   };
 
-  const handleOpenLangMenu = (event) => {
+  const handleOpenLangMenu = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorElLang(event.currentTarget);
   }
 
@@ -54,12 +54,12 @@ function TopNav() {
     setAnchorElLang(null);
   }
 
-  const handleLangMenuChoice = (newLang) => {
+  const handleLangMenuChoice = (newLang: string) => {
     handleLangMenuClose();
     updateLanguage(newLang);
   }
 
-  function updateLanguage(newLang) {
+  function updateLanguage(newLang: string) {
     i18n.changeLanguage(newLang);
     localStorage.setItem(LNG_KEY, newLang);
     localStorage.setItem(LANGUAGE_MANUALLY_SET_KEY, "true")
@@ -140,8 +140,6 @@ function TopNav() {
           </Box>
 
           {/* Admin */}
-          {/* Simulates "admin/manage" area, for now with no login needed 
-          TODO: add login here later*/}
           {loggedIn ? 
             <Box>
               <Button onClick={logout} color="inherit">Logout</Button>
