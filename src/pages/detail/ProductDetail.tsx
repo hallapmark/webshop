@@ -6,12 +6,24 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
 import { useEffect, useState } from "react";
+import type { Product } from "../../models/Product";
+import AddCartButton from "../../components/AddCartButton";
 
 // Product Detail Page
 function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState<Product>({
+    "id": 0,
+    "name": "", 
+    "description": "",
+    "description_est": "",
+    "price": 0,
+    "category": {
+      "id": 0,
+      "name": ""
+    }
+  });
 
   useEffect(() => {
       fetch("http://localhost:8080/products/" + id)
@@ -30,6 +42,7 @@ function ProductDetail() {
         <Typography variant="body2">{product.price}€</Typography>
         <Typography variant="body2">{product.description}</Typography>
         <Typography variant="body2">{product.description_est}</Typography>
+        <AddCartButton addedProduct={product} />
         <Button sx={{ mt: 2 }} onClick={() => navigate(-1)}>
           Back
         </Button>
