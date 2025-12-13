@@ -1,18 +1,26 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, type ReactNode } from "react"
 import { AuthContext } from "./AuthContext"
 import { useNavigate } from "react-router-dom";
+import type { Person } from "../models/Person";
 
-export const  AuthContextProvider = ({children}) => {
-  const [token, setToken] = useState(sessionStorage.getItem("token"));
+export const  AuthContextProvider = ({children}: {children: ReactNode}) => {
+  const [token, setToken] = useState(sessionStorage.getItem("token") || "");
   const [loggedIn, setLoggedIn] = useState(!!sessionStorage.getItem("token"));
-  const [person, setPerson] = useState({});
+  const [person, setPerson] = useState<Person>({
+    id: 0,
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    role: ""
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
     console.log(sessionStorage.getItem("expiration"));
     console.log(new Date().getTime());
     if (sessionStorage.getItem("token") && sessionStorage.getItem("expiration")) {
-      if (sessionStorage.getItem("expiration") > new Date().getTime()) {
+      if (Number(sessionStorage.getItem("expiration")) > new Date().getTime()) {
         fetchPerson();
     } else {
       alert("Token expired. Log in again");
@@ -36,9 +44,9 @@ export const  AuthContextProvider = ({children}) => {
     )
   }
 
-  function login(tokenFromServer, expiration) {
+  function login(tokenFromServer: string, expiration: number) {
     sessionStorage.setItem("token", tokenFromServer);
-    sessionStorage.setItem("expiration", expiration);
+    sessionStorage.setItem("expiration", expiration.toString());
     setToken(tokenFromServer);
     fetchPerson();
     setLoggedIn(true);
@@ -47,9 +55,8 @@ export const  AuthContextProvider = ({children}) => {
 
   function logout() {
     navigate("/");
-    setToken(null);
+    setToken("");
     setLoggedIn(false);
-    // sessionStorage.removeItem("token");
     sessionStorage.clear();
   }
 
