@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, type FormEvent } from "react";
 
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -8,13 +8,24 @@ import Typography from "@mui/material/Typography";
 import { toast, ToastContainer } from "react-toastify";
 import { AuthContext } from "../../context/AuthContext";
 
+interface LoginResponse {
+  // success
+  token?: string;
+  expiration?: number;
+
+  // error
+  message?: string;
+  timestamp?: string;
+  status?: number;
+}
+
 
 function Login() {
   const [loginCredentials, setLoginCredentials] = useState({"email": "", "password": ""});
   const [loading, setLoading] = useState(false);
   const {login} = useContext(AuthContext);
 
-  function handleSubmit(e) {
+  function handleSubmit(e: FormEvent) {
     // default käitumine on et teeb refreshi, me tõkestame seda
     e.preventDefault();
     setLoading(true);
@@ -24,10 +35,10 @@ function Login() {
       body: JSON.stringify(loginCredentials)
     })
       .then(res => res.json())
-      .then(json => {
+      .then((json: LoginResponse) => {
         if (json.message && json.timestamp && json.status) {
           toast.error(`${json.message}. Status: ${json.status}`);
-        } else if (json.token) {
+        } else if (json.token && json.expiration) {
           login(json.token, json.expiration);
         } else {
           toast.error("Unexpected response from server.")
