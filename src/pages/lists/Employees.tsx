@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import { Link as RouterLink } from "react-router-dom";
 
 import Box from '@mui/material/Box';
 import Button from "@mui/material/Button";
 import Card from '@mui/material/Card'
-import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid'
@@ -21,32 +19,32 @@ function Employees() {
   const [employees, setEmployees] = useState(employeesFile.slice());
   const [sortNextFirstNameAZAsc, setSortNextFirstNameAZAsc] = useState(true);
   const [sortNextLastNameAZAsc, setSortNextLastNameAZAsc] = useState(true);
-  const [lastSort, setLastSort] = useState(null); // 'first' | 'last' | null 
+  const [lastSort, setLastSort] = useState(""); // 'first' | 'last' | "" 
   // Muidu ei saa kiiresti aru mis sort on aktiivne
 
   const { t } = useTranslation();
 
   function sortFirstNameAZ() {
-    const sorted = employees.toSorted((a, b) =>
+    employees.sort((a, b) =>
       sortNextFirstNameAZAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)
     );
-    setEmployees(sorted);
+    setEmployees(employees.slice());
     setSortNextFirstNameAZAsc(!sortNextFirstNameAZAsc); 
     setLastSort('first');
   }
 
   function sortLastNameAZ() {
-    const sorted = employees.toSorted((a, b) =>
+    employees.sort((a, b) =>
       sortNextLastNameAZAsc 
       ? getLastName(a.name).localeCompare(getLastName(b.name)) 
       : getLastName(b.name).localeCompare(getLastName(a.name))
     );
-    setEmployees(sorted);
+    setEmployees(employees.slice());
     setSortNextLastNameAZAsc(!sortNextLastNameAZAsc); 
     setLastSort('last');
   }
 
-  function getLastName(name) {
+  function getLastName(name: string) {
     return name.split(" ").slice(-1)[0];
   }
 
