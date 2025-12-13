@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext"; 
 import NotEnoughRights from "../pages/auth/NotEnoughRights";
 
