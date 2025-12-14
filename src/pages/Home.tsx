@@ -120,7 +120,7 @@ function Home() {
                 </CardContent>
               </CardActionArea>
               <Divider />
-              <AddCartButton addedProduct={product} />
+              <AddCartButton addedProduct={product} fullWidth />
             </Card>
           </Grid>
         ))}
