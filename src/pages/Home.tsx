@@ -67,7 +67,7 @@ function Home() {
 
   return (
     <Box m={4}>
-      <Typography variant="h1" gutterBottom>Webshop</Typography>
+      <Typography variant="h1" gutterBottom>Demo Webshop</Typography>
       <br />
       <Typography variant="h3" gutterBottom>New arrivals</Typography>
       {/* TODO: Maybe some filters as well? */}
