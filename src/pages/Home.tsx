@@ -116,7 +116,7 @@ function Home() {
                 <CardContent sx={{ flexGrow: 1 }}>
                   <Typography variant="h6">{product.name}</Typography>
                   <Typography variant="body2">{product.price}€</Typography>
-                  <Typography variant="body2">{product.description}</Typography>
+                  <Typography variant="body2">{product.description_en}</Typography>
                 </CardContent>
               </CardActionArea>
               <Divider />
