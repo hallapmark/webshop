@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
-function useEffectFetch(endPoint: string, errorMessage: string) {
+function useEffectFetch(endPoint: string, errorMessage: string, headers?: Record<string, string>) {
   const [items, setItems] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080" + endPoint)
+    fetch("http://localhost:8080" + endPoint, { headers })
       .then(res => {
         if (!res.ok) throw new Error(errorMessage);
         return res.json();
