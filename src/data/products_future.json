@@ -1,0 +1,357 @@
+[
+  {
+    "id": 1,
+    "slug": "corevia-x7-mechanical-keyboard",
+    "name": "Corevia X7 Mechanical Keyboard",
+    "descriptions": {
+      "en": "RGB mechanical keyboard with tactile blue switches.",
+      "et": "RGB mehaaniline klaviatuur taktiilsete siniste lülititega.",
+      "de": "RGB-mechanische Tastatur mit taktilen blauen Schaltern.",
+      "fr": "Clavier mécanique RGB avec interrupteurs bleus tactiles."
+    },
+    "category": { "id": 1 },
+    "price": 89.99,
+    "rating": { "rating": 4.4, "count": 241 }
+  },
+  {
+    "id": 2,
+    "slug": "novatrax-bluetooth-keyboard",
+    "name": "Novatrax Bluetooth Keyboard",
+    "descriptions": {
+      "en": "Slim wireless keyboard compatible with laptops and tablets.",
+      "et": "Õhuke juhtmevaba klaviatuur sülearvutitele ja tahvelarvutitele.",
+      "de": "Schlanke kabellose Tastatur für Laptops und Tablets.",
+      "fr": "Clavier sans fil fin compatible avec ordinateurs portables et tablettes."
+    },
+    "category": { "id": 1 },
+    "price": 54.99,
+    "rating": { "rating": 4.1, "count": 167 }
+  },
+  {
+    "id": 3,
+    "slug": "veltrix-mx-200-gaming-mouse",
+    "name": "Veltrix MX-200 Gaming Mouse",
+    "descriptions": {
+      "en": "Ergonomic gaming mouse with adjustable DPI and RGB lighting.",
+      "et": "Ergonoomiline mänguhiir reguleeritava DPI ja RGB valgustusega.",
+      "de": "Ergonomische Gaming-Maus mit einstellbarer DPI und RGB-Beleuchtung.",
+      "fr": "Souris gaming ergonomique avec DPI réglable et éclairage RGB."
+    },
+    "category": { "id": 1 },
+    "price": 39.0,
+    "rating": { "rating": 4.0, "count": 312 }
+  },
+  {
+    "id": 4,
+    "slug": "pixelforge-graphic-tablet-m10",
+    "name": "PixelForge Graphic Tablet M10",
+    "descriptions": {
+      "en": "10-inch drawing tablet with pressure-sensitive stylus.",
+      "et": "10-tolline joonistustahvel survetundliku pliiatsiga.",
+      "de": "10-Zoll-Grafiktablett mit drucksensitivem Stift.",
+      "fr": "Tablette graphique 10 pouces avec stylet sensible à la pression."
+    },
+    "category": { "id": 1 },
+    "price": 179.0,
+    "rating": { "rating": 4.5, "count": 98 }
+  },
+  {
+    "id": 5,
+    "slug": "aurex-ergo-vertical-mouse",
+    "name": "Aurex Ergo Vertical Mouse",
+    "descriptions": {
+      "en": "Vertical ergonomic mouse designed to reduce wrist strain.",
+      "et": "Vertikaalne ergonoomiline hiir randme koormuse vähendamiseks.",
+      "de": "Vertikale ergonomische Maus zur Reduzierung der Handgelenkbelastung.",
+      "fr": "Souris verticale ergonomique conçue pour réduire la fatigue du poignet."
+    },
+    "category": { "id": 1 },
+    "price": 49.99,
+    "rating": { "rating": 4.2, "count": 186 }
+  },
+
+  {
+    "id": 6,
+    "slug": "quantel-mini-pc-cube",
+    "name": "Quantel Mini PC Cube",
+    "descriptions": {
+      "en": "Compact desktop PC suitable for home and office use.",
+      "et": "Kompaktne lauaarvuti kodu- ja kontorikasutuseks.",
+      "de": "Kompakter Desktop-PC für Zuhause und Büro.",
+      "fr": "PC de bureau compact pour la maison et le bureau."
+    },
+    "category": { "id": 2 },
+    "price": 599.0,
+    "rating": { "rating": 4.3, "count": 121 }
+  },
+  {
+    "id": 7,
+    "slug": "quantel-home-pc-s2",
+    "name": "Quantel Home PC S2",
+    "descriptions": {
+      "en": "Reliable home desktop PC for everyday computing tasks.",
+      "et": "Töökindel koduarvuti igapäevasteks arvutitöödeks.",
+      "de": "Zuverlässiger Heim-PC für alltägliche Computeraufgaben.",
+      "fr": "PC de bureau fiable pour les tâches informatiques quotidiennes."
+    },
+    "category": { "id": 2 },
+    "price": 749.0,
+    "rating": { "rating": 4.1, "count": 88 }
+  },
+  {
+    "id": 8,
+    "slug": "quantel-all-in-one-24",
+    "name": "Quantel All-in-One 24",
+    "descriptions": {
+      "en": "24-inch all-in-one PC with integrated display and speakers.",
+      "et": "24-tolline kõik-ühes arvuti integreeritud ekraani ja kõlaritega.",
+      "de": "24-Zoll-All-in-One-PC mit integriertem Display und Lautsprechern.",
+      "fr": "PC tout-en-un 24 pouces avec écran et haut-parleurs intégrés."
+    },
+    "category": { "id": 2 },
+    "price": 899.0,
+    "rating": { "rating": 4.4, "count": 73 }
+  },
+  {
+    "id": 9,
+    "slug": "quantel-compact-office-pc",
+    "name": "Quantel Compact Office PC",
+    "descriptions": {
+      "en": "Compact desktop PC designed for office productivity.",
+      "et": "Kompaktne lauaarvuti kontoritöö ja tootlikkuse jaoks.",
+      "de": "Kompakter Desktop-PC für Büro- und Produktivitätsaufgaben.",
+      "fr": "PC de bureau compact conçu pour la productivité au bureau."
+    },
+    "category": { "id": 2 },
+    "price": 679.0,
+    "rating": { "rating": 4.0, "count": 94 }
+  },
+
+  {
+    "id": 10,
+    "slug": "nexar-drive-ssd-1tb",
+    "name": "Nexar Drive SSD 1TB",
+    "descriptions": {
+      "en": "High-speed external SSD for backups and file transfers.",
+      "et": "Kiire väline SSD varundamiseks ja failiedastuseks.",
+      "de": "Schnelle externe SSD für Backups und Dateitransfers.",
+      "fr": "SSD externe rapide pour les sauvegardes et transferts de fichiers."
+    },
+    "category": { "id": 3 },
+    "price": 129.99,
+    "rating": { "rating": 4.6, "count": 212 }
+  },
+  {
+    "id": 11,
+    "slug": "spectra-512gb-usb-c-flash-drive",
+    "name": "Spectra 512GB USB-C Flash Drive",
+    "descriptions": {
+      "en": "Compact USB-C flash drive with fast transfer speeds.",
+      "et": "Kompaktne USB-C mälupulk kiire andmeedastusega.",
+      "de": "Kompakter USB-C-Stick mit hohen Übertragungsgeschwindigkeiten.",
+      "fr": "Clé USB-C compacte avec des vitesses de transfert élevées."
+    },
+    "category": { "id": 3 },
+    "price": 59.0,
+    "rating": { "rating": 4.2, "count": 301 }
+  },
+  {
+    "id": 12,
+    "slug": "spectra-portable-hdd-2tb",
+    "name": "Spectra Portable HDD 2TB",
+    "descriptions": {
+      "en": "Portable hard drive for everyday data storage.",
+      "et": "Kaasaskantav kõvaketas igapäevaseks andmesalvestuseks.",
+      "de": "Tragbare Festplatte für den täglichen Datenspeicher.",
+      "fr": "Disque dur portable pour le stockage de données quotidien."
+    },
+    "category": { "id": 3 },
+    "price": 89.0,
+    "rating": { "rating": 4.1, "count": 176 }
+  },
+  {
+    "id": 13,
+    "slug": "nexar-drive-ssd-2tb",
+    "name": "Nexar Drive SSD 2TB",
+    "descriptions": {
+      "en": "High-capacity external SSD with fast and reliable performance.",
+      "et": "Suure mahutavusega väline SSD kiire ja töökindla jõudlusega.",
+      "de": "Externe SSD mit hoher Kapazität und zuverlässiger Leistung.",
+      "fr": "SSD externe haute capacité avec des performances rapides et fiables."
+    },
+    "category": { "id": 3 },
+    "price": 229.0,
+    "rating": { "rating": 4.6, "count": 212 }
+  },
+
+  {
+    "id": 14,
+    "slug": "arcton-ax-500-headset",
+    "name": "Arcton AX-500 Headset",
+    "descriptions": {
+      "en": "Wired gaming headset with clear sound and microphone.",
+      "et": "Juhtmega mängupeakomplekt selge heli ja mikrofoniga.",
+      "de": "Kabelgebundenes Gaming-Headset mit klarem Klang und Mikrofon.",
+      "fr": "Casque gaming filaire avec son clair et microphone."
+    },
+    "category": { "id": 4 },
+    "price": 69.5,
+    "rating": { "rating": 4.0, "count": 203 }
+  },
+  {
+    "id": 15,
+    "slug": "cortel-soundbar-s100",
+    "name": "Cortel SoundBar S100",
+    "descriptions": {
+      "en": "Slim Bluetooth soundbar for desktop or TV use.",
+      "et": "Õhuke Bluetooth heliriba lauaarvuti või teleri jaoks.",
+      "de": "Schlanke Bluetooth-Soundbar für Desktop oder Fernseher.",
+      "fr": "Barre de son Bluetooth fine pour ordinateur ou télévision."
+    },
+    "category": { "id": 4 },
+    "price": 99.99,
+    "rating": { "rating": 4.1, "count": 134 }
+  },
+  {
+    "id": 16,
+    "slug": "sonet-airbuds-pro",
+    "name": "Sonet AirBuds Pro",
+    "descriptions": {
+      "en": "Wireless earbuds with noise isolation and long battery life.",
+      "et": "Juhtmevabad kõrvaklapid mürasummutuse ja pika akuajaga.",
+      "de": "Kabellose Ohrhörer mit Geräuschisolierung und langer Akkulaufzeit.",
+      "fr": "Écouteurs sans fil avec isolation du bruit et longue autonomie."
+    },
+    "category": { "id": 4 },
+    "price": 149.0,
+    "rating": { "rating": 4.3, "count": 189 }
+  },
+  {
+    "id": 17,
+    "slug": "sonet-desk-microphone-x1",
+    "name": "Sonet Desk Microphone X1",
+    "descriptions": {
+      "en": "USB desk microphone for streaming and voice calls.",
+      "et": "USB lauamikrofon striimimiseks ja kõnede jaoks.",
+      "de": "USB-Tischmikrofon für Streaming und Sprachanrufe.",
+      "fr": "Microphone USB de bureau pour le streaming et les appels vocaux."
+    },
+    "category": { "id": 4 },
+    "price": 89.0,
+    "rating": { "rating": 4.2, "count": 117 }
+  },
+  {
+    "id": 18,
+    "slug": "sonet-studio-headphones-h700",
+    "name": "Sonet Studio Headphones H700",
+    "descriptions": {
+      "en": "Over-ear studio headphones with balanced sound profile.",
+      "et": "Üle-kõrva stuudiokõrvaklapid tasakaalustatud heliga.",
+      "de": "Over-Ear-Studiokopfhörer mit ausgewogenem Klangbild.",
+      "fr": "Casque studio circum-aural avec un son équilibré."
+    },
+    "category": { "id": 4 },
+    "price": 129.0,
+    "rating": { "rating": 4.3, "count": 157 }
+  },
+
+  {
+    "id": 19,
+    "slug": "keltor-5-port-usb-hub",
+    "name": "Keltor 5-Port USB Hub",
+    "descriptions": {
+      "en": "Aluminum USB hub expanding connectivity options.",
+      "et": "Alumiiniumist USB jaotur ühendusvõimaluste laiendamiseks.",
+      "de": "USB-Hub aus Aluminium zur Erweiterung der Anschlussmöglichkeiten.",
+      "fr": "Hub USB en aluminium pour étendre les options de connectivité."
+    },
+    "category": { "id": 5 },
+    "price": 34.99,
+    "rating": { "rating": 3.9, "count": 221 }
+  },
+  {
+    "id": 20,
+    "slug": "optrix-pro-monitor-stand",
+    "name": "Optrix Pro Monitor Stand",
+    "descriptions": {
+      "en": "Adjustable monitor stand with improved ergonomics.",
+      "et": "Reguleeritav monitorialus parema ergonoomika jaoks.",
+      "de": "Verstellbarer Monitorständer für bessere Ergonomie.",
+      "fr": "Support d’écran réglable pour une meilleure ergonomie."
+    },
+    "category": { "id": 5 },
+    "price": 89.0,
+    "rating": { "rating": 4.2, "count": 142 }
+  },
+  {
+    "id": 21,
+    "slug": "voltair-powerbank-20000",
+    "name": "Voltair PowerBank 20000",
+    "descriptions": {
+      "en": "High-capacity power bank with fast USB-C charging.",
+      "et": "Suure mahutavusega akupank kiire USB-C laadimisega.",
+      "de": "Powerbank mit hoher Kapazität und schnellem USB-C-Laden.",
+      "fr": "Batterie externe haute capacité avec charge USB-C rapide."
+    },
+    "category": { "id": 5 },
+    "price": 49.95,
+    "rating": { "rating": 4.4, "count": 198 }
+  },
+  {
+    "id": 22,
+    "slug": "veyronix-streamcam-hd",
+    "name": "Veyronix StreamCam HD",
+    "descriptions": {
+      "en": "Full HD webcam with built-in stereo microphone.",
+      "et": "Full HD veebikaamera sisseehitatud stereomikrofoniga.",
+      "de": "Full-HD-Webcam mit integriertem Stereomikrofon.",
+      "fr": "Webcam Full HD avec microphone stéréo intégré."
+    },
+    "category": { "id": 5 },
+    "price": 79.9,
+    "rating": { "rating": 4.1, "count": 164 }
+  },
+  {
+    "id": 23,
+    "slug": "voltair-usb-c-charging-station",
+    "name": "Voltair USB-C Charging Station",
+    "descriptions": {
+      "en": "Multi-port USB-C charging station for home or office.",
+      "et": "Mitme pordiga USB-C laadimisjaam koju või kontorisse.",
+      "de": "Mehrport-USB-C-Ladestation für Zuhause oder Büro.",
+      "fr": "Station de charge USB-C multiports pour la maison ou le bureau."
+    },
+    "category": { "id": 5 },
+    "price": 59.0,
+    "rating": { "rating": 3.9, "count": 121 }
+  },
+
+  {
+    "id": 24,
+    "slug": "lunova-smartwatch-x3",
+    "name": "Lunova SmartWatch X3",
+    "descriptions": {
+      "en": "Smartwatch with fitness tracking and health monitoring.",
+      "et": "Nutikell treeningu ja tervisenäitajate jälgimiseks.",
+      "de": "Smartwatch mit Fitness-Tracking und Gesundheitsüberwachung.",
+      "fr": "Montre connectée avec suivi de la condition physique et de la santé."
+    },
+    "category": { "id": 6 },
+    "price": 199.0,
+    "rating": { "rating": 4.3, "count": 109 }
+  },
+  {
+    "id": 25,
+    "slug": "lunova-smartband-lite",
+    "name": "Lunova SmartBand Lite",
+    "descriptions": {
+      "en": "Lightweight fitness band for daily activity tracking.",
+      "et": "Kerge aktiivsusmonitor igapäevase liikumise jälgimiseks.",
+      "de": "Leichtes Fitnessarmband zur täglichen Aktivitätsverfolgung.",
+      "fr": "Bracelet connecté léger pour le suivi de l’activité quotidienne."
+    },
+    "category": { "id": 6 },
+    "price": 59.0,
+    "rating": { "rating": 4.0, "count": 87 }
+  }
+]
