@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 function useEffectFetch(endPoint: string, errorMessage: string, headers?: Record<string, string>) {
   const [items, setItems] = useState<any[]>([]);
+  // TODO: Tokeni võib siin siseselt võtta ka, true lihtsalt saada sisse
 
   useEffect(() => {
     fetch("http://localhost:8080" + endPoint, { headers })

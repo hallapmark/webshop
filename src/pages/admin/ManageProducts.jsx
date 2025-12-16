@@ -30,7 +30,8 @@ function ManageProducts() {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
   const { token, logout } = useContext(AuthContext);
-  const dbProducts = useEffectFetch("/products?categoryId=0", "Failed to load products");
+  const authHeaders = token ? { "Authorization": "Bearer " + token } : undefined;
+  const dbProducts = useEffectFetch("/admin/products", "Failed to load products",  authHeaders);
   const categories = useEffectFetch("/categories", "Failed to fetch categories");
   const [ deleteProduct, returnedProducts ] = useChangeFetch("/products");
 
@@ -143,21 +144,27 @@ function ManageProducts() {
               value={name}
               onChange={e => setName(e.target.value)}
             />
+            <TextField 
+              label="URL Slug"
+              required
+              value={slug}
+              onChange={e => setSlug(e.target.value)}
+            />
             <TextField
               label="Description (English)"
               required
               multiline
               rows={3}
-              value={description}
-              onChange={e => setDescription(e.target.value)}
+              value={descriptionEn}
+              onChange={e => setDescriptionEn(e.target.value)}
             />
             <TextField
               label="Description (Estonian)"
               required
               multiline
               rows={3}
-              value={descriptionEst}
-              onChange={e => setDescriptionEst(e.target.value)}
+              value={descriptionEt}
+              onChange={e => setDescriptionEt(e.target.value)}
             />
             <TextField
               label="Price"
