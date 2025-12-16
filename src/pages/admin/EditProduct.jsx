@@ -6,11 +6,13 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 import { toast, ToastContainer } from "react-toastify";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 function EditProduct() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { token, logout } = useContext(AuthContext);
   const [product, setProduct] = useState({});
   const [categories, setCategories] = useState([]);
 
@@ -36,15 +38,36 @@ function EditProduct() {
       return;
     }
 
+    // Add token to headers
+    const headers = { "Content-Type": "application/json" };
+    if (token) {
+      headers["Authorization"] = "Bearer " + token;
+    }
+
     fetch("http://localhost:8080/products", {
       method: "PUT",
       body: JSON.stringify(product),
-      headers : {
-        "Content-Type": "application/json"
-      }
+      headers // Use the headers object with token
     })
-     .then(res => res.json())
-     .then(() => navigate("/manage-products"))
+      .then(res => {
+        if (!res.ok) {
+          return res.json().then(json => {
+            if (json.message === "Token expired") {
+              logout();
+              navigate("/login");
+            }
+            throw new Error(json.message || "Failed to update");
+          });
+        }
+        return res.json();
+      })
+      .then(() => {
+        toast.success("Product updated!");
+        navigate("/manage-products");
+      })
+      .catch(err => {
+        toast.error(err.message || "Error updating product");
+      });
   };
 
   if (product === undefined) {
@@ -73,20 +96,25 @@ function EditProduct() {
         onChange={(e) => setProduct({...product, name: e.target.value })}
       />
       <TextField
+        label="URL Slug"
+        value={product.slug || ""}
+        onChange={(e) => setProduct({...product, slug: e.target.value })}
+      />
+      <TextField
         label="Price (EUR)"
         type="number"
         value={product.price}
         onChange={(e) => setProduct({...product, price: Number(e.target.value) })}
       />
       <TextField
-        label="Description"
-        value={product.description}
-        onChange={(e) => setProduct({...product, description: e.target.value })}
+        label="Descriptio (English)"
+        value={product.description_en}
+        onChange={(e) => setProduct({...product, description_en: e.target.value })}
       />
       <TextField
-        label="Description"
-        value={product.description_est}
-        onChange={(e) => setProduct({...product, description_est: e.target.value })}
+        label="Description (Estonian)"
+        value={product.description_et}
+        onChange={(e) => setProduct({...product, description_et: e.target.value })}
       />
       <select defaultValue={product.category.id}
         onChange={(e) => setProduct({...product, category: {"id": e.target.value}})}>

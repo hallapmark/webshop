@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 import ShopDetail from "./pages/detail/ShopDetail";
 import UserDetail from "./pages/detail/UserDetail";
 import ProductDetail from "./pages/detail/ProductDetail";
-import EditProduct from "./pages/admin/ChangeProduct";
+import EditProduct from "./pages/admin/EditProduct";
 import ManageEmployees from "./pages/admin/ManageEmployees";
 import ManageProducts from "./pages/admin/ManageProducts";
 import ManageUsers from "./pages/admin/ManageUsers";
