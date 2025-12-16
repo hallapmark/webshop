@@ -3,17 +3,27 @@ import type { Product } from "../models/Product";
 import { useContext } from "react";
 import { CartSumContext } from "../context/CartSumContext";
 import { Box, Button } from "@mui/material";
+import type { CartProduct } from "../models/CartProduct";
+import { useDispatch } from "react-redux";
+import { increment } from "../store/counterSlice";
 
 function AddCartButton(props: {addedProduct: Product, fullWidth?: boolean}) {
+  const dispatch = useDispatch();
   const {cartSum, setCartSum} = useContext(CartSumContext);
   const { fullWidth = false } = props;
 
-  const addToCart = (product: Product) => {
-    const cartLS: Product[] = JSON.parse(localStorage.getItem("cart") || "[]");
-    cartLS.push(product);
+  const addToCart = (productClicked: Product) => {
+    const cartLS: CartProduct[] = JSON.parse(localStorage.getItem("cart") || "[]");
+    const productFound = cartLS.find(cartProduct => cartProduct.product.id === productClicked.id);
+    if (productFound !== undefined) {
+      productFound.quantity++;
+    } else {
+      cartLS.push({quantity: 1, product: productClicked});
+    }
     localStorage.setItem("cart", JSON.stringify(cartLS));
-    toast.success(product.name + " added to cart!");
-    setCartSum(cartSum + product.price);
+    toast.success(productClicked.name + " added to cart!");
+    setCartSum(cartSum + productClicked.price);
+    dispatch(increment());
   }
 
   return (

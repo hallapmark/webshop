@@ -23,6 +23,8 @@ import { useTranslation } from "react-i18next";
 import { LNG_KEY, LANGUAGE_MANUALLY_SET_KEY, LANGUAGES } from "../i18n";
 import { CartSumContext } from "../context/CartSumContext";
 import { AuthContext } from "../context/AuthContext";
+import { Badge } from "@mui/material";
+import { useAppSelector } from "../store/hooks";
 
 
 function TopNav() {
@@ -32,6 +34,7 @@ function TopNav() {
   const { t, i18n } = useTranslation();
   const { cartSum } = useContext(CartSumContext);
   const { loggedIn, logout } = useContext(AuthContext);
+  const count = useAppSelector(state => state.counter.value);
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -99,9 +102,10 @@ function TopNav() {
                 overlap="circular"
                 slotProps={{ badge: { sx: { bgcolor: 'accent.main', color: 'accent.contrastText' } } }}
               > */}
-                <ShoppingCartIcon />
+                <Badge badgeContent={count} sx={{ mx: 1}}>
+                  <ShoppingCartIcon />
+                </Badge>
                 {cartSum.toFixed(2)}€
-              {/* </Badge> */}
             </IconButton>
           </Box>
           
