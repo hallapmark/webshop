@@ -16,6 +16,7 @@ import CallIcon from '@mui/icons-material/Call';
 import PlaceIcon from '@mui/icons-material/Place';
 
 import shopsFile from "../../data/tallinn_shops.json";
+import Map from "../../components/Map";
 
 function Shops() {
   const [tabValue, setTabValue] = useState('tallinn');
@@ -75,6 +76,7 @@ function Shops() {
         </Typography>
         }
       </Box>
+      <Map />
     </Box>
   )
 }
