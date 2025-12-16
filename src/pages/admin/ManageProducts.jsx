@@ -44,9 +44,11 @@ function ManageProducts() {
   }, [returnedProducts]);
 
   // Form state for adding a product
+  // TODO: use ... syntax and create a single Product object
   const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [descriptionEst, setDescriptionEst] = useState("");
+  const [slug, setSlug] = useState("");
+  const [descriptionEn, setDescriptionEn] = useState("");
+  const [descriptionEt, setDescriptionEt] = useState("");
   const [price, setPrice] = useState("");
   const [categoryId, setCategoryId] = useState("");
   // Accordion open state for the Add Product form
@@ -55,15 +57,16 @@ function ManageProducts() {
   const handleAddProduct = async (e) => {
     e.preventDefault();
 
-    if (!name || !description || !price || !categoryId) {
+    if (!name || !slug || !descriptionEn || !descriptionEt || !price || !categoryId) {
       toast.error("Please fill name, description (ENG), description (EST), price and category");
       return;
     }
 
     const payload = {
       name,
-      description,
-      description_est: descriptionEst,
+      slug,
+      description_en: descriptionEn,
+      description_et: descriptionEt,
       price: Number(price),
       category: { id: Number(categoryId) }
     };
@@ -100,8 +103,9 @@ function ManageProducts() {
 
       // Reset form
       setName("");
-      setDescription("");
-      setDescriptionEst("");
+      setSlug("");
+      setDescriptionEn("");
+      setDescriptionEt("");
       setPrice("");
       setCategoryId("");
       setAddOpen(false);

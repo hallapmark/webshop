@@ -15,9 +15,10 @@ function ProductDetail() {
   const navigate = useNavigate();
   const [product, setProduct] = useState<Product>({
     "id": 0,
+    "slug": "",
     "name": "", 
-    "description": "",
-    "description_est": "",
+    "description_en": "",
+    "description_et": "",
     "price": 0,
     "category": {
       "id": 0,
@@ -40,8 +41,8 @@ function ProductDetail() {
       <CardContent>
         <Typography variant="h6">{product.name}</Typography>
         <Typography variant="body2">{product.price}€</Typography>
-        <Typography variant="body2">{product.description}</Typography>
-        <Typography variant="body2">{product.description_est}</Typography>
+        <Typography variant="body2">{product.description_en}</Typography>
+        <Typography variant="body2">{product.description_et}</Typography>
         <AddCartButton addedProduct={product} />
         <Button sx={{ mt: 2 }} onClick={() => navigate(-1)}>
           Back
