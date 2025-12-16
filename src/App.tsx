@@ -1,3 +1,4 @@
+import "./App.css"
 // react, react router
 import { Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
