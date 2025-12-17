@@ -6,6 +6,13 @@ import useEffectFetch from "../../hooks/useEffectFetch";
 import useChangeFetch from "../../hooks/useChangeFetch";
 
 import Box from '@mui/material/Box';
+
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogActions from "@mui/material/DialogActions";
+
 import Button from "@mui/material/Button";
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -34,16 +41,12 @@ function ManageProducts() {
   const dbProducts = useEffectFetch("/admin/products", "Failed to load products",  authHeaders);
   const categories = useEffectFetch("/categories", "Failed to fetch categories");
   const [ deleteProduct, returnedProducts ] = useChangeFetch("/products");
+  // Product deletion modal
+  const [confirmMenuOpen, setConfirmMenuOpen] = useState(false);
+  const [productToDelete, setProductToDelete] = useState(null);
 
-  // Sync products from server and from change hook
-  useEffect(() => {
-    setProducts(dbProducts)
-  }, [dbProducts]);
-
-  useEffect(() => {
-    setProducts(returnedProducts)
-  }, [returnedProducts]);
-
+  // Accordion open state for the Add Product form
+  const [addOpen, setAddOpen] = useState(false);
   // Form state for adding a product
   // TODO: use ... syntax and create a single Product object
   const [name, setName] = useState("");
@@ -52,8 +55,15 @@ function ManageProducts() {
   const [descriptionEt, setDescriptionEt] = useState("");
   const [price, setPrice] = useState("");
   const [categoryId, setCategoryId] = useState("");
-  // Accordion open state for the Add Product form
-  const [addOpen, setAddOpen] = useState(false);
+  
+  // Sync products from server and from change hook
+  useEffect(() => {
+    setProducts(dbProducts)
+  }, [dbProducts]);
+
+  useEffect(() => {
+    setProducts(returnedProducts)
+  }, [returnedProducts]);
 
   const handleAddProduct = async (e) => {
     e.preventDefault();
@@ -116,6 +126,23 @@ function ManageProducts() {
       console.error(err);
       toast.error("Error adding product");
     }
+  };
+
+  const askConfirmProductDelete = (product) => {
+    setProductToDelete(product);
+    setConfirmMenuOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (!productToDelete) return;
+    deleteProduct(productToDelete.id);
+    setConfirmMenuOpen(false);
+    setProductToDelete(null);
+  };
+
+  const handleCancelDelete = () => {
+    setConfirmMenuOpen(false);
+    setProductToDelete(null);
   };
 
   return (
@@ -219,7 +246,7 @@ function ManageProducts() {
                 </Button>
               </TableCell>
               <TableCell align="right">
-                <Button variant="contained" color="error" size="small" onClick={() => deleteProduct(product.id)}>
+                <Button variant="contained" color="error" size="small" onClick={() => askConfirmProductDelete(product)}>
                   X
                 </Button>
               </TableCell>
@@ -228,6 +255,21 @@ function ManageProducts() {
         </TableBody>
         </Table>
       </TableContainer>
+      <Dialog
+        open={confirmMenuOpen}
+        onClose={handleCancelDelete}
+        aria-describedby="delete-product-dialog-description"
+      >
+        <DialogContent>
+          <DialogContentText id="delete-product-dialog-description">
+            Delete product "{productToDelete?.name}?"
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleCancelDelete}>Cancel</Button>
+          <Button color="error" variant="contained" onClick={handleConfirmDelete}>Delete</Button>
+        </DialogActions>
+      </Dialog>
       <ToastContainer position="bottom-right" autoClose={4000} theme="dark" />
     </Box>
   )
