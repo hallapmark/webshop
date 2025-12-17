@@ -2,12 +2,14 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-function useChangeFetch(endPoint: string) {
+type ChangeItemFunc = (id?: any) => void;
+
+function useChangeFetch<T>(endPoint: string): [ChangeItemFunc, T[]] {
   const { token, logout } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [items, setItems] = useState<any[]>([]);
+  const [items, setItems] = useState<T[]>([]);
 
-  function changeItem(id?: any) {
+  const changeItem: ChangeItemFunc = (id?: any) => {
     let url = "http://localhost:8080" + endPoint;
     fetch(id ? url + "/" + id : url, {
       method: "DELETE",

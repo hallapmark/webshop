@@ -1,14 +1,16 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, type FormEvent } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
 import useEffectFetch from "../../hooks/useEffectFetch";
 import useChangeFetch from "../../hooks/useChangeFetch";
 
+import type { Category } from "../../models/Category"
+import type { Product } from "../../models/Product"
+
 import Box from '@mui/material/Box';
 
 import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
@@ -34,21 +36,24 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { toast, ToastContainer } from "react-toastify";
 
 function ManageProducts() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const navigate = useNavigate();
   const { token, logout } = useContext(AuthContext);
   const authHeaders = token ? { "Authorization": "Bearer " + token } : undefined;
-  const dbProducts = useEffectFetch("/admin/products", "Failed to load products",  authHeaders);
-  const categories = useEffectFetch("/categories", "Failed to fetch categories");
-  const [ deleteProduct, returnedProducts ] = useChangeFetch("/products");
+  const dbProducts = useEffectFetch<Product>("/admin/products", "Failed to load products",  authHeaders);
+  const categories = useEffectFetch<Category>("/categories", "Failed to fetch categories");
+  const [ deleteProduct, returnedProducts ] = useChangeFetch<Product>("/products");
   // Product deletion modal
   const [confirmMenuOpen, setConfirmMenuOpen] = useState(false);
-  const [productToDelete, setProductToDelete] = useState(null);
+  const [productToDelete, setProductToDelete] = useState<Product | null>(null);
 
   // Accordion open state for the Add Product form
   const [addOpen, setAddOpen] = useState(false);
   // Form state for adding a product
   // TODO: use ... syntax and create a single Product object
+  // const [productToBeAdded, setProductToBeAdded] = useState(
+  //   Product
+  // )
   const [name, setName] = useState("");
   const [slug, setSlug] = useState("");
   const [descriptionEn, setDescriptionEn] = useState("");
@@ -65,7 +70,7 @@ function ManageProducts() {
     setProducts(returnedProducts)
   }, [returnedProducts]);
 
-  const handleAddProduct = async (e) => {
+  const handleAddProduct = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!name || !slug || !descriptionEn || !descriptionEt || !price || !categoryId) {
@@ -79,11 +84,11 @@ function ManageProducts() {
       description_en: descriptionEn,
       description_et: descriptionEt,
       price: Number(price),
-      category: { id: Number(categoryId) }
+      categoryId: Number(categoryId)
     };
 
     try {
-      const headers = { "Content-Type": "application/json" };
+      const headers: HeadersInit = { "Content-Type": "application/json" };
       if (token) {
         headers["Authorization"] = "Bearer " + token;
       }
@@ -128,7 +133,7 @@ function ManageProducts() {
     }
   };
 
-  const askConfirmProductDelete = (product) => {
+  const askConfirmProductDelete = (product: Product) => {
     setProductToDelete(product);
     setConfirmMenuOpen(true);
   };

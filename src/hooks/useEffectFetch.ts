@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 
-function useEffectFetch(endPoint: string, errorMessage: string, headers?: Record<string, string>) {
-  const [items, setItems] = useState<any[]>([]);
+function useEffectFetch<T>(
+  endPoint: string, 
+  errorMessage: string, 
+  headers?: Record<string, string>
+): T[] {
+  const [items, setItems] = useState<T[]>([]);
   // TODO: Tokeni võib siin siseselt võtta ka, true lihtsalt saada sisse
 
   useEffect(() => {
