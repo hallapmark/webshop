@@ -6,7 +6,7 @@ import useEffectFetch from "../../hooks/useEffectFetch";
 import useChangeFetch from "../../hooks/useChangeFetch";
 
 import type { Category } from "../../models/Category"
-import type { Product } from "../../models/Product"
+import type { Product, ProductInput } from "../../models/Product"
 
 import Box from '@mui/material/Box';
 
@@ -54,12 +54,15 @@ function ManageProducts() {
   // const [productToBeAdded, setProductToBeAdded] = useState(
   //   Product
   // )
-  const [name, setName] = useState("");
-  const [slug, setSlug] = useState("");
-  const [descriptionEn, setDescriptionEn] = useState("");
-  const [descriptionEt, setDescriptionEt] = useState("");
-  const [price, setPrice] = useState("");
-  const [categoryId, setCategoryId] = useState("");
+  const initialProduct: ProductInput = {
+    name: "",
+    slug: "",
+    description_en: "",
+    description_et: "",
+    price: 0,
+    categoryId: 0,
+  };
+  const [productToBeAdded, setProductToBeAdded] = useState<ProductInput>(initialProduct);
   
   // Sync products from server and from change hook
   useEffect(() => {
@@ -73,19 +76,14 @@ function ManageProducts() {
   const handleAddProduct = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!name || !slug || !descriptionEn || !descriptionEt || !price || !categoryId) {
-      toast.error("Please fill name, description (ENG), description (EST), price and category");
+    const { name, slug, description_en, description_et, price, categoryId } = productToBeAdded;
+
+    if (!name || !slug || !description_en || !description_et || price <= 0 || categoryId <= 0) {
+      toast.error("Please fill name, description (ENG), description (EST), price (>0) and category");
       return;
     }
 
-    const payload = {
-      name,
-      slug,
-      description_en: descriptionEn,
-      description_et: descriptionEt,
-      price: Number(price),
-      categoryId: Number(categoryId)
-    };
+    const payload: ProductInput = productToBeAdded;
 
     try {
       const headers: HeadersInit = { "Content-Type": "application/json" };
@@ -118,12 +116,7 @@ function ManageProducts() {
       setProducts(json);
 
       // Reset form
-      setName("");
-      setSlug("");
-      setDescriptionEn("");
-      setDescriptionEt("");
-      setPrice("");
-      setCategoryId("");
+      setProductToBeAdded(initialProduct);
       setAddOpen(false);
       toast.success("Product added!");
 
@@ -173,48 +166,48 @@ function ManageProducts() {
             <TextField 
               label="Product name"
               required
-              value={name}
-              onChange={e => setName(e.target.value)}
+              value={productToBeAdded.name}
+              onChange={e => setProductToBeAdded(p => ({ ...p, name: e.target.value }))}
             />
             <TextField 
               label="URL Slug"
               required
-              value={slug}
-              onChange={e => setSlug(e.target.value)}
+              value={productToBeAdded.slug}
+              onChange={e => setProductToBeAdded(p => ({ ...p, slug: e.target.value }))}
             />
             <TextField
               label="Description (English)"
               required
               multiline
               rows={3}
-              value={descriptionEn}
-              onChange={e => setDescriptionEn(e.target.value)}
+              value={productToBeAdded.description_en}
+              onChange={e => setProductToBeAdded(p => ({ ...p, description_en: e.target.value }))}
             />
             <TextField
               label="Description (Estonian)"
               required
               multiline
               rows={3}
-              value={descriptionEt}
-              onChange={e => setDescriptionEt(e.target.value)}
+              value={productToBeAdded.description_et}
+              onChange={e => setProductToBeAdded(p => ({ ...p, description_et: e.target.value }))}
             />
             <TextField
               label="Price"
               required
               type="number"
               inputMode="decimal"
-              value={price}
-              onChange={e => setPrice(e.target.value)}
+              value={productToBeAdded.price === 0 ? "" : productToBeAdded.price}
+              onChange={e => setProductToBeAdded(p => ({ ...p, price: e.target.value === "" ? 0 : Number(e.target.value) }))}
             />
             <FormControl>
               <InputLabel id="category-select-label">Category</InputLabel>
               <Select
                 labelId="category-select-label"
                 label="Category"
-                value={categoryId}
-                onChange={e => setCategoryId(e.target.value)}
+                value={productToBeAdded.categoryId}
+                onChange={e => setProductToBeAdded(p => ({ ...p, categoryId: Number(e.target.value) }))}
               >
-                <MenuItem value="">None</MenuItem>
+                <MenuItem value={0}>None</MenuItem>
                 {categories.map(cat => (
                   <MenuItem key={cat.id} value={cat.id}>{cat.name}</MenuItem>
                 ))}
