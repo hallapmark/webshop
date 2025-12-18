@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, type FormEvent } from "react";
+import { useContext, useEffect, useRef, useState, type FormEvent } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -9,11 +9,6 @@ import type { Category } from "../../models/Category"
 import type { Product, ProductInput } from "../../models/Product"
 
 import Box from '@mui/material/Box';
-
-import Dialog from "@mui/material/Dialog";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogActions from "@mui/material/DialogActions";
 
 import Button from "@mui/material/Button";
 import Paper from '@mui/material/Paper';
@@ -34,6 +29,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { toast, ToastContainer } from "react-toastify";
+import DeleteConfirmationModal, { type DeleteConfirmationModalType } from "../../components/DeleteConfirmationModal";
 
 function ManageProducts() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -43,9 +39,7 @@ function ManageProducts() {
   const dbProducts = useEffectFetch<Product>("/admin/products", "Failed to load products",  authHeaders);
   const categories = useEffectFetch<Category>("/categories", "Failed to fetch categories");
   const [ deleteProduct, returnedProducts ] = useChangeFetch<Product>("/products");
-  // Product deletion modal
-  const [confirmMenuOpen, setConfirmMenuOpen] = useState(false);
-  const [productToDelete, setProductToDelete] = useState<Product | null>(null);
+  const deleteModalRef = useRef<DeleteConfirmationModalType>(null);
 
   // Accordion open state for the Add Product form
   const [addOpen, setAddOpen] = useState(false);
@@ -126,22 +120,7 @@ function ManageProducts() {
     }
   };
 
-  const askConfirmProductDelete = (product: Product) => {
-    setProductToDelete(product);
-    setConfirmMenuOpen(true);
-  };
-
-  const handleConfirmDelete = () => {
-    if (!productToDelete) return;
-    deleteProduct(productToDelete.id);
-    setConfirmMenuOpen(false);
-    setProductToDelete(null);
-  };
-
-  const handleCancelDelete = () => {
-    setConfirmMenuOpen(false);
-    setProductToDelete(null);
-  };
+  
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
@@ -244,7 +223,7 @@ function ManageProducts() {
                 </Button>
               </TableCell>
               <TableCell align="right">
-                <Button variant="contained" color="error" size="small" onClick={() => askConfirmProductDelete(product)}>
+                <Button variant="contained" color="error" size="small" onClick={() => deleteModalRef.current?.askConfirmProductDelete(product)}>
                   X
                 </Button>
               </TableCell>
@@ -253,21 +232,7 @@ function ManageProducts() {
         </TableBody>
         </Table>
       </TableContainer>
-      <Dialog
-        open={confirmMenuOpen}
-        onClose={handleCancelDelete}
-        aria-describedby="delete-product-dialog-description"
-      >
-        <DialogContent>
-          <DialogContentText id="delete-product-dialog-description">
-            Delete product "{productToDelete?.name}?"
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleCancelDelete}>Cancel</Button>
-          <Button color="error" variant="contained" onClick={handleConfirmDelete}>Delete</Button>
-        </DialogActions>
-      </Dialog>
+      <DeleteConfirmationModal onConfirm={deleteProduct} ref={deleteModalRef} />
       <ToastContainer position="bottom-right" autoClose={4000} theme="dark" />
     </Box>
   )
