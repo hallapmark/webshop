@@ -19,7 +19,7 @@ function ManageCategories() {
   const [creating, setCreating] = useState(false);
 
   useEffect(() => {
-      fetch("http://localhost:8080/categories")
+      fetch(import.meta.env.VITE_BACKEND_URL + "/categories")
         .then(res => res.json())
         .then(json => setCategories(json))
   }, []);
@@ -29,7 +29,7 @@ function ManageCategories() {
     if (!name) return;
     setCreating(true);
 
-    fetch("http://localhost:8080/categories", {
+    fetch(import.meta.env.VITE_BACKEND_URL + "/categories", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name })

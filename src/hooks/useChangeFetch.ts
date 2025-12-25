@@ -10,7 +10,7 @@ function useChangeFetch<T>(endPoint: string): [ChangeItemFunc, T[]] {
   const [items, setItems] = useState<T[]>([]);
 
   const changeItem: ChangeItemFunc = (id?: any) => {
-    let url = "http://localhost:8080" + endPoint;
+    let url = import.meta.env.VITE_BACKEND_URL + "" + endPoint;
     fetch(id ? url + "/" + id : url, {
       method: "DELETE",
       headers: {

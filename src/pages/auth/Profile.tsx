@@ -40,7 +40,7 @@ function Profile() {
     }
     setLoading(true);
     // TODO: replace with dto-type object?
-    fetch("http://localhost:8080/persons", {
+    fetch(import.meta.env.VITE_BACKEND_URL + "/persons", {
       method: "PUT",
       headers: { 
         "Content-Type": "application/json",

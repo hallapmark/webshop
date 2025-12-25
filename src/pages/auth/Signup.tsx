@@ -39,7 +39,7 @@ function Signup() {
     };
 
     setLoading(true);
-    fetch("http://localhost:8080/persons", {
+    fetch(import.meta.env.VITE_BACKEND_URL + "/persons", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),

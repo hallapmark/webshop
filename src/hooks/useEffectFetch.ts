@@ -9,7 +9,7 @@ function useEffectFetch<T>(
   // TODO: Tokeni võib siin siseselt võtta ka, true lihtsalt saada sisse
 
   useEffect(() => {
-    fetch("http://localhost:8080" + endPoint, { headers })
+    fetch(import.meta.env.VITE_BACKEND_URL + "" + endPoint, { headers })
       .then(res => {
         if (!res.ok) throw new Error(errorMessage);
         return res.json();
