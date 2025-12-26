@@ -27,7 +27,7 @@ function ProductDetail() {
   });
 
   useEffect(() => {
-      fetch("http://localhost:8080/products/" + id)
+      fetch(import.meta.env.VITE_BACKEND_URL + "/products/" + id)
         .then(res => res.json())
         .then(json => setProduct(json))
     }, [id]);

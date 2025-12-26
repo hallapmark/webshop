@@ -17,11 +17,11 @@ function EditProduct() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/categories")
+    fetch(import.meta.env.VITE_BACKEND_URL + "/categories")
       .then(res => res.json())
       .then(json => {
         setCategories(json);
-        fetch("http://localhost:8080/products/" + id)
+        fetch(import.meta.env.VITE_BACKEND_URL + "/products/" + id)
           .then(res => res.json())
           .then(json => setProduct(json))
       })
@@ -44,7 +44,7 @@ function EditProduct() {
       headers["Authorization"] = "Bearer " + token;
     }
 
-    fetch("http://localhost:8080/products", {
+    fetch(import.meta.env.VITE_BACKEND_URL + "/products", {
       method: "PUT",
       body: JSON.stringify(product),
       headers // Use the headers object with token

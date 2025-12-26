@@ -85,7 +85,7 @@ function ManageProducts() {
         headers["Authorization"] = "Bearer " + token;
       }
 
-      const res = await fetch("http://localhost:8080/products", {
+      const res = await fetch(import.meta.env.VITE_BACKEND_URL + "/products", {
         method: "POST",
         headers,
         body: JSON.stringify(payload)

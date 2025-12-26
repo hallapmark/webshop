@@ -32,7 +32,7 @@ function Home() {
   const categories = useEffectFetch("/categories", "Failed to fetch categories");
 
   // useEffect(() => {
-  //   fetch("http://localhost:8080/categories")
+  //   fetch(import.meta.env.VITE_BACKEND_URL + "/categories")
   //     .then(res => res.json())
   //     .then(json => {
   //       setCategories(json);
@@ -40,7 +40,7 @@ function Home() {
   // }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/products?size=${size}&page=${page}&categoryId=${selectedCategory}&sort=${sort}`)
+    fetch(import.meta.env.VITE_BACKEND_URL + `/products?size=${size}&page=${page}&categoryId=${selectedCategory}&sort=${sort}`)
       .then(res => res.json())
       .then(json => {
         setProducts(json.content)

@@ -30,7 +30,7 @@ export const  AuthContextProvider = ({children}: {children: ReactNode}) => {
   }, []);
 
   const fetchPerson = () => {
-    fetch("http://localhost:8080/person", {
+    fetch(import.meta.env.VITE_BACKEND_URL + "/person", {
       headers: {
         "Authorization": "Bearer " + sessionStorage.getItem("token")
       }
