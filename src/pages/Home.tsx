@@ -75,13 +75,13 @@ function Home() {
   }
 
   return (
-    <Box m={4}>
-      <Typography variant="h1" gutterBottom>Demo Webshop</Typography>
+    <Box sx={{ m: { xs: 1, sm: 2, md: 4 } }}>
+      <Typography variant="h1" gutterBottom sx={{ fontSize: { xs: '1.5rem', sm: '2rem' } }}>Demo Webshop</Typography>
       <br />
-      <Typography variant="h3" gutterBottom>New arrivals</Typography>
+      <Typography variant="h3" gutterBottom sx={{ fontSize: { xs: '1.125rem', sm: '1.5rem' } }}>New arrivals</Typography>
       {/* TODO: Maybe some filters as well? */}
       {/* --- CATEGORIES --- */}
-      <Box sx={{ display: "flex", alignItems: "center", mt: 1, gap: 2 }}>
+      <Box sx={{ display: "flex", flexDirection: { xs: 'column', sm: 'row' }, alignItems: { xs: 'stretch', sm: 'center' }, mt: 1, gap: { xs: 1, sm: 2 } }}>
         {/* Scrollable categories */}
         <Box
           sx={{
@@ -90,18 +90,19 @@ function Home() {
             overflowX: "auto",
             flexWrap: "nowrap",
             gap: 1,
-            pr: { xs: 2, md: 2 },
-            mr: { xs: 2, md: 2 },
+            pr: { xs: 1, md: 2 },
+            mr: { xs: 1, md: 2 },
             position: "relative",
-            // add a fade on the right edge (32px) for md and below so partially-hidden items appear faded
-            WebkitMaskImage: { xs: "linear-gradient(to right, black 0 calc(100% - 32px), transparent 100%)", md: "none" },
-            maskImage: { xs: "linear-gradient(to right, black 0 calc(100% - 32px), transparent 100%)", md: "none" },
+            // add a fade on the right edge (20px) for md and below so partially-hidden items appear faded
+            WebkitMaskImage: { xs: "linear-gradient(to right, black 0 calc(100% - 20px), transparent 100%)", md: "none" },
+            maskImage: { xs: "linear-gradient(to right, black 0 calc(100% - 20px), transparent 100%)", md: "none" },
             WebkitMaskRepeat: "no-repeat",
             maskRepeat: "no-repeat",
             scrollbarColor: "text.secondary muted.main", // firefox and 2025+ chrome, edge, safari
             "&::-webkit-scrollbar": { height: 8 }, // <- old chrome, edge, safari ->
             "&::-webkit-scrollbar-track": { backgroundColor: "muted.main" },
-            "&::-webkit-scrollbar-thumb": { backgroundColor: "text.secondary", borderRadius: 1 }
+            "&::-webkit-scrollbar-thumb": { backgroundColor: "text.secondary", borderRadius: 1 },
+            width: { xs: '100%', sm: 'auto' }
           }}
         >
           {categories.map(category =>
@@ -115,14 +116,16 @@ function Home() {
           )}
         </Box>
 
-        {/* Controls */}
-        <Box sx={{ display: "flex", justifyContent: "flex-end", alignItems: "center", mt: 1, mr: 2, gap: 1 }}>
-          <select onChange={(e) => changeSize(Number(e.target.value))} value={size}>
-            <option value={2}>2</option>
-            <option value={4}>4</option>
-            <option value={6}>6</option>
-            <option value={8}>8</option>
-          </select>
+        {/* Controls (kept as a single horizontal unit on xs, but allowed to wrap on md to avoid overflow) */}
+        <Box sx={{ display: "flex", width: { xs: '100%', sm: 'auto' }, flexWrap: { xs: 'nowrap', sm: 'nowrap', md: 'wrap' }, overflowX: { xs: 'auto', sm: 'visible' }, justifyContent: { xs: 'center', sm: 'flex-end' }, alignItems: "center", mt: { xs: 1, md: 1 }, mr: { xs: 0, md: 2 }, gap: 1 }}>
+          <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', minWidth: 40, mr: { xs: 1 } }}>
+            <select onChange={(e) => changeSize(Number(e.target.value))} value={size}>
+              <option value={2}>2</option>
+              <option value={4}>4</option>
+              <option value={6}>6</option>
+              <option value={8}>8</option>
+            </select>
+          </Box>
 
           <Button
             variant={sortField === "name" ? "contained" : "outlined"}
@@ -131,7 +134,7 @@ function Home() {
             aria-pressed={sortField === "name"}
             aria-label={sortField === "name" ? `Sort by name, ${sortDir === 'asc' ? 'ascending' : 'descending'}` : 'Sort by name'}
             onClick={() => toggleSort("name")}
-            sx={{ minWidth: 56, minHeight: 40, px: 1 }}
+            sx={{ minWidth: { xs: 40, sm: 48 }, minHeight: 36, px: 1 }}
           >
             {sortField === "name"
               ? (sortDir === "asc" ? <ArrowUpwardIcon fontSize="small" /> : <ArrowDownwardIcon fontSize="small" />)
@@ -146,7 +149,7 @@ function Home() {
             aria-pressed={sortField === "price"}
             aria-label={sortField === "price" ? `Sort by price, ${sortDir === 'asc' ? 'ascending' : 'descending'}` : 'Sort by price'}
             onClick={() => toggleSort("price")}
-            sx={{ minWidth: 56, minHeight: 40, px: 1 }}
+            sx={{ minWidth: { xs: 40, sm: 48 }, minHeight: 36, px: 1 }}
           >
             {sortField === "price"
               ? (sortDir === "asc" ? <ArrowUpwardIcon fontSize="small" /> : <ArrowDownwardIcon fontSize="small" />)
@@ -155,7 +158,7 @@ function Home() {
           </Button>
         </Box>
       </Box>
-      <Grid container spacing={4} alignItems="stretch" mx={2} my={4}>
+      <Grid container spacing={4} alignItems="stretch" sx={{ mx: { xs: 0, sm: 2 }, my: 4 }}>
         {products.map((product) => (
           <Grid
             // Grid is divided into 12

@@ -21,6 +21,8 @@ import LoginIcon from '@mui/icons-material/Login';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import HomeIcon from '@mui/icons-material/Home';
+import Tooltip from '@mui/material/Tooltip';
 // import Badge from '@mui/material/Badge';
 
 // other
@@ -79,35 +81,57 @@ function TopNav() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>     
           {/* Note to self: Box is like an enhanced 'div' in mui-world */}
-          <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', gap: 1 }}>
-            <Typography 
-              variant="h6" 
-              component={RouterLink} 
-              to="/" 
+          {/* Home icon on xs (with tooltip) and text on sm+ */}
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, minWidth: 0 }}>
+            <Tooltip title={t('nav.webshop')}>
+              <IconButton
+                component={RouterLink}
+                to="/"
+                color="inherit"
+                aria-label={t('nav.webshop')}
+                sx={{ display: { xs: 'inline-flex', sm: 'none' }, mr: 1 }}
+              >
+                <HomeIcon />
+              </IconButton>
+            </Tooltip>
+
+            <Typography
+              variant="h6"
+              component={RouterLink}
+              to="/"
               sx={{
+                display: { xs: 'none', sm: 'block' },
                 color: "inherit",
                 textDecoration: "none",
                 "&:hover": { textDecoration: "none" },
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                minWidth: 0,
               }}
-            > 
-            {t('nav.webshop')}
-            </Typography>
-            <IconButton 
-              color="inherit" 
-              sx={{ ml: 2 }} 
-              aria-label="Open shopping cart" 
-              component={RouterLink}
-              to="/cart"
             >
-              <Badge badgeContent={count} sx={{ mx: 1 }}>
-                <ShoppingCartIcon />
-              </Badge>
-              {/* hide price on extra-small screens to save space */}
-              <Typography component="span" sx={{ display: { xs: 'none', sm: 'inline' }, ml: 0.5 }}>
-                {cartSum.toFixed(2)}€
-              </Typography>
-            </IconButton>
-          </Box> 
+              {t('nav.webshop')}
+            </Typography>
+          </Box>
+
+          <IconButton 
+            color="inherit" 
+            aria-label="Open shopping cart" 
+            component={RouterLink}
+            to="/cart"
+            sx={{ ml: 1 }}
+          >
+            <Badge badgeContent={count} sx={{ mx: 1 }}>
+              <ShoppingCartIcon />
+            </Badge>
+            {/* hide price on extra-small screens to save space */}
+            <Typography component="span" sx={{ display: { xs: 'none', sm: 'inline' }, ml: 0.5 }}>
+              {cartSum.toFixed(2)}€
+            </Typography>
+          </IconButton>
+
+          {/* spacer to push remaining items to the right */}
+          <Box sx={{ flexGrow: 1 }} /> 
           
           {/* https://mui.com/material-ui/integrations/routing/ */}
           {/* Medium-to-xl: display menu items in a row */}
