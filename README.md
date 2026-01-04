@@ -1,5 +1,6 @@
-# Webshop React/React Router + Vite + GitHub Actions
+# Webshop React/React Router + Vite + MUI
 
-Frontend React bootcamp webshop project with React Router and MUI.
+Frontend React bootcamp webshop project made with React Router and MUI. Implements a full JSON Web Token based authentication flow, persistent shopping cart state, and protected URLs (admin area).
 
-Implements continuous integration and automated preview deployments: each pull request triggers a GitHub Actions workflow which builds the app and then deploys a live preview on Firebase Hosting before we merge.
+The corresponding backend repository is here: 
+[Webshop backend](https://github.com/hallapmark/webshop-backend).
