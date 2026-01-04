@@ -114,6 +114,7 @@ function TopNav() {
             </Typography>
           </Box>
 
+          {/* Cart Icon */}
           <IconButton 
             color="inherit" 
             aria-label="Open shopping cart" 
@@ -134,7 +135,7 @@ function TopNav() {
           <Box sx={{ flexGrow: 1 }} /> 
           
           {/* https://mui.com/material-ui/integrations/routing/ */}
-          {/* Medium-to-xl: display menu items in a row */}
+          {/* Medium-to-xl: display shops and employees menu items in a row */}
           <Box sx={{ display: { xs: 'none', md: 'block' } }}>
             <Button component={RouterLink} to="/shops" color="inherit">{t('nav.shops')}</Button>
             <Button component={RouterLink} to="/employees" color="inherit">{t('nav.employees')}</Button>
@@ -166,7 +167,7 @@ function TopNav() {
             </Menu>
           </Box>
 
-          {/* Admin */}
+          {/* Admin, Logout, Login depending on auth state */}
           {loggedIn ? 
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               {/* full text on sm+ */}
@@ -191,6 +192,7 @@ function TopNav() {
               </Box>
             </Box>
             : 
+            // Not logged in, show signup and login
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
                   <Button component={RouterLink} to="/signup" color="inherit">Sign up</Button>
