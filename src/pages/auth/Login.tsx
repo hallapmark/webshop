@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { AuthContext } from "../../context/AuthContext";
 
 interface LoginResponse {
@@ -83,9 +83,7 @@ function Login() {
       <Button type="submit" variant="contained" disabled={loading}>
         {loading ? "Signing in..." : "Sign in"}
       </Button>
-
-      <ToastContainer position="bottom-right" autoClose={3000} theme="dark" />
-    </Box>
+    </Box> 
   );
 }
 export default Login

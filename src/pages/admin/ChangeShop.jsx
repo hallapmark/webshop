@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 import shopsFile from "../../data/tallinn_shops.json"
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { useState } from "react";
 
 function ChangeShop() {
@@ -64,8 +64,7 @@ function ChangeShop() {
         onChange={(e) => setShop({...shop, address: e.target.value })}
       />
       <Button variant="contained" onClick={updateShop}>Update</Button>
-      <ToastContainer position="bottom-right" autoClose={4000} theme="dark" />
-    </Box>
+    </Box> 
   );
 }
 

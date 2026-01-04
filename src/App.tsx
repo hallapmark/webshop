@@ -20,6 +20,8 @@ import "@fontsource/roboto/700.css"; // Bold
 import { ThemeProvider } from "@mui/material/styles";
 import travelTheme from "./theme";
 import CssBaseline from '@mui/material/CssBaseline';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Cart from "./pages/Cart";
 import Employees from "./pages/lists/Employees";
 import Shops from "./pages/lists/Shops";
@@ -66,6 +68,7 @@ function App() {
       {/* see https://mui.com/material-ui/react-css-baseline/ */}
       <CssBaseline />
       <TopNav />
+      <ToastContainer position="bottom-right" autoClose={4000} theme="dark" />
       
       <Routes>
         <Route path="/" element={<Home />} />

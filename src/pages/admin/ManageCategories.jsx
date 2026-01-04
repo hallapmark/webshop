@@ -11,7 +11,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Typography from "@mui/material/Typography";
 import Paper from '@mui/material/Paper';
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 function ManageCategories() {
   const [categories, setCategories] = useState([]);
@@ -83,8 +83,7 @@ function ManageCategories() {
         </TableBody>
         </Table>
       </TableContainer>
-      <ToastContainer position="bottom-right" autoClose={4000} theme="dark" />
-    </Box>
+    </Box> 
   )
 }
 export default ManageCategories

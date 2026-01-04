@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -124,8 +124,7 @@ function EditProduct() {
           </option>)}
       </select>
       <Button variant="contained" onClick={updateProduct}>Update</Button>
-      <ToastContainer position="bottom-right" autoClose={4000} theme="dark" />
-    </Box>
+    </Box> 
   );
 }
 

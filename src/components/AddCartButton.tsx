@@ -1,4 +1,4 @@
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import type { Product } from "../models/Product";
 import { useContext } from "react";
 import { CartSumContext } from "../context/CartSumContext";
@@ -31,7 +31,6 @@ function AddCartButton(props: {addedProduct: Product, fullWidth?: boolean}) {
       <Button fullWidth={fullWidth} variant="contained" color="accent" sx={{ py: 1.2 }} onClick={() => addToCart(props.addedProduct)}>
         Add to cart
       </Button>
-      <ToastContainer position="bottom-right" autoClose={4000} theme="dark" />
       {/* mõni teeb nii, et ToastContainer ainult app.jsx-is, ainult seal. 
       Ja siis kutsud välja kui vaja */}
     </Box>

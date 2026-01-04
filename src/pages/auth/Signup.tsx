@@ -6,7 +6,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { validateEmail } from "../../util/Validations";
 
 function Signup() {
@@ -94,9 +94,7 @@ function Signup() {
       <Button type="submit" variant="contained" disabled={loading}>
         {loading ? "Signing up..." : "Sign up"}
       </Button>
-
-      <ToastContainer position="bottom-right" autoClose={4000} theme="dark" />
-    </Box>
+    </Box> 
   );
 }
 

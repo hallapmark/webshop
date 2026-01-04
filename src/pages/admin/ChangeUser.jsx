@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 import usersFile from "../../data/users.json"
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { useState } from "react";
 
 function ChangeUser() {
@@ -60,8 +60,7 @@ function ChangeUser() {
       />
       
       <Button variant="contained" onClick={update}>Update</Button>
-      <ToastContainer position="bottom-right" autoClose={4000} theme="dark" />
-    </Box>
+    </Box> 
   );
 }
 

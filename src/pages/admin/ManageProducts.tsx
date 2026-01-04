@@ -28,7 +28,7 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import DeleteConfirmationModal, { type DeleteConfirmationModalType } from "../../components/DeleteConfirmationModal";
 
 function ManageProducts() {
@@ -233,8 +233,7 @@ function ManageProducts() {
         </Table>
       </TableContainer>
       <DeleteConfirmationModal onConfirm={deleteProduct} ref={deleteModalRef} />
-      <ToastContainer position="bottom-right" autoClose={4000} theme="dark" />
-    </Box>
+    </Box> 
   )
 }
 export default ManageProducts
