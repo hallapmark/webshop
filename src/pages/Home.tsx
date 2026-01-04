@@ -89,8 +89,15 @@ function Home() {
             alignItems: "center",
             overflowX: "auto",
             flexWrap: "nowrap",
+            gap: 1,
             pr: { xs: 2, md: 2 },
             mr: { xs: 2, md: 2 },
+            position: "relative",
+            // add a fade on the right edge (32px) for md and below so partially-hidden items appear faded
+            WebkitMaskImage: { xs: "linear-gradient(to right, black 0 calc(100% - 32px), transparent 100%)", md: "none" },
+            maskImage: { xs: "linear-gradient(to right, black 0 calc(100% - 32px), transparent 100%)", md: "none" },
+            WebkitMaskRepeat: "no-repeat",
+            maskRepeat: "no-repeat",
             scrollbarColor: "text.secondary muted.main", // firefox and 2025+ chrome, edge, safari
             "&::-webkit-scrollbar": { height: 8 }, // <- old chrome, edge, safari ->
             "&::-webkit-scrollbar-track": { backgroundColor: "muted.main" },
@@ -101,7 +108,7 @@ function Home() {
             <Button
               key={category.id}
               onClick={() => changeSelectedCategory(category.id)}
-              sx={{ flexShrink: 0 }}
+              sx={{ flexShrink: 0, fontSize: { xs: '0.75rem', md: "0.8125rem" } }}
             >
               {category.name}
             </Button>
