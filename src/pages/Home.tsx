@@ -11,14 +11,15 @@ import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
 
 import SortByAlphaIcon from '@mui/icons-material/SortByAlpha';
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-// import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-// import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import Euro from "@mui/icons-material/Euro";
 import type { Product } from "../models/Product";
 import type { Category } from "../models/Category";
 import AddCartButton from "../components/AddCartButton";
 
 import useEffectFetch from "../hooks/useEffectFetch";
+
 
 
 function Home() {
@@ -28,7 +29,8 @@ function Home() {
   const [totalPages, setTotalPages] = useState(0);
   const [size, setSize] = useState(4);
   const [selectedCategory, setSelectedCategory] = useState(0);
-  const [sort, setSort] = useState("id,asc");
+  const [sortField, setSortField] = useState<"id"|"name"|"price">("id");
+  const [sortDir, setSortDir] = useState<"asc"|"desc">("asc");
   const categories = useEffectFetch("/categories", "Failed to fetch categories") as Category[];
 
   // useEffect(() => {
@@ -40,13 +42,14 @@ function Home() {
   // }, []);
 
   useEffect(() => {
-    fetch(import.meta.env.VITE_BACKEND_URL + `/products?size=${size}&page=${page}&categoryId=${selectedCategory}&sort=${sort}`)
+    const sortParam = `${sortField},${sortDir}`;
+    fetch(import.meta.env.VITE_BACKEND_URL + `/products?size=${size}&page=${page}&categoryId=${selectedCategory}&sort=${sortParam}`)
       .then(res => res.json())
       .then(json => {
         setProducts(json.content)
         setTotalPages(json.totalPages)
       })
-  }, [page, size, selectedCategory, sort]);
+  }, [page, size, selectedCategory, sortField, sortDir]);
   // filtreerimised pigem backendis teha. isegi sorteerimisi tehakse tihti backendis (TODO!)
   // lehekylgede kaupa võiks ka olla lõpuks
 
@@ -60,8 +63,14 @@ function Home() {
     setPage(0);
   }
 
-  function changeSort(newValue: string) {
-    setSort(newValue);
+  function toggleSort(field: "name" | "price") {
+    if (sortField === field) {
+      setSortDir(prev => prev === "asc" ? "desc" : "asc");
+    } else {
+      setSortField(field);
+      // Default direction: asc for all fields
+      setSortDir("asc");
+    }
     setPage(0);
   }
 
@@ -71,7 +80,7 @@ function Home() {
       <br />
       <Typography variant="h3" gutterBottom>New arrivals</Typography>
       {/* TODO: Maybe some filters as well? */}
-      {/* --- SORTING / CATEGORIES --- */}
+      {/* --- CATEGORIES --- */}
       <Box sx={{ display: "flex", alignItems: "center", mt: 1, gap: 2 }}>
         {/* Scrollable categories */}
         <Box
@@ -81,7 +90,7 @@ function Home() {
             overflowX: "auto",
             flexWrap: "nowrap",
             pr: { xs: 2, md: 2 },
-            mr: { xs: -2, md: 2 },
+            mr: { xs: 2, md: 2 },
             scrollbarColor: "text.secondary muted.main", // firefox and 2025+ chrome, edge, safari
             "&::-webkit-scrollbar": { height: 8 }, // <- old chrome, edge, safari ->
             "&::-webkit-scrollbar-track": { backgroundColor: "muted.main" },
@@ -100,7 +109,7 @@ function Home() {
         </Box>
 
         {/* Controls */}
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1, ml: "auto" }}>
+        <Box sx={{ display: "flex", justifyContent: "flex-end", alignItems: "center", mt: 1, mr: 2, gap: 1 }}>
           <select onChange={(e) => changeSize(Number(e.target.value))} value={size}>
             <option value={2}>2</option>
             <option value={4}>4</option>
@@ -109,18 +118,33 @@ function Home() {
           </select>
 
           <Button
-            variant="contained"
+            variant={sortField === "name" ? "contained" : "outlined"}
             startIcon={<SortByAlphaIcon />}
-            onClick={() => changeSort("name,asc")}
+            title="Sort by name"
+            aria-pressed={sortField === "name"}
+            aria-label={sortField === "name" ? `Sort by name, ${sortDir === 'asc' ? 'ascending' : 'descending'}` : 'Sort by name'}
+            onClick={() => toggleSort("name")}
+            sx={{ minWidth: 56, minHeight: 40, px: 1 }}
           >
-            A-Z
+            {sortField === "name"
+              ? (sortDir === "asc" ? <ArrowUpwardIcon fontSize="small" /> : <ArrowDownwardIcon fontSize="small" />)
+              : <ArrowDownwardIcon fontSize="small" sx={{ color: 'text.secondary' }} />
+            }
           </Button>
+
           <Button
-            variant="contained"
-            startIcon={<AttachMoneyIcon />}
-            onClick={() => changeSort("price,desc")}
+            variant={sortField === "price" ? "contained" : "outlined"}
+            startIcon={<Euro />}
+            title="Sort by price"
+            aria-pressed={sortField === "price"}
+            aria-label={sortField === "price" ? `Sort by price, ${sortDir === 'asc' ? 'ascending' : 'descending'}` : 'Sort by price'}
+            onClick={() => toggleSort("price")}
+            sx={{ minWidth: 56, minHeight: 40, px: 1 }}
           >
-            Price
+            {sortField === "price"
+              ? (sortDir === "asc" ? <ArrowUpwardIcon fontSize="small" /> : <ArrowDownwardIcon fontSize="small" />)
+              : <ArrowDownwardIcon fontSize="small" sx={{ color: 'text.secondary' }} />
+            }
           </Button>
         </Box>
       </Box>
