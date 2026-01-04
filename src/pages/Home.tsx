@@ -17,7 +17,7 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import type { Product } from "../models/Product";
 import type { Category } from "../models/Category";
 import AddCartButton from "../components/AddCartButton";
-import { ToastContainer } from "react-toastify";
+
 import useEffectFetch from "../hooks/useEffectFetch";
 
 
@@ -26,10 +26,10 @@ function Home() {
   // const [categories, setCategories] = useState<Category[]>([]);
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
-  const [size, setSize] = useState(2);
+  const [size, setSize] = useState(4);
   const [selectedCategory, setSelectedCategory] = useState(0);
   const [sort, setSort] = useState("id,asc");
-  const categories = useEffectFetch("/categories", "Failed to fetch categories");
+  const categories = useEffectFetch("/categories", "Failed to fetch categories") as Category[];
 
   // useEffect(() => {
   //   fetch(import.meta.env.VITE_BACKEND_URL + "/categories")
@@ -71,36 +71,58 @@ function Home() {
       <br />
       <Typography variant="h3" gutterBottom>New arrivals</Typography>
       {/* TODO: Maybe some filters as well? */}
-      {/* --- SORTING -- */}
-      <Box
-        sx={{ display: "flex", justifyContent: "flex-end", alignItems: "center", mt: 1, mr: 2, gap: 1 }}
-      >
-        {categories.map(category =>
-          <Button key={category.id} onClick={() => changeSelectedCategory(category.id)}>{category.name}</Button>
-        )}
+      {/* --- SORTING / CATEGORIES --- */}
+      <Box sx={{ display: "flex", alignItems: "center", mt: 1, gap: 2 }}>
+        {/* Scrollable categories */}
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            overflowX: "auto",
+            flexWrap: "nowrap",
+            pr: { xs: 2, md: 2 },
+            mr: { xs: -2, md: 2 },
+            scrollbarColor: "text.secondary muted.main", // firefox and 2025+ chrome, edge, safari
+            "&::-webkit-scrollbar": { height: 8 }, // <- old chrome, edge, safari ->
+            "&::-webkit-scrollbar-track": { backgroundColor: "muted.main" },
+            "&::-webkit-scrollbar-thumb": { backgroundColor: "text.secondary", borderRadius: 1 }
+          }}
+        >
+          {categories.map(category =>
+            <Button
+              key={category.id}
+              onClick={() => changeSelectedCategory(category.id)}
+              sx={{ flexShrink: 0 }}
+            >
+              {category.name}
+            </Button>
+          )}
+        </Box>
 
-        <select onChange={(e) => changeSize(Number(e.target.value))}>
-          <option>2</option>
-          <option>4</option>
-          <option>6</option>
-          <option>8</option>
-        </select>
+        {/* Controls */}
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1, ml: "auto" }}>
+          <select onChange={(e) => changeSize(Number(e.target.value))} value={size}>
+            <option value={2}>2</option>
+            <option value={4}>4</option>
+            <option value={6}>6</option>
+            <option value={8}>8</option>
+          </select>
 
-        <Button 
-          variant="contained"
-          startIcon={<SortByAlphaIcon />} 
-          onClick={() => changeSort("name,asc")}>
+          <Button
+            variant="contained"
+            startIcon={<SortByAlphaIcon />}
+            onClick={() => changeSort("name,asc")}
+          >
             A-Z
-        </Button>
-        <Button 
-          variant="contained"
-          startIcon={<AttachMoneyIcon />} 
-          onClick={() => changeSort("price,desc")}>
-            Desc
-          {/* {sortNextPriceAsc // if yes, current is descending (high price first)
-            ? <ArrowDownwardIcon fontSize="small" /> 
-            : <ArrowUpwardIcon fontSize="small" />} */}
-        </Button>
+          </Button>
+          <Button
+            variant="contained"
+            startIcon={<AttachMoneyIcon />}
+            onClick={() => changeSort("price,desc")}
+          >
+            Price
+          </Button>
+        </Box>
       </Box>
       <Grid container spacing={4} alignItems="stretch" mx={2} my={4}>
         {products.map((product) => (
