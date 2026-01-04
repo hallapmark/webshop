@@ -16,6 +16,11 @@ import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import LoginIcon from '@mui/icons-material/Login';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LogoutIcon from '@mui/icons-material/Logout';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 // import Badge from '@mui/material/Badge';
 
 // other
@@ -74,9 +79,7 @@ function TopNav() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>     
           {/* Note to self: Box is like an enhanced 'div' in mui-world */}
-          {/* Make title box extend with flexGrow, 
-          we get all menu items after Cart pushed to the right*/}
-          <Box sx={{ flexGrow: 1 }}>
+          <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', gap: 1 }}>
             <Typography 
               variant="h6" 
               component={RouterLink} 
@@ -96,18 +99,15 @@ function TopNav() {
               component={RouterLink}
               to="/cart"
             >
-              {/* Todo: Add the badge back in when we can update the cart state ... hmm */}
-              {/* <Badge
-                badgeContent={2}
-                overlap="circular"
-                slotProps={{ badge: { sx: { bgcolor: 'accent.main', color: 'accent.contrastText' } } }}
-              > */}
-                <Badge badgeContent={count} sx={{ mx: 1}}>
-                  <ShoppingCartIcon />
-                </Badge>
+              <Badge badgeContent={count} sx={{ mx: 1 }}>
+                <ShoppingCartIcon />
+              </Badge>
+              {/* hide price on extra-small screens to save space */}
+              <Typography component="span" sx={{ display: { xs: 'none', sm: 'inline' }, ml: 0.5 }}>
                 {cartSum.toFixed(2)}€
+              </Typography>
             </IconButton>
-          </Box>
+          </Box> 
           
           {/* https://mui.com/material-ui/integrations/routing/ */}
           {/* Medium-to-xl: display menu items in a row */}
@@ -138,37 +138,56 @@ function TopNav() {
               onClose={handleNavMenuClose}
             >
               <MenuItem onClick={() => handleNavMenuNavigate("/shops")}>{t('nav.shops')}</MenuItem>
-              <MenuItem onClick={() => handleNavMenuNavigate("/users")}>{t('nav.users')}</MenuItem>
               <MenuItem onClick={() => handleNavMenuNavigate("/employees")}>{t('nav.employees')}</MenuItem>
             </Menu>
           </Box>
 
           {/* Admin */}
           {loggedIn ? 
-            <Box>
-              <Button onClick={logout} color="inherit">Logout</Button>
-              <Button
-                component={RouterLink}
-                to="/profile"
-                color="inherit"
-              >
-                Profile
-              </Button>
-              <Button
-                component={RouterLink}
-                to="/admin"
-                color="inherit"
-              >
-                {t('nav.admin')}
-              </Button>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              {/* full text on sm+ */}
+              <Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
+                <Button
+                  component={RouterLink}
+                  to="/admin"
+                  color="inherit"
+                >
+                  {t('nav.admin')}
+                </Button>
+                <Button onClick={logout} color="inherit">Logout</Button>
+              </Box>
+              {/* compact icons on xs: Admin, Logout (Profile icon is shown separately next to the language icon) */}
+              <Box sx={{ display: { xs: 'flex', sm: 'none' }, gap: 0.5 }}>
+                <IconButton component={RouterLink} to="/admin" color="inherit" aria-label="Admin">
+                  <AdminPanelSettingsIcon />
+                </IconButton>
+                <IconButton color="inherit" aria-label="Logout" onClick={logout}>
+                  <LogoutIcon />
+                </IconButton>
+              </Box>
             </Box>
             : 
-              <Box>
-                <Button component={RouterLink} to="/signup" color="inherit">Sign up</Button>
-                <Button component={RouterLink} to="/login" color="inherit">Login</Button>
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
+                  <Button component={RouterLink} to="/signup" color="inherit">Sign up</Button>
+                  <Button component={RouterLink} to="/login" color="inherit">Login</Button>
+                </Box>
+                <Box sx={{ display: { xs: 'flex', sm: 'none' } }}>
+                  <IconButton component={RouterLink} to="/signup" color="inherit" aria-label="Sign up">
+                    <PersonAddIcon />
+                  </IconButton>
+                  <IconButton component={RouterLink} to="/login" color="inherit" aria-label="Login">
+                    <LoginIcon />
+                  </IconButton>
+                </Box>
               </Box>
           }
 
+          {loggedIn && (
+            <IconButton component={RouterLink} to="/profile" color="inherit" aria-label="Profile" sx={{ mr: 1 }}>
+              <AccountCircleIcon />
+            </IconButton>
+          )}
           <IconButton 
             color="inherit"
             onClick={handleOpenLangMenu}
