@@ -19,8 +19,42 @@ import type { Category } from "../models/Category";
 import AddCartButton from "../components/AddCartButton";
 
 import useEffectFetch from "../hooks/useEffectFetch";
+import placeholder from "../assets/placeholder.webp";
 
+function ProductImage({ src, alt }: { src: string | null, alt: string }) {
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(false);
 
+  return (
+    <Box sx={{ position: 'relative', width: '100%', aspectRatio: '1 / 1', overflow: 'hidden' }}>
+      <Box
+        component="img"
+        src={placeholder}
+        alt={alt}
+        sx={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+      />
+      {src && !error && (
+        <Box
+          component="img"
+          src={src}
+          alt={alt}
+          onLoad={() => setLoaded(true)}
+          onError={() => setError(true)}
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            opacity: loaded ? 1 : 0,
+            transition: 'opacity 200ms ease-in',
+          }}
+        />
+      )}
+    </Box>
+  );
+}
 
 function Home() {
   const [products, setProducts] = useState<Product[]>([]); 
@@ -169,6 +203,9 @@ function Home() {
           >
             <Card sx={{ height: "100%", display: "flex", flexDirection: "column", textAlign: "center" }}>
               <CardActionArea component={RouterLink} to={`/product/${product.id}`} sx={{ flexGrow: 1 }}>
+                <Box sx={{ width: '100%', px: 4, pt: 4 }}>
+                  <ProductImage src={product.imageUrl} alt={product.name} />
+                </Box>
                 <CardContent sx={{ flexGrow: 1 }}>
                   <Typography variant="h6">{product.name}</Typography>
                   <Typography variant="body2">{product.price}€</Typography>

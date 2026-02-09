@@ -7,7 +7,8 @@ export type Product = {
   "description_en": string,
   "description_et": string,
   "price": number,
-  "category": Category
+  "category": Category,
+  "imageUrl": string | null
 }
 
 // For adding a new product to the server.
