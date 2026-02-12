@@ -12,8 +12,9 @@ export type Product = {
 }
 
 // For adding a new product to the server.
-// Omit id, omit complex category object.
+// Omit id (backend-generated), omit complex category object, 
+// omit imageUrl (backend generated).
 // Then add a simple categoryId back in.
-export type ProductInput = Omit<Product, 'id' | 'category'> & {
+export type ProductInput = Omit<Product, 'id' | 'category' | 'imageUrl'> & {
   categoryId: number;
 }
